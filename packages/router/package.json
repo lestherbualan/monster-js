@@ -1,5 +1,5 @@
 {
-  "name": "@monster-js/core",
+  "name": "@monster-js/router",
   "version": "1.0.0",
   "description": "",
   "main": "dist/public_apis.js",

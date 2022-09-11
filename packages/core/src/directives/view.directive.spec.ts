@@ -1,4 +1,4 @@
-import { fireEvent } from "@tester";
+import { fireEvent } from "@monster-js/tester";
 import { ComponentInstance } from "../interfaces/component-instance.interface";
 import { DirectiveParam } from "../interfaces/directive-param.interface";
 import { useState } from "../state/use-state";
@@ -12,7 +12,7 @@ describe('view.directive', function() {
             detectChanges() {}
         };
 
-        let ref = null;
+        let ref: HTMLElement = null;
         const element = document.createElement('button');
 
         const params: DirectiveParam = {

@@ -44,6 +44,7 @@ export { createWatcher } from "./src/utils/create-watcher";
 export { defineComponent } from "./src/utils/define-component";
 export { CustomObservable } from "./src/utils/custom-observable";
 export { _StyleFn } from "./src/utils/style-fn";
+export { DevTool } from "./src/utils/dev-tool";
 
 /**
  * Types
@@ -55,6 +56,12 @@ export type { FunctionComponent } from './src/interfaces/function-component.inte
  */
 export { directive } from "./src/directives/directive";
 export { directives } from "./src/directives/directives";
+export { dirCreateWatcher } from './src/directives/dir-create-watcher';
+export { dirAfterInit } from './src/directives/hooks/dir-after-init';
+export { dirOnchangeDetection } from './src/directives/hooks/dir-on-change-detection';
+export { dirOnDestroy } from './src/directives/hooks/dir-on-destroy';
+export { dirOnPropsChange } from './src/directives/hooks/dir-on-props-change';
+export { dirOnViewChange } from './src/directives/hooks/dir-on-view-change';
 
 /**
  * Interfaces
@@ -62,6 +69,8 @@ export { directives } from "./src/directives/directives";
 export type { DirectiveParam } from './src/interfaces/directive-param.interface';
 export type { OnReceiveConfig } from './src/interfaces/on-receive-config.interface';
 export type { Subscription } from './src/interfaces/subscription.interface';
+export type { MonsterWebComponent } from './src/interfaces/monster-web-component.interface';
+export type { ComponentInstance } from './src/interfaces/component-instance.interface';
 
 /**
  * Pipes

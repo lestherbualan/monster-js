@@ -6,7 +6,7 @@ describe('create-component', function() {
 
     it('should create a web component with super class based on provided by the function component', function() {
         const component = createComponent(function() {
-            return <button></button>
+            return document.createElement('button');
         }, 'app-test');
         customElements.define('app-test', component);
         const defined = customElements.get('app-test');
