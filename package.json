@@ -6,7 +6,8 @@
   "main": "index.js",
   "sideEffects": false,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "docs"
   ],
   "scripts": {
     "build": "npm run build-core && npm run build-tester && npm run build-http && npm run build-router && npm run build-store",
@@ -15,7 +16,7 @@
     "build-http": "tsc --build packages/http",
     "build-router": "tsc --build packages/router",
     "build-store": "tsc --build packages/store",
-    "start-docs": "docsify serve ./packages/docs"
+    "start-docs": "docsify serve ./docs"
   },
   "keywords": [],
   "author": "",
