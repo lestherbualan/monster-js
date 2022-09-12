@@ -1,0 +1,3 @@
+[submodule "packages/starter-app"]
+	path = packages/starter-app
+	url = https://github.com/monster-js/starter-app.git
