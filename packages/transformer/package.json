@@ -1,13 +1,17 @@
 {
-  "name": "@monster-js/store",
+  "name": "@monster-js/transformer",
   "version": "1.4.0",
   "description": "",
-  "main": "dist/public_apis.js",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "peerDependencies": {
-    "@monster-js/core": "^1.4"
+  "dependencies": {
+    "css-tree": "^2.2.1",
+    "sass": "^1.54.9"
   },
   "publishConfig": {
     "access": "public"

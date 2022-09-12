@@ -11,12 +11,13 @@
   ],
   "scripts": {
     "build": "npm run build-core && npm run build-tester && npm run build-http && npm run build-router && npm run build-store",
-    "build-core": "tsc --build packages/core",
+    "build-core": "tsc --build packages/core --clean && tsc --build packages/core",
     "build-tester": "tsc --build packages/tester",
     "build-http": "tsc --build packages/http",
     "build-router": "tsc --build packages/router",
     "build-store": "tsc --build packages/store",
-    "start-docs": "docsify serve ./docs"
+    "start-docs": "npm start -w @monster-js/docs",
+    "start-starter-app": "npm start -w @monster-js/starter-app"
   },
   "keywords": [],
   "author": "",

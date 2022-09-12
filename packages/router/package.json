@@ -1,9 +1,35 @@
 {
   "name": "@monster-js/router",
-  "version": "1.0.0",
+  "version": "1.4.0",
   "description": "",
   "main": "dist/public_apis.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "peerDependencies": {
+    "@monster-js/core": "^1.4"
+  },
+
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://monster-js.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/monster-js/monster-js"
+  },
+  "funding": [
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/monsterjs"
+    },
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/monster-js"
+    },
+    {
+      "type": "individual",
+      "url": "https://www.paypal.com/paypalme/dariusbualan"
+    }
+  ]
 }
