@@ -1,0 +1,76 @@
+# Quick start
+
+There are two recommended ways to setup a MonsterJS project.
+First is to use the [CLI](/cli/cli-introduction) and second is to clone the [starter app](https://github.com/monster-js/starter-app) from GitHub.
+
+## Create a project using starter app
+
+The first step to create a project using the starter app is to clone the repository to your local machine.
+
+```bash
+git clone https://github.com/monster-js/starter-app.git monster-app
+```
+
+After cloning the repository, change directory into the starter project.
+
+```bash
+cd monster-app
+```
+
+then install the dependencies
+
+```bash
+npm install
+```
+
+Once installation of dependencies is done we can now start a local development server by running the following command.
+
+```bash
+npm start
+```
+
+Now we can view our app by pointing our browsers to [http://localhost:4000](http://localhost:4000).
+
+## Create a project using CLI
+
+To create a project using the MonsterJS CLI we can check the [CLI documentation](/cli/create-application) on how to create a new project.
+
+## Project structure
+
+After the setup is complete, you can see the file structure of project in the current directory.
+
+```bash
+.monster
+    └── monster.json
+node_modules
+src
+    └── app
+        ├── app.tsx
+    ├── assets
+    └── environments
+        ├── dev.js
+        └── prod.js
+    ├── index.html
+    ├── index.ts
+    ├── styles.scss
+    └── types.d.ts
+package.json
+tsconfig.json
+```
+
+* `.monster` Contains the configurations needed for MonsterJS project.
+* `.monster/monster.json` The configuration for MonsterJS project. Usually used by the CLI.
+* `node_modules/` This is where the installed node packages are located.
+* `src/` A directory that contains the source code and assets of your application.
+* `src/app/` This is where the codes related to application is located
+* `src/app/app.tsx` Contains the ts codes of the root component. Any other components must be a child of this component.
+* `src/assets/` This is the recommended directory to put all of the asset files.
+* `src/environments/` Contains the different environment files for the project.
+* `src/environments/dev.js` The development environment of the project.
+* `src/environments/prod.js` The production environment of the project.
+* `src/index.html` The main HTML page that is served when someone visits your application.
+* `src/index.ts` The main entry point of your application. It bootstrap the root module of the entire project.
+* `src/styles.scss` Contains the global styles of the application.
+* `src/types.d.ts` Interfaces to override the default types.
+* `package.json` All the dependencies and configurations of your project.
+* `tsconfig.json` The typescript configuration file.

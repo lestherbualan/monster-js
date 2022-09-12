@@ -1,0 +1,28 @@
+{
+  "name": "monster-js",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "sideEffects": false,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build-core && npm run build-tester && npm run build-http && npm run build-router && npm run build-store",
+    "build-core": "tsc --build packages/core",
+    "build-tester": "tsc --build packages/tester",
+    "build-http": "tsc --build packages/http",
+    "build-router": "tsc --build packages/router",
+    "build-store": "tsc --build packages/store",
+    "start-docs": "docsify serve ./packages/docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jasmine": "^4.3.0",
+    "jasmine": "^4.4.0",
+    "typescript": "^4.8.3"
+  }
+}

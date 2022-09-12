@@ -1,0 +1,12 @@
+{
+  "name": "@monster-js/tester",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/public_apis.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "@monster-js/core": "1.0"
+  }
+}
