@@ -25,3 +25,15 @@ Developing micro frontend and widgets are made easy using this framework.
 * [Directives](/main-concept/directives)
 * [Pipes](/main-concept/pipes)
 * [CLI](/cli/cli-introduction)
+
+## Support us
+
+MonsterJS is licensed with an MIT license and it is completely free to use software.
+However, maintaining the code and develop new features requires some financial backing.
+
+<img src='https://github.githubassets.com/images/icons/emoji/heart.png' class="donate-heart-icon"></img>
+You can support the development of MonsterJS using the following links:
+
+- [One-time donation](https://www.paypal.com/paypalme/dariusbualan)
+- Become a [patreon sponsor](https://www.patreon.com/monsterjs)
+- Become a [github sponsor](https://github.com/sponsors/monster-js)
