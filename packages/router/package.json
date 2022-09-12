@@ -2,7 +2,7 @@
   "name": "@monster-js/router",
   "version": "1.4.0",
   "description": "",
-  "main": "dist/public_apis.js",
+  "main": "./public_apis.ts",
   "keywords": [],
   "author": "",
   "license": "ISC",
