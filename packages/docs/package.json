@@ -1,0 +1,16 @@
+{
+  "name": "@monster-js/docs",
+  "version": "1.0.0",
+  "description": "> Simple but powerful JavaScript framework.",
+  "main": "index.js",
+  "scripts": {
+    "start": "docsify serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "docsify": "^4.12.2",
+    "docsify-cli": "^4.4.4"
+  }
+}

@@ -14,7 +14,8 @@
     "build-tester": "tsc --build packages/tester",
     "build-http": "tsc --build packages/http",
     "build-router": "tsc --build packages/router",
-    "build-store": "tsc --build packages/store"
+    "build-store": "tsc --build packages/store",
+    "start-docs": "docsify serve ./packages/docs"
   },
   "keywords": [],
   "author": "",
