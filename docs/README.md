@@ -1,18 +1,18 @@
 ## Easy to Use
 
-This framework is built to be simple, easy to understand and easy to use.
+This framework is built to be simple, easy to understand, and easy to use.
 
 ## Component-Based
 
-Build small components that manages their own state as a building blocks to build larger applications.
+Build small components that manage their own states as building blocks to build larger applications.
 
 ## Web Components
 
-It is based on web components which is good for building loosely coupled components.
+It is based on web components suitable for building loosely coupled components.
 
 ## Support us
 
-MonsterJS is licensed with an MIT license and it is completely free to use software.
+MonsterJS is licensed with an MIT license and it is completely free-to-use software.
 However, maintaining the code and develop new features requires some financial backing.
 
 <img src='https://github.githubassets.com/images/icons/emoji/heart.png' class="donate-heart-icon"></img>
