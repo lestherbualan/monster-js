@@ -1,6 +1,6 @@
 {
   "name": "@monster-js/cli",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Command line interface for MonsterJS framework.",
   "main": "./dist/src/index.js",
   "scripts": {
@@ -10,7 +10,11 @@
   "bin": {
     "mn": "./dist/src/index.js"
   },
-  "keywords": ["mn", "monsterjs", "cli"],
+  "keywords": [
+    "mn",
+    "monsterjs",
+    "cli"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
