@@ -1,8 +1,8 @@
 {
   "name": "@monster-js/http",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "",
-  "main": "dist/public_apis.js",
+  "main": "./public_apis.ts",
   "keywords": [],
   "author": "",
   "license": "ISC",
