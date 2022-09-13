@@ -13,14 +13,12 @@ export function newCommand(program: Command) {
             const destination = resolve(process.cwd(), name);
             const folderExists = fileExistsChecker(destination);
             if (folderExists) {
-                logError(`Unable to generate new app. The folder named ${name} already exists.`);
-                return;
+                return logError(`Unable to generate new app. The folder named ${name} already exists.`);
             }
             ncp(paths.NEW_APP, destination, function(error) {
                 if (error) {
                     return console.error(error);
                 }
-
                 console.log("Installing packages ...");
                 execSync(`cd ${name} && npm install`, {stdio: 'inherit'});
                 console.log("Done");
