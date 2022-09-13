@@ -1,6 +1,6 @@
 {
   "name": "@monster-js/router",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "",
   "main": "./public_apis.ts",
   "keywords": [],
@@ -9,7 +9,6 @@
   "peerDependencies": {
     "@monster-js/core": "^1.4"
   },
-
   "publishConfig": {
     "access": "public"
   },
