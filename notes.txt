@@ -1,0 +1,16 @@
+finish http docs
+implement cli generate codes
+implement cli serve, build, and test command
+
+micro frontend documentation
+micro frontend implementation
+	generate micro frontend setup like angular library project setup
+
+implement dependency injection
+
+service documentation
+service implementation
+
+update documentation for dependency injection
+
+add tester tools to mock services with dependency injection

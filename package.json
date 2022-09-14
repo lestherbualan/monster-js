@@ -16,6 +16,14 @@
     "lint-http": "tsc -p packages/http --noEmit",
     "lint-router": "tsc -p packages/router --noEmit",
     "lint-store": "tsc -p packages/store --noEmit",
+
+    "build": "npm run build-core && npm run build-tester && npm run build-http && npm run build-router && npm run build-store",
+    "build-core": "rm -rf packages/core/dist && tsc -p packages/core",
+    "build-tester": "rm -rf packages/tester/dist && tsc -p packages/tester",
+    "build-http": "rm -rf packages/http/dist && tsc -p packages/http",
+    "build-router": "rm -rf packages/router/dist && tsc -p packages/router",
+    "build-store": "rm -rf packages/store/dist && tsc -p packages/store",
+
     "start-docs": "npm start -w @monster-js/docs",
     "version-patch": "npm run version-patch-core && npm run version-patch-http && npm run version-patch-router && npm run version-patch-store && npm run version-patch-tester && npm run version-patch-transformer && npm run version-patch-cli",
     "version-patch-core": "npm version patch -w @monster-js/core",

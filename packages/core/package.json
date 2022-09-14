@@ -2,10 +2,10 @@
   "name": "@monster-js/core",
   "version": "1.4.1",
   "description": "",
-  "main": "./public_apis.ts",
+  "main": "./dist/public_apis.js",
   "exports": {
-    ".": "./public_apis.ts",
-    "./reflection": "./src/reflection.ts"
+    ".": "./dist/public_apis.js",
+    "./reflection": "./dist/src/reflection.js"
   },
   "keywords": [],
   "author": "",
