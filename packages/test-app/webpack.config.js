@@ -42,10 +42,10 @@ module.exports = function(env, mode) {
             rules: [
                 {
                     test: /\.tsx?$/,
-                    include: [
-                        path.resolve(__dirname, 'src'),
-                        path.resolve(__dirname, 'node_modules/@monster-js'),
-                    ],
+                    // include: [
+                    //     path.resolve(__dirname, 'src'),
+                    //     path.resolve(__dirname, 'node_modules/@monster-js'),
+                    // ],
                     use: {
                         loader: 'babel-loader',
                         options: {
