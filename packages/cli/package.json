@@ -4,6 +4,7 @@
   "description": "Command line interface for MonsterJS framework.",
   "main": "./dist/src/index.js",
   "scripts": {
+    "watch": "tsc --watch -p . && npm run copy:assets",
     "build": "tsc -p . && npm run copy:assets",
     "copy:assets": "ncp ./src/assets ./dist/src/assets"
   },
@@ -18,7 +19,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^5.0.1",
     "commander": "^9.4.0",
     "ncp": "^2.0.0",
     "open": "^8.4.0",
@@ -50,7 +50,6 @@
     }
   ],
   "devDependencies": {
-    "@types/chalk": "^2.2.0",
     "@types/commander": "^2.12.2",
     "@types/ncp": "^2.0.5",
     "@types/node": "^18.7.17"

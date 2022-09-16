@@ -16,7 +16,6 @@
     "lint-http": "tsc -p packages/http --noEmit",
     "lint-router": "tsc -p packages/router --noEmit",
     "lint-store": "tsc -p packages/store --noEmit",
-
     "start-docs": "npm start -w @monster-js/docs",
     "version-patch": "npm run version-patch-core && npm run version-patch-http && npm run version-patch-router && npm run version-patch-store && npm run version-patch-tester && npm run version-patch-transformer && npm run version-patch-cli",
     "version-patch-core": "npm version patch -w @monster-js/core",
@@ -42,5 +41,8 @@
     "@types/jasmine": "^4.3.0",
     "jasmine": "^4.4.0",
     "typescript": "^4.8.3"
+  },
+  "dependencies": {
+    "colors": "^1.4.0"
   }
 }
