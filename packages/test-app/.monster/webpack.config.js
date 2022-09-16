@@ -27,7 +27,7 @@ module.exports = function(env, mode) {
         context: path.resolve(__dirname, '../'),
         output: {
             filename: 'index.js',
-            path: path.resolve(__dirname, 'public')
+            path: path.resolve(__dirname, '../public')
         },
         optimization: {
             usedExports: true, // used for tree shaking
