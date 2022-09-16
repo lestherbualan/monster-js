@@ -19,6 +19,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.4.0",
     "commander": "^9.4.0",
     "ncp": "^2.0.0",
     "open": "^8.4.0",
