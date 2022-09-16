@@ -16,4 +16,5 @@ mn build
 | Options | Description | Value type | Default |
 | --- | --- | --- | --- |
 | --env <value\> | Build the project using the specified environment. | string | |
+| --mode <value\> | This is an option to build the application in different modes. Same as webpack's '--mode' option. (choices: "development", "production", "none", default: "development") | string | development |
 | --output <value\> | The directory where it should output the bundles, assets and other files. | string | dist |

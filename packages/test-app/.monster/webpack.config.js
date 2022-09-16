@@ -1,5 +1,4 @@
 const path = require('path');
-const { NormalModuleReplacementPlugin } = require('webpack');
 
 module.exports = function(env, mode) {
 
@@ -7,9 +6,9 @@ module.exports = function(env, mode) {
     /**
      * https://webpack.js.org/guides/environment-variables/
      */
-    let environment = './src/environments/environment.ts';
+    let environment = 'src/environments/environment.ts';
     if (env.environment) {
-        environment = `./src/environments/environment.${env.environment}.ts`;
+        environment = `src/environments/environment.${env.environment}.ts`;
     }
 
 
@@ -25,6 +24,7 @@ module.exports = function(env, mode) {
     return {
         mode: configMode,
         entry: './src/index.ts',
+        context: path.resolve(__dirname, '../'),
         output: {
             filename: 'index.js',
             path: path.resolve(__dirname, 'public')
@@ -32,20 +32,10 @@ module.exports = function(env, mode) {
         optimization: {
             usedExports: true, // used for tree shaking
         },
-        plugins: [
-            new NormalModuleReplacementPlugin(
-                new RegExp(path.resolve(__dirname, 'src/environments/environment.ts')),
-                path.resolve(__dirname, environment)
-            )
-        ],
         module: {
             rules: [
                 {
                     test: /\.tsx?$/,
-                    // include: [
-                    //     path.resolve(__dirname, 'src'),
-                    //     path.resolve(__dirname, 'node_modules/@monster-js'),
-                    // ],
                     use: {
                         loader: 'babel-loader',
                         options: {
@@ -61,11 +51,14 @@ module.exports = function(env, mode) {
             ],
         },
         resolve: {
-            extensions: ['.tsx', '.ts', '.js']
+            extensions: ['.tsx', '.ts', '.js'],
+            alias: {
+                [path.resolve('src/environments/environment')]: path.resolve(environment)
+            }
         },
         devServer: {
             static: {
-                directory: path.join(__dirname, 'public'),
+                directory: path.join(__dirname, '../public'),
             },
             compress: true,
             port: 4000,

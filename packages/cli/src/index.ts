@@ -3,6 +3,7 @@ import { Command } from "commander";
 import packageJson from '../package.json';
 import { docsCommand } from "./commands/docs.command";
 import { newCommand } from "./commands/new.command";
+import { serveCommand } from "./commands/serve.command";
 
 const program = new Command();
 
@@ -12,5 +13,6 @@ program.name('MonsterJS Cli')
 
 docsCommand(program);
 newCommand(program);
+serveCommand(program);
 
 program.parse();
