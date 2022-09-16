@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = function(env, mode) {
 
@@ -32,6 +33,14 @@ module.exports = function(env, mode) {
         optimization: {
             usedExports: true, // used for tree shaking
         },
+        plugins: [
+            new CopyWebpackPlugin({
+                patterns: [
+                    { from: "src/index.html", to: "" },
+                    { from: "src/assets", to: "assets" }
+                ],
+            })
+        ],
         module: {
             rules: [
                 {
