@@ -1,6 +1,6 @@
 {
   "name": "@monster-js/http",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "",
   "main": "./public_apis.ts",
   "keywords": [],

@@ -21,6 +21,7 @@ When the server is running we can now view our project by pointing our browsers 
 | --- | --- | --- | --- |
 | --env <value\> | Serve the project using the specified environment. | string | dev |
 | --port <value\> | Set the port for the local development server. | number | 4000 |
+| --mode <value\> | This is an option to serve the application in different modes. Same as webpack's '--mode' option. (choices: "development", "production", "none", default: "development") | string | development |
 | --open | Opens a browser when local development server is ready. | boolean | false |
 
 Example.

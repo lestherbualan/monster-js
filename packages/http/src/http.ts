@@ -5,13 +5,15 @@ export class Http {
 
     private defaultConfig: RequestInit = {}
 
-    baseUrl: string = '';
+    baseUrl(): string {
+        return '';
+    }
 
     modifyUrl(url: string): string {
         return url;
     }
 
-    modifyResponse(response: Promise<Response>): any {
+    modifyResponse(response: Response): any {
         return response;
     }
 
@@ -62,30 +64,31 @@ export class Http {
         }));
     }
 
-    send<T>(url: string, method: string, body: any, params: CustomObject, config: RequestInit): Promise<CustomResponse<T>> {
+    async send<T>(url: string, method: string, body: any, params: CustomObject, config: RequestInit): Promise<CustomResponse<T>> {
         const urlWithParams = this.joinBaseUrl(this.addParam(url, params));
         const newUrl = this.modifyUrl(urlWithParams);
         const newBody = this.modifyBody(body);
         const newHeaders = this.modifyHeaders(config.headers);
 
-        return fetch(newUrl, this.modifyConfig({
+        const response = await fetch(newUrl, this.modifyConfig({
             ...this.defaultConfig,
             method,
             body: newBody,
             headers: newHeaders
         }));
+        return this.modifyResponse(response);
     }
 
     private joinBaseUrl(url: string): string {
-        const lastBaseUrl = this.baseUrl[this.baseUrl.length - 1];
+        const lastBaseUrl = this.baseUrl()[this.baseUrl().length - 1];
         if (lastBaseUrl !== '/' && url[0] !== '/') {
-            return `${this.baseUrl}/${url}`;
+            return `${this.baseUrl()}/${url}`;
         } else if (lastBaseUrl === '/' && url[0] !== '/') {
-            return `${this.baseUrl}${url}`;
+            return `${this.baseUrl()}${url}`;
         } else if (lastBaseUrl !== '/' && url[0] === '/') {
-            return `${this.baseUrl}${url}`;
+            return `${this.baseUrl()}${url}`;
         } else if (lastBaseUrl === '/' && url[0] === '/') {
-            return `${this.baseUrl}${url.substring(1)}`;
+            return `${this.baseUrl()}${url.substring(1)}`;
         }
     }
 

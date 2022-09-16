@@ -218,12 +218,108 @@ export class SampleService {
 | config | optional | This is will override the default configuration of the fetch api request. |
 | url_params | optional | This is an object that will be converted as a url search query. |
 
-
 ## Http interceptor
+
 ### Set base url
+
+We can set the base url of each request by overriding the `setBaseUrl()` method.
+This method should return the base url we want to set in each request.
+Since this is a method, we are can also add some logic and return a specific base url for each request.
+
+Example.
+
+```tsx
+export class Httpclient extends Http {
+    baseUrl() {
+        return 'https://backend-server.com';
+    }
+}
+```
+
 ### Modify url
-### Modify response
+
+We can also modify the url for every request.
+To do this, we just need to override the `modifyUrl(<url>)` method.
+
+Example.
+
+```tsx
+export class Httpclient extends Http {
+    modifyUrl(url) {
+        // modify url here
+        return url;
+    }
+}
+```
+
 ### Modify request body
+
+Before the request is sent to the api server, we can modify the request body before sending it by overriding the `modifyBody(<body>)` method.
+
+Example.
+
+```tsx
+export class Httpclient extends Http {
+    modifyBody(body) {
+        // modify body here
+        return body;
+    }
+}
+```
+
 ### Modify request params
+
+We can also modify the request parameters before before appending it to the url by overriding the `modifyParams(<params>)` method.
+
+Example.
+
+```tsx
+export class Httpclient extends Http {
+    modifyParams(params): CustomObject {
+        // modify params here
+        return params;
+    }
+}
+```
+
 ### Modify headers
+
+Headers can also be modified by overriding the `modifyHeaders(<headers>)` method.
+
+Example.
+
+```tsx
+export class Httpclient extends Http {
+    modifyHeaders(headers: HeadersInit): HeadersInit {
+        return headers;
+    }
+}
+```
+### Modify response
+
+After the request is made even if it is successful or failed, we can modify the response by overriding the `modifyResponse(<response>)` method.
+
+Example.
+
+```tsx
+export class Httpclient extends Http {
+    modifyResponse(response: Response): any {
+        // modify response here
+        return response;
+    }
+}
+```
 ### Modify config
+
+We can modify the request config by overriding the `modifyConfig(<config>)` method.
+
+Example.
+
+```tsx
+export class Httpclient extends Http {
+    modifyConfig(config: RequestInit): RequestInit {
+        // modify config here
+        return config;
+    }
+}
+```

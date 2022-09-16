@@ -22,13 +22,7 @@ export function Button() {
 
 export default component(Button, 'custom-button');
 
-<style>
-{`
-    button {
-        color: red;
-    }
-`}
-</style>
+<style>{``}</style>
 ```
 
 ## Css preprocessors

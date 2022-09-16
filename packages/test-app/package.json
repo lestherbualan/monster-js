@@ -1,0 +1,36 @@
+{
+  "name": "@monster-js/test-app",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "sideEffects": false,
+  "scripts": {
+    "start": "webpack serve --port 4000 --config ./.monster/webpack.config.js",
+    "build": "webpack build",
+    "build-prod": "webpack build --env environment=prod --mode production",
+    "test": "karma start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.18.6",
+    "@monster-js/tester": "^1.4.1",
+    "@monster-js/transformer": "^1.4.1",
+    "babel-loader": "^8.2.5",
+    "copy-webpack-plugin": "^11.0.0",
+    "karma": "^6.4.0",
+    "karma-chrome-launcher": "^3.1.1",
+    "karma-coverage": "^2.2.0",
+    "karma-iframes": "^1.3.1",
+    "karma-jasmine": "^5.1.0",
+    "karma-webpack": "^5.0.0",
+    "typescript": "^4.8.3",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.0"
+  },
+  "dependencies": {
+    "@monster-js/core": "^1.4.1"
+  }
+}
