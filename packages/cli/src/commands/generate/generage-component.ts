@@ -32,7 +32,7 @@ describe('<describeName>', function() {
 
 export function generateComponentTest(name: string) {
     const baseName = basename(name);
-    const fullDirPath = resolve(process.cwd(), name);
+    const fullDirPath = resolve(process.cwd(), 'src/app', name);
     const fullTestPath = resolve(fullDirPath, `${baseName}.spec.ts`)
 
 
@@ -57,7 +57,7 @@ export function generateComponentTest(name: string) {
 
 export function generateFunctionComponent(name: string) {
     const baseName = basename(name);
-    const fullDirPath = resolve(process.cwd(), name);
+    const fullDirPath = resolve(process.cwd(), 'src/app', name);
     const fullLogicPath = resolve(fullDirPath, `${baseName}.tsx`)
 
 

@@ -18,7 +18,7 @@ const guardData = `export function <gaurdName>Guard(context) {
 
 export function generateGuard(name: string, options: { [key: string]: any; }) {
     const baseName = basename(name);
-    const fullDirPath = resolve(process.cwd(), name);
+    const fullDirPath = resolve(process.cwd(), 'src/app', name);
     const fullPath = resolve(fullDirPath, `${baseName}.guard.ts`)
 
     // check if files don't exists

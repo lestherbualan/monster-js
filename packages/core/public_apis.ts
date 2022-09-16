@@ -78,3 +78,4 @@ export type { ComponentInstance } from './src/interfaces/component-instance.inte
 export { lowercasePipe } from "./src/pipes/lowercase.pipe";
 export { uppercasePipe } from "./src/pipes/uppercase.pipe";
 export { pipes } from "./src/pipes/pipes";
+export { pipe } from "./src/pipes/pipe";
