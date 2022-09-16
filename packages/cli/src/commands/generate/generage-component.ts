@@ -38,8 +38,7 @@ export function generateComponentTest(name: string) {
 
     // check if files don't exists
     // if yes, then throw an error
-    const fileExists = fileExistsChecker(fullTestPath);
-    if (fileExists) {
+    if (fileExistsChecker(fullTestPath)) {
         return logError(`Unable to create new file. ${fullTestPath} file already exists.`);
     }
 
@@ -66,8 +65,7 @@ export function generateFunctionComponent(name: string) {
      * check if files don't exists
      * if file exists, then throw an error
      */
-    const fileExists = fileExistsChecker(fullLogicPath);
-    if (fileExists) {
+    if (fileExistsChecker(fullLogicPath)) {
         return logError(`Unable to create new file. ${fullLogicPath} file already exists.`);
     }
 

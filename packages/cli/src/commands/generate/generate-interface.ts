@@ -15,8 +15,7 @@ export function generateInterface(name: string, options: { [key: string]: any; }
 
     // check if files don't exists
     // if yes, then throw an error
-    const fileExists = fileExistsChecker(fullPath);
-    if (fileExists) {
+    if (fileExistsChecker(fullPath)) {
         return logError(`Unable to create new file. ${fullPath} file already exists.`);
     }
 
