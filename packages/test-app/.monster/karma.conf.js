@@ -1,4 +1,3 @@
-const karma = require('karma');
 const webpackConfigCaller = require('./webpack.config');
 
 let webpackEnvironment = {
@@ -86,12 +85,7 @@ module.exports = function(config) {
 
     webpack,
 
-
-    // coverageReporter: {
-    //   type : 'html',
-    //   dir : 'coverage/'
-    // }
-  })
+  });
 }
 
 
