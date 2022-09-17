@@ -2,10 +2,22 @@
 7. micro frontend implementation
 	generate micro frontend setup like angular library project setup
 
-1. implement dependency injection
+1. [done] implement dependency injection
 2. update documentation for dependency injection
 
 3. service documentation
 4. service implementation
+	- service decorator
+	- onReceiveConfig
 
 5. add tester tools to mock services with dependency injection
+
+
+
+document
+globalService function
+registerServices function
+registerService function
+inject function
+dependency injection
+service decorator

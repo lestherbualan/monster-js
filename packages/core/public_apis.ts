@@ -84,3 +84,4 @@ export { pipe } from "./src/pipes/pipe";
  */
 export { registerServices } from "./src/dependency-injection/register-services";
 export { inject } from "./src/dependency-injection/inject";
+export { Service } from "./src/dependency-injection/service.decorator";
