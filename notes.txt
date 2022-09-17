@@ -1,6 +1,4 @@
-finish http docs
-implement cli generate codes
-implement cli serve, build, and test command
+implement test command
 
 micro frontend documentation
 micro frontend implementation

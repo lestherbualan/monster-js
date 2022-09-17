@@ -28,5 +28,6 @@
     * [Create application](cli/create-application.md)
     * [Local development server](cli/local-dev-server.md)
     * [Build project](cli/build-the-project.md)
+    * [Test project](cli/test-the-project.md)
     * [Generate commands](cli/generate-command.md)
     * [Useful commands](cli/useful-command.md)

@@ -1,16 +1,25 @@
-const webpack = require('./webpack.config')({}, {});
+const karma = require('karma');
+const webpackConfigCaller = require('./webpack.config');
 
-delete webpack.entry;
-delete webpack.output;
+let webpackEnvironment = {
+  environment: null
+};
 
 // Karma configuration
 // Generated on Tue Aug 16 2022 23:52:11 GMT+0800 (Philippine Standard Time)
 
 module.exports = function(config) {
+
+  const webpack = webpackConfigCaller({ environment: webpackEnvironment.environment }, {});
+  console.log(webpackEnvironment.environment);
+
+  delete webpack.entry;
+  delete webpack.output;
+
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: '../',
 
 
     // frameworks to use
@@ -84,3 +93,8 @@ module.exports = function(config) {
     // }
   })
 }
+
+
+module.exports.webpackEnvironmentSetter = (environment) => {
+  webpackEnvironment.environment = environment;
+};

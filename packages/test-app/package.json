@@ -8,7 +8,7 @@
     "start": "webpack serve --port 4000 --config ./.monster/webpack.config.js",
     "build": "mn build --mode production",
     "build-prod": "webpack build --env environment=prod --mode production",
-    "test": "karma start"
+    "test": "karma start ./.monster/karma.conf.js"
   },
   "keywords": [],
   "author": "",
