@@ -1,3 +1,1 @@
-export const environment = {
-    title: 'prod'
-};
+export const environment = { };

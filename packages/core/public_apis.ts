@@ -78,3 +78,9 @@ export { lowercasePipe } from "./src/pipes/lowercase.pipe";
 export { uppercasePipe } from "./src/pipes/uppercase.pipe";
 export { pipes } from "./src/pipes/pipes";
 export { pipe } from "./src/pipes/pipe";
+
+/**
+ * Dependency injection
+ */
+export { registerServices } from "./src/dependency-injection/register-services";
+export { inject } from "./src/dependency-injection/inject";

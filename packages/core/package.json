@@ -5,7 +5,7 @@
   "main": "./public_apis.ts",
   "exports": {
     ".": "./public_apis.ts",
-    "./reflection": "./src/reflection.ts"
+    "./reflection": "./src/dependency-injection/reflection.ts"
   },
   "scripts": {
     "build": "webpack"

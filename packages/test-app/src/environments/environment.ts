@@ -1,3 +1,1 @@
-export const environment = {
-    title: 'dev'
-};
+export const environment = { };
