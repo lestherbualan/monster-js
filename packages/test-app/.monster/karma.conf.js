@@ -26,6 +26,14 @@ module.exports = function(config) {
     frameworks: ['jasmine', 'webpack', 'iframes'],
 
 
+    plugins: [
+      require.resolve('karma-jasmine'),
+      require.resolve('karma-webpack'),
+      require.resolve('karma-iframes'),
+      require.resolve('karma-chrome-launcher')
+    ],
+
+
     // list of files / patterns to load in the browser
     files: [
       'src/**/*.ts',
@@ -41,15 +49,15 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://www.npmjs.com/search?q=keywords:karma-preprocessor
     preprocessors: {
-      'src/**/*.ts': ['webpack', 'coverage', 'iframes'],
-      'src/**/*.tsx': ['webpack', 'coverage', 'iframes']
+      'src/**/*.ts': ['webpack', 'iframes'],
+      'src/**/*.tsx': ['webpack', 'iframes']
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://www.npmjs.com/search?q=keywords:karma-reporter
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress'],
 
 
     // web server port
