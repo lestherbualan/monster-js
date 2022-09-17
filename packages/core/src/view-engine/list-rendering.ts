@@ -8,15 +8,15 @@ export function listRendering(context: ComponentInstance, elementCaller: (index?
     fragment.appendChild(comment);
 
     const watcher: Watcher = {
-        currentValue: {
+        val: {
             oldValue: [],
             newValue: []
         },
         isConnected: () => comment.isConnected,
         isUpdated: () => {
             const newValue = valueCaller();
-            if (watcher.currentValue.oldValue.length !== newValue.length) {
-                watcher.currentValue.newValue = newValue;
+            if (watcher.val.oldValue.length !== newValue.length) {
+                watcher.val.newValue = newValue;
                 return true;
             }
             return false;
@@ -40,13 +40,13 @@ export function listRendering(context: ComponentInstance, elementCaller: (index?
             }
 
             elements = elements.filter(element => !!element);
-            watcher.currentValue.oldValue = newValue;
-            delete watcher.currentValue.newValue;
+            watcher.val.oldValue = newValue;
+            delete watcher.val.newValue;
         }
     };
 
-    watcher.currentValue.newValue = valueCaller();
-    watcher.update(watcher.currentValue);
+    watcher.val.newValue = valueCaller();
+    watcher.update(watcher.val);
 
     context.conditionWatchers.push(watcher);
 

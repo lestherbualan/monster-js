@@ -6,7 +6,7 @@
   "sideEffects": false,
   "scripts": {
     "start": "webpack serve --port 4000 --config ./.monster/webpack.config.js",
-    "build": "webpack build",
+    "build": "mn build --mode production",
     "build-prod": "webpack build --env environment=prod --mode production",
     "test": "karma start"
   },

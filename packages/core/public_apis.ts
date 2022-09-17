@@ -2,7 +2,6 @@
 /**
  * Component
  */
-export { createComponent } from "./src/component/create-component";
 export { component } from "./src/component/component";
 export { childComponents } from "./src/component/child-components";
 

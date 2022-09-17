@@ -5,17 +5,17 @@ import { Watcher } from "../interfaces/watcher.interface";
 export function attributeBinding(context: ComponentInstance, element: HTMLElement, attributes: CustomObject<() => any>) {
 
     const watcher: Watcher = {
-        currentValue: {},
+        val: {},
         isConnected: () => element.isConnected,
         isUpdated: () => {
             let isUpdated = false;
 
             for (const [key, value] of Object.entries(attributes)) {
                 const newValue = value();
-                if (watcher.currentValue[key] !== newValue) {
+                if (watcher.val[key] !== newValue) {
                     isUpdated = true;
                 }
-                watcher.currentValue[key] = newValue;
+                watcher.val[key] = newValue;
             }
 
             return isUpdated;
@@ -29,7 +29,7 @@ export function attributeBinding(context: ComponentInstance, element: HTMLElemen
 
     for (const [key, value] of Object.entries(attributes)) {
         const currentValue = value();
-        watcher.currentValue[key] = currentValue;
+        watcher.val[key] = currentValue;
         element.setAttribute(key, currentValue);
     }
 

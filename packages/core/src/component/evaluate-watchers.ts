@@ -5,7 +5,7 @@ export function evaluateWatchers(context: ComponentInstance): boolean {
     [...context.conditionWatchers, ...context.watchers].forEach(watcher => {
         if (watcher.isUpdated() && watcher.isConnected()) {
             hasViewChanges = true;
-            watcher.update(watcher.currentValue);
+            watcher.update(watcher.val);
         }
     });
 

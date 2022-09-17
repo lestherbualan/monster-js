@@ -11,7 +11,7 @@ export interface ComponentInstance extends HTMLElement {
     state: CustomObject;
     stateIndex: number;
 
-    isChangeDetectionRunning: boolean;
+    isCDRunning: boolean;
     detectChanges(): void;
 
     directives: CustomObject<(param: DirectiveParam) => void>;
