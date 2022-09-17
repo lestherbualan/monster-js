@@ -8,12 +8,12 @@ export function ifCondition(context: ComponentInstance, elementCaller: () => HTM
     fragment.appendChild(comment);
 
     const watcher: Watcher = {
-        currentValue: !!valueCaller(),
+        val: !!valueCaller(),
         isConnected: () => comment.isConnected,
         isUpdated: () => {
             const newValue = !!valueCaller();
-            if (watcher.currentValue !== newValue) {
-                watcher.currentValue = newValue;
+            if (watcher.val !== newValue) {
+                watcher.val = newValue;
                 return true;
             }
             return false;
@@ -29,7 +29,7 @@ export function ifCondition(context: ComponentInstance, elementCaller: () => HTM
         }
     };
 
-    if (watcher.currentValue) {
+    if (watcher.val) {
         element = elementCaller();
         fragment.appendChild(element);
     }

@@ -6,9 +6,9 @@
   "sideEffects": false,
   "scripts": {
     "start": "webpack serve --port 4000 --config ./.monster/webpack.config.js",
-    "build": "webpack build",
+    "build": "mn build --mode production",
     "build-prod": "webpack build --env environment=prod --mode production",
-    "test": "karma start"
+    "test": "karma start ./.monster/karma.conf.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,8 @@
     "@monster-js/transformer": "^1.4.1",
     "babel-loader": "^8.2.5",
     "copy-webpack-plugin": "^11.0.0",
+    "coverage": "^0.4.1",
+    "jasmine": "^4.4.0",
     "karma": "^6.4.0",
     "karma-chrome-launcher": "^3.1.1",
     "karma-coverage": "^2.2.0",

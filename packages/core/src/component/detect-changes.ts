@@ -1,24 +1,25 @@
 import { HookKeys } from "../enums/hook-keys.enum";
+import { ComponentInstance } from "../interfaces/component-instance.interface";
 import { evaluateWatchers } from "./evaluate-watchers";
 
 /**
  * This function is use to run change detection of the component.
- * The `this` context is the component that change detection will run
+ * The context is the component that change detection is running
  * 
  * @returns void
  */
-export function detectChanges() {
-    if (this.isChangeDetectionRunning) {
+export function detectChanges(context: ComponentInstance) {
+    if (context.isCDRunning) {
         return;
     }
-    this.isChangeDetectionRunning = true;
+    context.isCDRunning = true;
 
-    let hasViewChanges = evaluateWatchers(this);
+    let hasViewChanges = evaluateWatchers(context);
 
-    this.hooks.run(HookKeys.onChangeDetection);
+    context.hooks.run(HookKeys.onChangeDetection);
     if (hasViewChanges) {
-        this.hooks.run(HookKeys.onViewChange);
+        context.hooks.run(HookKeys.onViewChange);
     }
 
-    this.isChangeDetectionRunning = false;
+    context.isCDRunning = false;
 }

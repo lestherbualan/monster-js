@@ -21,16 +21,16 @@ export function renderChild(
          * Add props watcher is there is a props
          */
         const watcher: Watcher = {
-            currentValue: {},
+            val: {},
             isConnected: () => element.isConnected,
             isUpdated: () => {
                 let hasChanges = false;
                 for (const [key, value] of Object.entries(props)) {
                     const newValue = value();
-                    if (watcher.currentValue[key] !== newValue) {
+                    if (watcher.val[key] !== newValue) {
                         hasChanges = true;
                     }
-                    watcher.currentValue[key] = newValue;
+                    watcher.val[key] = newValue;
                 }
                 return hasChanges;
             },
@@ -39,7 +39,7 @@ export function renderChild(
             }
         };
         watcher.isUpdated();
-        watcher.update(watcher.currentValue);
+        watcher.update(watcher.val);
         if (context.watchers && Array.isArray(context.watchers)) {
             context.watchers.push(watcher);
         }

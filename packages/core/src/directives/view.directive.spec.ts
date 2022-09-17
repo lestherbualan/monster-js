@@ -1,8 +1,12 @@
-import { fireEvent } from "@monster-js/tester";
 import { ComponentInstance } from "../interfaces/component-instance.interface";
 import { DirectiveParam } from "../interfaces/directive-param.interface";
 import { useState } from "../state/use-state";
 import { viewDir } from "./view.directive";
+
+export function fireEvent(element: HTMLElement, event: string) {
+    const newEvent = new Event(event);
+    element.dispatchEvent(newEvent);
+}
 
 describe('view.directive', function() {
 

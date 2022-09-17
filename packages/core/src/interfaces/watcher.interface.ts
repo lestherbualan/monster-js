@@ -1,5 +1,5 @@
 export interface Watcher {
-    currentValue: any;
+    val: any;
     isConnected: () => boolean;
     isUpdated: () => boolean;
     update: (value?: any) => void;

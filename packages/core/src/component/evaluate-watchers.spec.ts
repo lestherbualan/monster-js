@@ -7,13 +7,13 @@ describe('evaluate-watchers', function() {
         const context: Partial<ComponentInstance> = {
             watchers: [
                 {
-                    currentValue: null,
+                    val: null,
                     isConnected: () => true,
                     isUpdated: () => false,
                     update: () => {}
                 },
                 {
-                    currentValue: null,
+                    val: null,
                     isConnected: () => false,
                     isUpdated: () => false,
                     update: () => {}
@@ -21,13 +21,13 @@ describe('evaluate-watchers', function() {
             ],
             conditionWatchers: [
                 {
-                    currentValue: null,
+                    val: null,
                     isConnected: () => true,
                     isUpdated: () => false,
                     update: () => {}
                 },
                 {
-                    currentValue: null,
+                    val: null,
                     isConnected: () => false,
                     isUpdated: () => false,
                     update: () => {}
@@ -43,7 +43,7 @@ describe('evaluate-watchers', function() {
         const context: Partial<ComponentInstance> = {
             watchers: [
                 {
-                    currentValue: null,
+                    val: null,
                     isConnected: () => true,
                     isUpdated: () => true,
                     update: () => {}
@@ -59,7 +59,7 @@ describe('evaluate-watchers', function() {
         const context: Partial<ComponentInstance> = {
             watchers: [
                 {
-                    currentValue: null,
+                    val: null,
                     isConnected: () => true,
                     isUpdated: () => false,
                     update: () => {}

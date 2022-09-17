@@ -1,7 +1,7 @@
 {
   "name": "monster-js",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "sideEffects": false,
@@ -17,6 +17,7 @@
     "lint-router": "tsc -p packages/router --noEmit",
     "lint-store": "tsc -p packages/store --noEmit",
     "start-docs": "npm start -w @monster-js/docs",
+    "deploy-patch": "npm run version-patch && npm run build && npm run publish",
     "build": "npm run build -w @monster-js/cli",
     "version-patch": "npm run version-patch-core && npm run version-patch-http && npm run version-patch-router && npm run version-patch-store && npm run version-patch-tester && npm run version-patch-transformer && npm run version-patch-cli",
     "version-patch-core": "npm version patch -w @monster-js/core",
@@ -40,10 +41,8 @@
   "license": "ISC",
   "devDependencies": {
     "@types/jasmine": "^4.3.0",
+    "@types/karma": "^6.3.3",
     "jasmine": "^4.4.0",
     "typescript": "^4.8.3"
-  },
-  "dependencies": {
-    "colors": "^1.4.0"
   }
 }

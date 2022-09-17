@@ -1,21 +1,37 @@
-const webpack = require('./webpack.config')({}, {});
+const webpackConfigCaller = require('./webpack.config');
 
-delete webpack.entry;
-delete webpack.output;
+let webpackEnvironment = {
+  environment: null
+};
 
 // Karma configuration
 // Generated on Tue Aug 16 2022 23:52:11 GMT+0800 (Philippine Standard Time)
 
 module.exports = function(config) {
+
+  const webpack = webpackConfigCaller({ environment: webpackEnvironment.environment }, {});
+  console.log(webpackEnvironment.environment);
+
+  delete webpack.entry;
+  delete webpack.output;
+
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: '../',
 
 
     // frameworks to use
     // available frameworks: https://www.npmjs.com/search?q=keywords:karma-adapter
     frameworks: ['jasmine', 'webpack', 'iframes'],
+
+
+    plugins: [
+      require.resolve('karma-jasmine'),
+      require.resolve('karma-webpack'),
+      require.resolve('karma-iframes'),
+      require.resolve('karma-chrome-launcher')
+    ],
 
 
     // list of files / patterns to load in the browser
@@ -33,15 +49,15 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://www.npmjs.com/search?q=keywords:karma-preprocessor
     preprocessors: {
-      'src/**/*.ts': ['webpack', 'coverage', 'iframes'],
-      'src/**/*.tsx': ['webpack', 'coverage', 'iframes']
+      'src/**/*.ts': ['webpack', 'iframes'],
+      'src/**/*.tsx': ['webpack', 'iframes']
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://www.npmjs.com/search?q=keywords:karma-reporter
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress'],
 
 
     // web server port
@@ -77,10 +93,10 @@ module.exports = function(config) {
 
     webpack,
 
-
-    // coverageReporter: {
-    //   type : 'html',
-    //   dir : 'coverage/'
-    // }
-  })
+  });
 }
+
+
+module.exports.webpackEnvironmentSetter = (environment) => {
+  webpackEnvironment.environment = environment;
+};
