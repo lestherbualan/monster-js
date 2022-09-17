@@ -9,6 +9,8 @@ import { HooksCls } from "./hooks";
 import { HookKeys } from "../enums/hook-keys.enum";
 import { detectChanges } from "./detect-changes";
 import { defineComponent } from "../utils/define-component";
+import { DIDataSource } from "../interfaces/di-data-source.interface";
+import { MonsterWebComponent } from "../interfaces/monster-web-component.interface";
 
 export function component(functionComponent: FunctionComponent, selector: string): CustomElementConstructor {
 
@@ -17,6 +19,8 @@ export function component(functionComponent: FunctionComponent, selector: string
     return class extends superClass implements ComponentInstance {
 
         public static selector = selector;
+        public static dataSource: Map<any, DIDataSource> = functionComponent.dataSource;
+        public static parentDataSource: Map<any, DIDataSource> = functionComponent.parentDataSource;
 
 
         private fn = functionComponent;
@@ -72,7 +76,20 @@ export function component(functionComponent: FunctionComponent, selector: string
         connectedCallback() {
 
             if (!this.fn.childrenDefined) {
-                (this.fn.children || []).forEach(child => defineComponent(child));
+
+
+                /**
+                 * Pass down the parentDataSource and dataSource to children
+                 * parentDataSource and dataSource should be combined before passing down to children
+                 */
+                const constructor: MonsterWebComponent = this.constructor as any;
+                const merged = new Map([...(constructor.dataSource || new Map()), ...(constructor.parentDataSource || new Map())]);
+
+
+                (this.fn.children || []).forEach(child => {
+                    child.parentDataSource = merged;
+                    defineComponent(child);
+                });
             }
             this.fn.childrenDefined = true;
 

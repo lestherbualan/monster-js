@@ -1,6 +1,6 @@
 {
   "name": "@monster-js/cli",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "Command line interface for MonsterJS framework.",
   "main": "./dist/src/index.js",
   "scripts": {

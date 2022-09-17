@@ -76,7 +76,7 @@ export function generateFunctionComponent(name: string) {
     const camelCaseName = kebabToCamelCase(baseName);
     const writeData = componentData
         .replace(/<functionName>/g, camelCaseName)
-        .replace(/<componentSelector>/g, camelToKebab(baseName));
+        .replace(/<componentSelector>/g, 'app-' + camelToKebab(baseName));
 
 
     writeFile(fullLogicPath, writeData);

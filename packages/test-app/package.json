@@ -5,22 +5,22 @@
   "main": "index.js",
   "sideEffects": false,
   "scripts": {
-    "start": "webpack serve --port 4000 --config ./.monster/webpack.config.js",
-    "build": "mn build --mode production",
-    "build-prod": "webpack build --env environment=prod --mode production",
-    "test": "karma start ./.monster/karma.conf.js"
+    "start": "mn serve",
+    "build": "mn build",
+    "build-prod": "mn build --env prod --mode production",
+    "test": "mn test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.19.1",
     "@babel/preset-typescript": "^7.18.6",
-    "@monster-js/tester": "^1.4.1",
-    "@monster-js/transformer": "^1.4.1",
+    "@monster-js/tester": "^1.4.6",
+    "@monster-js/transformer": "^1.4.6",
     "babel-loader": "^8.2.5",
+    "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "copy-webpack-plugin": "^11.0.0",
-    "coverage": "^0.4.1",
-    "jasmine": "^4.4.0",
     "karma": "^6.4.0",
     "karma-chrome-launcher": "^3.1.1",
     "karma-coverage": "^2.2.0",
@@ -33,6 +33,6 @@
     "webpack-dev-server": "^4.11.0"
   },
   "dependencies": {
-    "@monster-js/core": "^1.4.1"
+    "@monster-js/core": "^1.4.6"
   }
 }

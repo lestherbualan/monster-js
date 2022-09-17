@@ -28,7 +28,7 @@ module.exports = function(env, mode) {
         context: path.resolve(__dirname, '../'),
         output: {
             filename: 'index.js',
-            path: path.resolve(__dirname, '../public')
+            path: path.resolve(__dirname, '../dist')
         },
         optimization: {
             usedExports: true, // used for tree shaking
@@ -52,7 +52,9 @@ module.exports = function(env, mode) {
                                 '@babel/preset-typescript'
                             ],
                             plugins: [
-                                'module:@monster-js/transformer'
+                                'module:@monster-js/transformer',
+                                'babel-plugin-transform-typescript-metadata',
+                                ["@babel/plugin-proposal-decorators", { "legacy": true }]
                             ]
                         }
                     }
@@ -67,7 +69,7 @@ module.exports = function(env, mode) {
         },
         devServer: {
             static: {
-                directory: path.join(__dirname, '../public'),
+                directory: path.join(__dirname, '../dist'),
             },
             compress: true,
             port: 4000,

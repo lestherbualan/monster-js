@@ -54,54 +54,54 @@ function ordinaryDefineOwnMetadata<MetadataValue>(
     || createMetadataMap<MetadataValue>(target, propertyKey)).set(metadataKey, metadataValue);
 }
 
-// export const getMetadata = <MetadataValue>(
-//   metadataKey: MetadataKey,
-//   target: Target,
-// ): MetadataValue | undefined => ordinaryGetMetadata<MetadataValue>(metadataKey, target);
-
-// export function metadata<MetadataValue>(
-//     metadataKey: MetadataKey,
-//     metadataValue: MetadataValue,
-// ) {
-//     return function decorator(target: Target, propertyKey?: PropertyKey): void {
-//         ordinaryDefineOwnMetadata<MetadataValue>(
-//             metadataKey,
-//             metadataValue,
-//             target,
-//             propertyKey,
-//         );
-//     };
-// }
-const originalMetadata = Reflect.metadata;
-function metadata<MetadataValue>(...args: any[]) {
-  const originalMetadataCaller = () => originalMetadata.apply(this, args);
-  return function decorator(target: Target, propertyKey?: PropertyKey): void {
-    const metadataKey = args[0];
-    const metadataValue = args[1];
-    if ((target as any).isMunster) {
-      ordinaryDefineOwnMetadata<MetadataValue>(
-          metadataKey,
-          metadataValue,
-          target,
-          propertyKey,
-      );
-    } else {
-      originalMetadataCaller().apply(this, arguments);
-    }
-  };
-}
-
-const originalGetMetadata = Reflect.getMetadata;
-export function getMetadata<MetadataValue>(
+export const getMetadata = <MetadataValue>(
   metadataKey: MetadataKey,
   target: Target,
-): MetadataValue | undefined {
-  if ((target as any).isMunster) {
-    return ordinaryGetMetadata<MetadataValue>(metadataKey, target);
-  } else {
-    return originalGetMetadata.apply(this, arguments);
-  }
+): MetadataValue | undefined => ordinaryGetMetadata<MetadataValue>(metadataKey, target);
+
+export function metadata<MetadataValue>(
+    metadataKey: MetadataKey,
+    metadataValue: MetadataValue,
+) {
+    return function decorator(target: Target, propertyKey?: PropertyKey): void {
+        ordinaryDefineOwnMetadata<MetadataValue>(
+            metadataKey,
+            metadataValue,
+            target,
+            propertyKey,
+        );
+    };
 }
+// const originalMetadata = Reflect.metadata;
+// function metadata<MetadataValue>(...args: any[]) {
+//   const originalMetadataCaller = () => originalMetadata.apply(this, args);
+//   return function decorator(target: Target, propertyKey?: PropertyKey): void {
+//     const metadataKey = args[0];
+//     const metadataValue = args[1];
+//     if ((target as any).isMunster) {
+//       ordinaryDefineOwnMetadata<MetadataValue>(
+//           metadataKey,
+//           metadataValue,
+//           target,
+//           propertyKey,
+//       );
+//     } else {
+//       originalMetadataCaller().apply(this, arguments);
+//     }
+//   };
+// }
+
+// const originalGetMetadata = Reflect.getMetadata;
+// export function getMetadata<MetadataValue>(
+//   metadataKey: MetadataKey,
+//   target: Target,
+// ): MetadataValue | undefined {
+//   if ((target as any).isMunster) {
+//     return ordinaryGetMetadata<MetadataValue>(metadataKey, target);
+//   } else {
+//     return originalGetMetadata.apply(this, arguments);
+//   }
+// }
 
 export const Reflection = {
   getMetadata,
