@@ -1,5 +1,3 @@
 - micro frontend documentation
 - micro frontend implementation
 	- generate micro frontend setup like angular library project setup
-
-- add tester tools to mock services with dependency injection

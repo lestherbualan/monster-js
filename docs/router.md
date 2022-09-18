@@ -315,12 +315,12 @@ The example above will display the component when the route match and is allowed
 ## Lazy loading child components
 
 Child components of a lazy loaded components should not be defined in `src/index.ts`.
-These child components needs to be defined using `childComponents(<component>, <array_of_children>)` function.
+These child components needs to be defined using `components(<component>, <array_of_children>)` function.
 
 Example.
 
 ```tsx
-import { childComponents, component } from '@monster-js/core';
+import { components, component } from '@monster-js/core';
 import greeting from './greeting';
 
 function app() {
@@ -330,9 +330,9 @@ function app() {
     </div>
 }
 
-childComponents(app, [ greeting ]);
+components(app, [ greeting ]);
 export default component(app, 'app-root');
 ```
 
 If the child component needs to be used by other components outside the lazy loaded component,
-then it should be defined in the `src/index.ts` file and not using the `childComponents` function.
+then it should be defined in the `src/index.ts` file and not using the `components` function.

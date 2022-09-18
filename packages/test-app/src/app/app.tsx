@@ -1,16 +1,7 @@
-import { childComponents, component, inject, registerServices } from '@monster-js/core';
-import child from './child/child';
-import { AuthService } from './services/auth.service';
+import { component } from '@monster-js/core';
 
 function app() {
-    return <div>
-        <h1>Hello World!</h1>
-        <app-child></app-child>
-    </div>
+    return <h1>Hello World!</h1>
 }
 
-registerServices(app, [AuthService]);
-childComponents(app, [child]);
 export default component(app, 'app-root');
-
-<style>{``}</style>

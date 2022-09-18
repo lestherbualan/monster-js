@@ -13,6 +13,11 @@ function construct(dataSource: DIDataSource, context: ComponentInstance) {
 }
 
 export function processDataSource(dataSource: DIDataSource, context: ComponentInstance) {
+
+    if (dataSource.mock) {
+        return dataSource.mock;
+    }
+
     if (dataSource.singleton && dataSource.instance) {
         return dataSource.instance;
     } else if (dataSource.singleton && !dataSource.instance) {
@@ -23,4 +28,3 @@ export function processDataSource(dataSource: DIDataSource, context: ComponentIn
         return construct(dataSource, context);
     }
 }
-

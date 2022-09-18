@@ -22,6 +22,7 @@
 * Unit testing
     * [Testing tools](unit-testing/testing-tools.md)
     * [Component testing](unit-testing/testing-components.md)
+    * [Service testing](unit-testing/testing-services.md)
 * Useful Topics
     * [Environment variables](useful-topics/environment-variables.md)
 * CLI

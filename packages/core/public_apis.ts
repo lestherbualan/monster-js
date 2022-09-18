@@ -3,7 +3,7 @@
  * Component
  */
 export { component } from "./src/component/component";
-export { childComponents } from "./src/component/child-components";
+export { components } from "./src/component/components";
 
 /**
  * View engine
@@ -82,7 +82,8 @@ export { pipe } from "./src/pipes/pipe";
 /**
  * Dependency injection
  */
-export { registerServices } from "./src/dependency-injection/register-services";
+export { services } from "./src/dependency-injection/services";
 export { inject } from "./src/dependency-injection/inject";
 export { Service } from "./src/dependency-injection/service.decorator";
 export { globalService } from "./src/dependency-injection/global-service";
+export { globalDi } from "./src/dependency-injection/global-di";
