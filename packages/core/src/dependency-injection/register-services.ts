@@ -1,23 +1,10 @@
 import { FunctionComponent } from "../interfaces/function-component.interface";
+import { ServiceInterface } from "../interfaces/service.interface";
+import { registerService } from "./register-service";
 
-interface Service {
-    new(...args: any[]): any;
-    singleton?: boolean;
-    config?: any;
-    service?: Service;
-}
-
-export function registerServices(fnComponent: FunctionComponent, services: Service[]) {
+export function registerServices(fnComponent: FunctionComponent, services: ServiceInterface[]) {
     if (!fnComponent.dataSource) {
         fnComponent.dataSource = new Map();
     }
-    services.map(service => {
-        fnComponent.dataSource.set(service, {
-            config: null,
-            instance: null,
-            mock: null,
-            singleton: service.singleton,
-            target: service
-        });
-    });
+    services.map(service => registerService(fnComponent.dataSource, service));
 }

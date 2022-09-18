@@ -1,5 +1,5 @@
 import { Command, Option } from "commander";
-import { generateComponent } from "./generate/generage-component";
+import { generateComponent } from "./generate/generate-component";
 import { generateDirective } from "./generate/generate-directive";
 import { generateGuard } from "./generate/generate-guard";
 import { generateInterface } from "./generate/generate-interface";
@@ -17,6 +17,7 @@ export function generateCommand(program: Command) {
 
     generate.command("service <name>")
         .description("Generate a service file")
+        .option("--singleton", "Generate a singleton service.", false)
         .action(generateService);
 
     generate.command("interface <name>")

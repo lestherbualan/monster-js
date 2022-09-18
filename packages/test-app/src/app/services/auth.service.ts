@@ -1,14 +1,4 @@
-export class HttpService {
-    public url = 'http://localhost:4000';
-}
+import { Service } from "@monster-js/core";
 
 @Service()
-export class AuthService {
-    public username = 'helloworld';
-
-    constructor(private http: HttpService) { }
-}
-
-function Service(config?: any) {
-    return function(target: any) {}
-}
+export class AuthService { }

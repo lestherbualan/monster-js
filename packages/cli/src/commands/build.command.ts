@@ -20,6 +20,9 @@ export function buildCommand(program: Command) {
             }
 
             const compiler = webpack(config);
+            compiler.hooks.done.tap('test', function(c) {
+                console.log(c.toString());
+            });
             compiler.run((err, res) => {
                 if (err) {
                     console.error(err);

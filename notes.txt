@@ -1,11 +1,5 @@
-6. micro frontend documentation
-7. micro frontend implementation
-	generate micro frontend setup like angular library project setup
+- micro frontend documentation
+- micro frontend implementation
+	- generate micro frontend setup like angular library project setup
 
-1. implement dependency injection
-2. update documentation for dependency injection
-
-3. service documentation
-4. service implementation
-
-5. add tester tools to mock services with dependency injection
+- add tester tools to mock services with dependency injection

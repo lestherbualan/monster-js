@@ -1,7 +1,7 @@
 export interface DIDataSource {
     singleton: boolean;
     target: any;
-    instance: any;
+    instance?: any;
     config: any;
-    mock: any;
+    mock?: any;
 }
