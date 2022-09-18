@@ -12,7 +12,7 @@ Lifecycle hooks are functions that lets you run a block of codes when your compo
 | onViewChange | This will be called every time there are changes in view caused by change detection. |
 | onDestroy | This will be called when a component is destroyed. This is used for cleanup like unsubscribing all subscriptions. |
 
-## Syntax
+### Syntax
 
 * `onPropsChange(<context>, <handler>, <is_active>)`
 
@@ -111,7 +111,7 @@ afterInit(params.context, () => {
 }, () => params.element.isConnected);
 ```
 
-## Syntax
+### Syntax
 
 * `dirOnPropsChange(<params>, <handler>)`
 
@@ -160,5 +160,25 @@ function sampleDirective(param: DirectiveParam) {
     dirOnDestroy(param, () => {
         console.log('dirOnDestroy');
     });
+}
+```
+
+## Service available hooks
+
+| Hooks | Description |
+| --- | --- |
+| onReceiveConfig | This hook will receive the configuration durring initialization of the service. |
+
+### Syntax
+
+* `onReceiveConfig(<config>)`
+
+```tsx
+@Service()
+export class GreetingService {
+    message: string;
+    onReceiveConfig(config) {
+        this.message = config.message;
+    }
 }
 ```

@@ -12,6 +12,7 @@
     * [Pipes](main-concept/pipes.md)
     * [Custom pipes](main-concept/custom-pipes.md)
     * [States](main-concept/states.md)
+    * [Services](main-concept/services.md)
     * [List rendering](main-concept/list-rendering.md)
     * [Conditional rendering](main-concept/conditional-rendering.md)
 * [Router](router.md)
