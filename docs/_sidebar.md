@@ -15,6 +15,7 @@
     * [Services](main-concept/services.md)
     * [List rendering](main-concept/list-rendering.md)
     * [Conditional rendering](main-concept/conditional-rendering.md)
+    * [Dependency injection](main-concept/dependency-injection.md)
 * [Router](router.md)
 * [Http](http.md)
 * [Store](store.md)
