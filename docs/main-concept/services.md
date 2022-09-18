@@ -65,27 +65,27 @@ Before we can use a service we need to register it in our component.
 Example.
 
 ```tsx
-import { registerServices } from '@monster-js/core';
+import { services } from '@monster-js/core';
 import { GreetingService } from './greeting.service';
 
 function app() {
     return <h1>App component</h1>
 }
 
-registerServices(app, [GreetingService]);
+services(app, [GreetingService]);
 ```
 
 ### Register with config
 
 ```tsx
-import { registerServices } from '@monster-js/core';
+import { services } from '@monster-js/core';
 import { GreetingService } from './greeting.service';
 
 function app() {
     return <h1>App component</h1>
 }
 
-registerServices(app, [
+services(app, [
     {
         service: GreetingService,
         config: { message: 'hello world' }
