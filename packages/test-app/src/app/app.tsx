@@ -1,15 +1,7 @@
-import { component, inject, services } from '@monster-js/core';
-import { AuthService } from './services/auth.service';
+import { component } from '@monster-js/core';
 
 function app() {
-    const auth = inject(this, AuthService);
-    console.log(auth);
-    return <div>
-        <h1>Hello World!</h1>
-    </div>
+    return <h1>Hello World!</h1>
 }
 
-services(app, [AuthService]);
 export default component(app, 'app-root');
-
-<style>{``}</style>
