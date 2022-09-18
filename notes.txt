@@ -21,3 +21,5 @@ registerService function
 inject function
 dependency injection
 service decorator
+
+add documentation for individual generate commands in cli
