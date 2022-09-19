@@ -59,18 +59,18 @@ tsconfig.json
 ```
 
 * `.monster` Contains the configurations needed for the MonsterJS project.
-* `.monster/monster.json` The configuration for the MonsterJS project. Usually used by the CLI.
+* `.monster/webpack.config.js` The webpack configuration of the project.
+* `.monster/karma.conf.js` The karma test runner configuration.
 * `node_modules/` This is where the installed node packages are located.
 * `src/` A directory that contains the source code and assets of your application.
 * `src/app/` This is where the codes related to the application are located.
 * `src/app/app.tsx` Contains the ts codes of the root component. Any other components must be a child of this component.
 * `src/assets/` This is the recommended directory to put all of the asset files.
+* `src/assets/styles.css` The global styles of the project.
 * `src/environments/` Contains the different environment files for the project.
-* `src/environments/dev.js` The development environment of the project.
-* `src/environments/prod.js` The production environment of the project.
+* `src/environments/environment.ts` The development environment variables of the project.
+* `src/environments/environment.prod.ts` The production environment variables of the project.
 * `src/index.html` This is the main HTML page that is served when someone visits your application.
 * `src/index.ts` The main entry point of your application. It bootstraps the root module of the entire project.
-* `src/styles.scss` Contains the global styles of the application.
-* `src/types.d.ts` Interfaces to override the default types.
 * `package.json` All the dependencies and configurations of your project.
 * `tsconfig.json` The typescript configuration file.
