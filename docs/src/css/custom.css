@@ -1,0 +1,121 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap');
+
+html,
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #34495e;
+  font-size: 15px;
+}
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #42b983;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  --ifm-font-family-base: 'Source Sans Pro', sans-serif;
+  --ifm-menu-color: #364149;
+  --ifm-toc-border-color: rgba(0,0,0,.07);
+}
+
+.theme-doc-sidebar-menu.menu__list {
+  font-size: 15px;
+  padding-top: 30px;
+}
+.theme-doc-sidebar-menu.menu__list ul {
+  font-size: 14px;
+}
+.theme-doc-sidebar-menu.menu__list li {
+  margin-bottom: 6px;
+}
+.theme-doc-sidebar-menu.menu__list li a:hover {
+  text-decoration: underline;
+}
+.theme-doc-sidebar-menu.menu__list * {
+  background: transparent;
+}
+.theme-doc-sidebar-menu.menu__list button {
+  zoom: 60%;
+}
+.pagination-nav__label {
+  font-weight: 400;
+}
+li code,
+p code {
+  color: #e96900;
+  background-color: #f6f6f6;
+  border: none;
+  font-size: 12px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 3px;
+}
+.container article .markdown a {
+  font-weight: 600;
+  font-size: 93%;
+  text-decoration: underline;
+}
+.donate-heart-icon {
+  width: 15px;
+  height: 15px;
+}
+.theme-doc-markdown.markdown {
+  padding-top: 30px;
+}
+.table-of-contents {
+  margin-top: 60px;
+}
+.hero__title {
+  font-weight: 300;
+  font-size: 2.6rem;
+}
+.hero__subtitle {
+  font-weight: 400;
+  font-size: 1.6rem;
+  margin-top: 30px;
+}
+.hero__subtitle-sub {
+  font-size: 15px;
+  margin-bottom: 0;
+}
+.hero.hero--banner {
+  border-bottom: 1px solid rgba(0,0,0,.07);
+  padding: 15rem 0;
+  color: #34495e;
+}
+.hero-buttons {
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: .1rem;
+  padding: 12px 32px;
+  line-height: 1.5rem;
+  background-color: #42b983;
+  border: solid 1px #42b983;
+  color: white!important;
+  border-radius: 50px;
+  margin: 0 15px;
+}
+.hero-button-inverse {
+  color: #42b983!important;
+  background-color: white;
+}
+.hero-buttons:hover {
+  color: #42b983!important;
+  background-color: white;
+}
+.hero-button-inverse:hover {
+  color: white!important;
+  background-color: #42b983;
+}
