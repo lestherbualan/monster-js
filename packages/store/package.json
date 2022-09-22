@@ -1,6 +1,6 @@
 {
   "name": "@monster-js/store",
-  "version": "1.4.11",
+  "version": "1.4.12",
   "description": "",
   "main": "./public_apis.ts",
   "keywords": [],
