@@ -1,33 +1,41 @@
-## Easy to Use
+# Website
 
-This framework is built to be simple, easy to understand, and easy to use.
+This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-## Component-Based
+### Installation
 
-Build small components that manage their own states as building blocks to build larger applications.
+```
+$ yarn
+```
 
-## Web Components
+### Local Development
 
-It is based on web components suitable for building loosely coupled components.
+```
+$ yarn start
+```
 
-## Support us
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
-MonsterJS is licensed with an MIT license and it is completely free-to-use software.
-However, maintaining the code and develop new features requires some financial backing.
+### Build
 
-<img src='https://github.githubassets.com/images/icons/emoji/heart.png' class="donate-heart-icon"></img>
-You can support the development of MonsterJS using the following links:
+```
+$ yarn build
+```
 
-- [One-time donation](https://www.paypal.com/paypalme/dariusbualan)
-- Become a [patreon sponsor](https://www.patreon.com/monsterjs)
-- Become a [github sponsor](https://github.com/sponsors/monster-js)
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-## Contact us
+### Deployment
 
-You can contact the team by sending us an email to [mfpjayb@gmail.com](mailto:mfpjayb@gmail.com).
+Using SSH:
 
-## License
+```
+$ USE_SSH=true yarn deploy
+```
 
-Licensed under the [MIT License](https://monster-js.org/docs/license/).
+Not using SSH:
 
-Copyright (c) 2022 Darius Bualan Jr.
+```
+$ GIT_USER=<Your GitHub username> yarn deploy
+```
+
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
