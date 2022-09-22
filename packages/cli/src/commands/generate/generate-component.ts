@@ -13,6 +13,8 @@ function <functionName>() {
 }
 
 export default component(<functionName>, '<componentSelector>');
+
+<style>{\`\`}</style>
 `;
 
 const componentTestData = `import { createComponentTester } from '@monster-js/tester';
