@@ -1,4 +1,6 @@
-import { DirectiveParam } from "../interfaces/directive-param.interface";
+import { createWatcher } from "../watcher/create-watcher";
+import { directive } from "./directive";
+import { DirectiveParam } from "./interfaces/directive-params.interface";
 
 export function viewDir(params: DirectiveParam) {
     const { directives, element, context } = params;
@@ -9,7 +11,9 @@ export function viewDir(params: DirectiveParam) {
         (element as HTMLInputElement).value = modelGetter();
         element.addEventListener('input', (event: any) => {
             modelSetter(event.target.value);
-            context.detectChanges();
+        });
+        createWatcher(params.context, params.element, () => modelGetter(), newVal => {
+            (element as HTMLInputElement).value = newVal;
         });
     }
 
@@ -17,3 +21,4 @@ export function viewDir(params: DirectiveParam) {
         ref.set(element);
     }
 }
+directive(viewDir, 'view');

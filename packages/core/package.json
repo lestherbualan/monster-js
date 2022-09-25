@@ -1,11 +1,11 @@
 {
   "name": "@monster-js/core",
-  "version": "1.4.12",
+  "version": "1.4.13",
   "description": "",
   "main": "./public_apis.ts",
   "exports": {
     ".": "./public_apis.ts",
-    "./reflection": "./src/dependency-injection/reflection.ts"
+    "./reflection": "./src/dependency-injection/reflect.ts"
   },
   "scripts": {
     "build": "webpack"

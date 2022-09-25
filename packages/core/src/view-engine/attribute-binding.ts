@@ -1,8 +1,7 @@
-import { ComponentInstance } from "../interfaces/component-instance.interface";
-import { CustomObject } from "../interfaces/custom-object.interface";
-import { Watcher } from "../interfaces/watcher.interface";
+import { ComponentInstance } from "../component/interfaces/component-instance.interface";
+import { Watcher } from "../watcher/interfaces/watcher.interface";
 
-export function attributeBinding(context: ComponentInstance, element: HTMLElement, attributes: CustomObject<() => any>) {
+export function attributeBinding(context: ComponentInstance, element: HTMLElement, attributes: { [key: string]: () => any; }) {
 
     const watcher: Watcher = {
         val: {},
@@ -20,7 +19,7 @@ export function attributeBinding(context: ComponentInstance, element: HTMLElemen
 
             return isUpdated;
         },
-        update: ((newValue: CustomObject) => {
+        update: ((newValue: { [key: string]: any }) => {
             for (const [key, value] of Object.entries(newValue)) {
                 element.setAttribute(key, value);
             }

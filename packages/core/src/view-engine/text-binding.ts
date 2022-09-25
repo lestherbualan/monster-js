@@ -1,5 +1,5 @@
-import { ComponentInstance } from "../interfaces/component-instance.interface";
-import { Watcher } from "../interfaces/watcher.interface";
+import { ComponentInstance } from "../component/interfaces/component-instance.interface";
+import { Watcher } from "../watcher/interfaces/watcher.interface";
 
 export function textBinding(context: ComponentInstance, valueCaller: () => any): Text {
     const val = valueCaller();

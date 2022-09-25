@@ -1,5 +1,3 @@
-import { CustomObject } from "../interfaces/custom-object.interface";
-
 export class DevTool {
     private static instance;
 
@@ -23,13 +21,13 @@ export class DevTool {
         }
     }
 
-    init(state: CustomObject) {
+    init(state: { [key: string]: any; }) {
         if (this.devTool) {
             this.devTool.init(state);
         }
     }
 
-    send(action: string, state: CustomObject) {
+    send(action: string, state: { [key: string]: any; }) {
         if (this.devTool) {
             this.devTool.send(action, state);
         }

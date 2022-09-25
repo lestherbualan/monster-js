@@ -1,3 +1,1 @@
-export function createText(text: string): Text {
-    return document.createTextNode(text);
-}
+export const createText = (text: string) => document.createTextNode(text);

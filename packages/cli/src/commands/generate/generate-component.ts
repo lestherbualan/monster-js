@@ -6,36 +6,20 @@ import { logCreate } from '../../utils/log-create';
 import { logError } from '../../utils/log-error';
 import { writeFile } from '../../utils/write-file';
 
-const componentData = `import { component } from '@monster-js/core';
+const componentData = `import './<styleName>.component.scss';
+import { component } from '@monster-js/core';
 
-function <functionName>() {
+export function <functionName>() {
     return <h1><functionName> component</h1>
 }
 
-export default component(<functionName>, '<componentSelector>');
-
-<style>{\`\`}</style>
+component(<functionName>, '<componentSelector>');
 `;
 
-const componentTestData = `import { createComponentTester } from '@monster-js/tester';
-import <functionName> from './<importPath>';
-
-describe('<describeName>', function() {
-
-    const { render } = createComponentTester(<functionName>);
-
-    it('should render the component', function() {
-        const { component } = render();
-        expect(component).toBeTruthy();
-    });
-
-});
-`;
-
-export function generateComponentTest(name: string) {
+export function generateComponentStyle(name: string) {
     const baseName = basename(name);
     const fullDirPath = resolve(process.cwd(), 'src/app', name);
-    const fullTestPath = resolve(fullDirPath, `${baseName}.spec.ts`)
+    const fullTestPath = resolve(fullDirPath, `${baseName}.component.scss`)
 
 
     // check if files don't exists
@@ -44,23 +28,14 @@ export function generateComponentTest(name: string) {
         return logError(`Unable to create new file. ${fullTestPath} file already exists.`);
     }
 
-
-    // if not, create the files
-    const camelCaseName = kebabToCamelCase(baseName);
-    const test = componentTestData
-        .replace(/<functionName>/g, camelCaseName)
-        .replace(/<importPath>/g, camelToKebab(baseName))
-        .replace(/<describeName>/g, baseName);
-
-
-    writeFile(fullTestPath, test);
+    writeFile(fullTestPath, '');
     logCreate(fullTestPath);
 }
 
 export function generateFunctionComponent(name: string) {
     const baseName = basename(name);
     const fullDirPath = resolve(process.cwd(), 'src/app', name);
-    const fullLogicPath = resolve(fullDirPath, `${baseName}.tsx`)
+    const fullLogicPath = resolve(fullDirPath, `${baseName}.component.tsx`);
 
 
     /**
@@ -77,6 +52,7 @@ export function generateFunctionComponent(name: string) {
      */
     const camelCaseName = kebabToCamelCase(baseName);
     const writeData = componentData
+        .replace(/<styleName>/g, baseName)
         .replace(/<functionName>/g, camelCaseName)
         .replace(/<componentSelector>/g, 'app-' + camelToKebab(baseName));
 
@@ -87,7 +63,5 @@ export function generateFunctionComponent(name: string) {
 
 export function generateComponent(name: string, options: { [key: string]: any; }) {
     generateFunctionComponent(name);
-    if (!options.noTest) {
-        generateComponentTest(name);
-    }
+    generateComponentStyle(name);
 }

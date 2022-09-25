@@ -1,5 +1,5 @@
-import { ComponentInstance } from "../interfaces/component-instance.interface";
-import { Watcher } from "../interfaces/watcher.interface";
+import { ComponentInstance } from "../component/interfaces/component-instance.interface";
+import { Watcher } from "../watcher/interfaces/watcher.interface";
 
 export function ifCondition(context: ComponentInstance, elementCaller: () => HTMLElement, valueCaller: () => any) {
     const fragment = document.createDocumentFragment();
@@ -34,7 +34,7 @@ export function ifCondition(context: ComponentInstance, elementCaller: () => HTM
         fragment.appendChild(element);
     }
 
-    context.conditionWatchers.push(watcher);
+    context.cWatchers.push(watcher);
 
     return fragment;
 }
