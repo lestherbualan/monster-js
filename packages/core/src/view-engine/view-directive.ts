@@ -1,14 +1,14 @@
-import { ComponentInstance } from "../interfaces/component-instance.interface";
-import { ViewDirective } from "../interfaces/view-directive.interface";
+import { ComponentInstance } from "../component/interfaces/component-instance.interface";
+import { ViewDirective } from "../directives/interfaces/view-directive.interface";
 
 export function viewDirective(context: ComponentInstance, element: HTMLElement, directives: ViewDirective[]) {
 
     directives.forEach(directive => {
-        if (!context.directives[directive.namespace]) {
+        if (!context.dirs[directive.namespace]) {
             console.error(`The directive with namespace ${directive.namespace} is not registered.`);
             return;
         }
-        context.directives[directive.namespace]({
+        context.dirs[directive.namespace]({
             context,
             directives: directive.directives,
             element

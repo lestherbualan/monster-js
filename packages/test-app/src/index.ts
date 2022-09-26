@@ -1,5 +1,6 @@
 import '@monster-js/core/reflection';
-import { defineComponent } from '@monster-js/core';
-import app from './app/app';
+import './styles.scss';
+import { AppModule } from './app/app.module';
+import { bootstrap } from '@monster-js/core';
 
-defineComponent(app);
+bootstrap(AppModule);

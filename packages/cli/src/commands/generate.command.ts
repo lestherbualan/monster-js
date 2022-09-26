@@ -12,7 +12,7 @@ export function generateCommand(program: Command) {
 
     generate.command("component <name>")
         .description("Generate a component files")
-        .option("--noTest", "Generate a component without a test.", false)
+        // .option("--noTest", "Generate a component without a test.", false)
         .action(generateComponent);
 
     generate.command("service <name>")

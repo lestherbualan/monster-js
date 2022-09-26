@@ -1,4 +1,4 @@
-import { ComponentInstance } from "../interfaces/component-instance.interface";
+import { ComponentInstance } from "../component/interfaces/component-instance.interface";
 
 export function useState<T>(context: ComponentInstance, value?: T): [() => T, (value: T) => void] {
     let state = value;

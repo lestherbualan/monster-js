@@ -1,4 +1,4 @@
-import { ComponentInstance } from "../interfaces/component-instance.interface";
+import { ComponentInstance } from "../component/interfaces/component-instance.interface";
 
 export function viewPipe(context: ComponentInstance, pipeSelector: string, value: any, params: any[] = []) {
     const pipe = context.pipes[pipeSelector];

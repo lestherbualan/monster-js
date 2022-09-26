@@ -1,13 +1,6 @@
-import { CustomObject } from "../interfaces/custom-object.interface";
-
-export function createElement(tag: string, attributes: CustomObject = {}, children: (HTMLElement | Text)[] = []): HTMLElement {
-    const element = document.createElement(tag);
-
-    for (const [key, value] of Object.entries(attributes)) {
-        element.setAttribute(key, value);
-    }
-
+export const createElement = (name: string, attributes: { [key: string]: any; } = {}, children: (HTMLElement | Text)[] = []) => {
+    const element = document.createElement(name);
+    Object.keys(attributes).forEach(key => element.setAttribute(key, attributes[key]));
     element.append(...children);
-
     return element;
 }

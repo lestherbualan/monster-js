@@ -1,5 +1,5 @@
-import { ComponentInstance } from "../interfaces/component-instance.interface";
-import { Watcher } from "../interfaces/watcher.interface";
+import { ComponentInstance } from "../component/interfaces/component-instance.interface";
+import { Watcher } from "../watcher/interfaces/watcher.interface";
 
 export function listRendering(context: ComponentInstance, elementCaller: (index?: number) => HTMLElement, valueCaller: () => any[]): DocumentFragment {
     const fragment = document.createDocumentFragment();
@@ -48,7 +48,7 @@ export function listRendering(context: ComponentInstance, elementCaller: (index?
     watcher.val.newValue = valueCaller();
     watcher.update(watcher.val);
 
-    context.conditionWatchers.push(watcher);
+    context.cWatchers.push(watcher);
 
     return fragment;
 }

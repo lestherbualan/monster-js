@@ -1,13 +1,12 @@
-import { ComponentInstance } from "../interfaces/component-instance.interface";
-import { CustomObject } from "../interfaces/custom-object.interface";
-import { Watcher } from "../interfaces/watcher.interface";
+import { ComponentInstance } from "../component/interfaces/component-instance.interface";
+import { Watcher } from "../watcher/interfaces/watcher.interface";
 
 export function renderChild(
     tag: string,
-    attributes: CustomObject,
+    attributes: { [key: string]: any; },
     children: (HTMLElement | Text)[],
     context: ComponentInstance,
-    props: CustomObject<() => any>
+    props: { [key: string]: () => any; }
 ): HTMLElement {
     const child = customElements.get(tag);
     if (!child) {
@@ -34,7 +33,7 @@ export function renderChild(
                 }
                 return hasChanges;
             },
-            update: (newValue: CustomObject) => {
+            update: (newValue: { [key: string]: any; }) => {
                 (element as unknown as ComponentInstance).setProps(newValue);
             }
         };

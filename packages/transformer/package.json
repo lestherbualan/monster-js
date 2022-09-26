@@ -1,17 +1,22 @@
 {
   "name": "@monster-js/transformer",
-  "version": "1.4.12",
+  "version": "1.4.14",
   "description": "",
-  "main": "src/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "./dist/index.js",
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "build": "tsc -p ."
+  },
   "dependencies": {
+    "@babel/generator": "^7.19.0",
+    "@babel/parser": "^7.19.1",
+    "@babel/traverse": "^7.19.1",
+    "@rollup/pluginutils": "^4.2.1",
     "css-tree": "^2.2.1",
-    "sass": "^1.54.9"
+    "sass": "^1.55.0"
   },
   "publishConfig": {
     "access": "public"
@@ -34,5 +39,8 @@
       "type": "individual",
       "url": "https://www.paypal.com/paypalme/dariusbualan"
     }
-  ]
+  ],
+  "devDependencies": {
+    "typescript": "^4.8.3"
+  }
 }

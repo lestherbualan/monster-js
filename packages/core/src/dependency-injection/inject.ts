@@ -1,15 +1,14 @@
-import { ComponentInstance } from "../interfaces/component-instance.interface";
-import { DIDataSource } from "../interfaces/di-data-source.interface";
-import { MonsterWebComponent } from "../interfaces/monster-web-component.interface";
-import { getDataSource } from "./get-data-source";
-import { globalDi } from "./global-di";
+import { ComponentInstance } from "../component/interfaces/component-instance.interface";
+import { MonsterWebComponent } from "../component/interfaces/monster-web-component.interface";
+import { Constructor } from "../interfaces/constructor.interface";
+import { DIDataSource } from "./interfaces/di-data-source.interface";
 
-function construct(dataSource: DIDataSource, context: ComponentInstance) {
+const construct = (dataSource: DIDataSource, context: ComponentInstance) => {
     const constructorParams: any[] = Reflect.getMetadata('design:paramtypes', dataSource.target) || [];
     const instance = new dataSource.target(...constructorParams.map(param => inject(context, param)));
-    if (instance.onReceiveConfig) {
-        instance.onReceiveConfig(dataSource.config);
-    }
+
+    if (instance.onReceiveConfig) instance.onReceiveConfig(dataSource.config);
+
     return instance;
 }
 
@@ -30,37 +29,21 @@ export function processDataSource(dataSource: DIDataSource, context: ComponentIn
     }
 }
 
-export function inject<T = any>(context: ComponentInstance, target: T): T {
-
+export function inject<T>(context: ComponentInstance, target: Constructor<T>): T {
 
     /**
-     * Get data source from private data source
+     * Get data source
      */
-    let dataSource = getDataSource(context, 'dataSource').get(target);
+    let dataSource = (context as any).constructor.dataSource.get(target);
 
 
     /**
-     * Get data source from parent data source
-     * data source from parent is passed down to the child components from the module component
-     */
-    if (!dataSource) {
-        dataSource = getDataSource(context, 'parentDataSource').get(target);
-    }
-
-
-    /**
-     * Get data source from global data source
-     */
-    if (!dataSource) {
-        dataSource = globalDi.dataSource.get(target);
-    }
-
-    /**
-     * If data source is not found in the three sources
+     * If data source is not found
      * then throw an error
      */
     if (!dataSource) {
         console.error(`The service '${(target as any).name}' is not registered in the component!`);
+        return;
     }
 
     return processDataSource(dataSource, context);

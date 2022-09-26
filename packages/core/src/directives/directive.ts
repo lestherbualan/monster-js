@@ -1,6 +1,6 @@
-import { FunctionDirective } from "../interfaces/function-directive.interface";
+import { FunctionDirective } from "./function-directive.interface";
 
-export function directive(directive: FunctionDirective, selector: string) {
-    directive.selector = selector;
+export function directive(fnDirective: FunctionDirective, selector: string) {
+    fnDirective.selector = selector;
     return directive;
 }
