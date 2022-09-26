@@ -18,3 +18,5 @@
 
 - update .monster -> .config documentation
 - fix environment content replacement using rollup replace plugin
+- replace cli mode option to --config-prod
+- remove output directory in build command
