@@ -1,6 +1,6 @@
 {
   "name": "@monster-js/tester",
-  "version": "1.4.14",
+  "version": "1.4.16",
   "description": "",
   "main": "./public_apis.ts",
   "keywords": [],
