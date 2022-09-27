@@ -1,11 +1,11 @@
 {
   "name": "@monster-js/cli",
-  "version": "1.4.16",
+  "version": "1.4.17",
   "description": "Command line interface for MonsterJS framework.",
   "main": "./dist/src/index.js",
   "scripts": {
-    "watch": "tsc --watch -p . && npm run copy:assets",
-    "build": "tsc -p . && npm run copy:assets",
+    "watch": "rm dist -rf && tsc --watch -p . && npm run copy:assets",
+    "build": "rm dist -rf && tsc -p . && npm run copy:assets",
     "copy:assets": "ncp ./src/assets ./dist/src/assets"
   },
   "bin": {

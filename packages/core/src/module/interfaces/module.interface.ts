@@ -6,11 +6,21 @@ import { FunctionPipe } from "../../pipes/interfaces/function-pipe.interface";
 import { ServiceConstructor } from "../../service/interfaces/service-constructor.interface";
 
 export interface Module {
+    modules?: Module[];
     components?: FunctionComponent[];
     directives?: FunctionDirective[];
     pipes?: FunctionPipe[];
     root?: FunctionComponent;
     services?: (ServiceConstructor | [ServiceConstructor, any])[];
     diSource?: Map<Constructor, DIDataSource>;
+
+    exports?: {
+        components?: FunctionComponent[];
+        services?: (ServiceConstructor | [ServiceConstructor, any])[];
+        directives?: FunctionDirective[];
+        pipes?: FunctionPipe[];
+    };
+
     init?: boolean;
+    definedSelectors?: string[];
 }

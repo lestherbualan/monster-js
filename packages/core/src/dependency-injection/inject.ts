@@ -42,7 +42,7 @@ export function inject<T>(context: ComponentInstance, target: Constructor<T>): T
      * then throw an error
      */
     if (!dataSource) {
-        console.error(`The service '${(target as any).name}' is not registered in the component!`);
+        console.error(`The service '${(target as any).name}' is not registered in the module!`);
         return;
     }
 

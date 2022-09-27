@@ -7,11 +7,11 @@ import { writeFile } from "../../utils/write-file";
 
 const pipeData = `import { pipe } from "@monster-js/core";
 
-function <pipeName>Pipe(value: any, args: any[]) {
+export function <pipeName>Pipe(value: any, args: any[]) {
     return value;
 }
 
-export default pipe(<pipeName>, '<pipeSelector>');`;
+pipe(<pipeName>Pipe, '<pipeSelector>');`;
 
 export function generatePipe(name: string, options: { [key: string]: any; }) {
     const baseName = basename(name);

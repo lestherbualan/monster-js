@@ -56,3 +56,13 @@ export { createSharedState } from "./src/state/create-shared-state";
  */
 export { bootstrap } from "./src/module/bootstrap";
 export { Module } from './src/module/interfaces/module.interface';
+
+/**
+ * dependency injection
+ */
+export { inject } from "./src/dependency-injection/inject";
+
+/**
+ * services
+ */
+export { Service } from "./src/service/service.decorator";

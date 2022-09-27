@@ -1,3 +1,4 @@
+import { EXTERNAL_COMPONENTS } from "../component/external-components";
 import { ComponentInstance } from "../component/interfaces/component-instance.interface";
 import { Watcher } from "../watcher/interfaces/watcher.interface";
 
@@ -8,11 +9,26 @@ export function renderChild(
     context: ComponentInstance,
     props: { [key: string]: () => any; }
 ): HTMLElement {
-    const child = customElements.get(tag);
-    if (!child) {
-        console.error(`The component ${tag} is not defined.`);
+
+
+    /**
+     * Check if selector is external web component
+     * if yes, then return the element
+     */
+    if (EXTERNAL_COMPONENTS.indexOf(tag) >= 0) {
+        // TODO : try to test return new (customElements.get(tag))();
+        const child = customElements.get(tag);
+        return new child();
+    }
+
+
+    if (context.definedSelectors.indexOf(tag) === -1) {
+        console.error(`The component ${tag} is not defined in the module.`);
         return;
     }
+
+
+    const child = customElements.get(tag);
     const element = new child();
 
     if (Object.keys(props).length > 0) {

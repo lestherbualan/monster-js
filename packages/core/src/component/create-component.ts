@@ -17,7 +17,7 @@ export const createComponent = (fnComponent: FunctionComponent, module: Module) 
     (module.directives || []).forEach(dir => directives[dir.selector] = dir);
     (module.pipes || []).forEach(pipe => pipes[pipe.selector] = pipe);
 
-    return class extends fnComponent.super implements ComponentInstance {
+    return class extends (fnComponent.super) implements ComponentInstance {
 
         public static dataSource = module.diSource;
 
@@ -34,6 +34,7 @@ export const createComponent = (fnComponent: FunctionComponent, module: Module) 
             ...directives
         };
         public pipes = pipes;
+        public definedSelectors: string[] = module.definedSelectors;
 
         connectedCallback() {
             this.appendChild(fnComponent.bind(this)(this.props));

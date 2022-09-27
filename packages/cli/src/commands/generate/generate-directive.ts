@@ -7,10 +7,10 @@ import { writeFile } from "../../utils/write-file";
 
 const directiveData = `import { directive, DirectiveParam } from '@monster-js/core';
 
-function <directiveName>Dir(param: DirectiveParam) {
+export function <directiveName>Dir(param: DirectiveParam) {
 }
 
-export default directive(<directiveName>, '<directiveSelector>');`;
+directive(<directiveName>Dir, '<directiveSelector>');`;
 
 export function generateDirective(name: string, options: { [key: string]: any; }) {
     const baseName = basename(name);

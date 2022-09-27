@@ -5,7 +5,7 @@ export function viewDirective(context: ComponentInstance, element: HTMLElement, 
 
     directives.forEach(directive => {
         if (!context.dirs[directive.namespace]) {
-            console.error(`The directive with namespace ${directive.namespace} is not registered.`);
+            console.error(`The directive with namespace ${directive.namespace} is not registered in module.`);
             return;
         }
         context.dirs[directive.namespace]({
