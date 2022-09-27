@@ -9,7 +9,6 @@
     - it should be registered in module
 
 - update service config documentation
-- remove global service documentation
 - remove global component documentation
 - remove component test documentation
 - remove testing documentation
@@ -23,3 +22,4 @@
 
 - add cli generate module
 - add external web components
+- add global service for store singleton

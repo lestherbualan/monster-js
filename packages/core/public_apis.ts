@@ -76,3 +76,10 @@ export { Service } from "./src/service/service.decorator";
  * interfaces
  */
 export { Subscription } from './src/interfaces/subscription.interface';
+export { OnReceiveConfig } from './src/interfaces/on-receive-config.interface';
+
+/**
+ * utils
+ */
+export { DevTool } from "./src/utils/dev-tool";
+export { Observable } from "./src/utils/observable";

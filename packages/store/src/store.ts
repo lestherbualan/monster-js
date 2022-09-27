@@ -1,4 +1,4 @@
-import { CustomObservable, OnReceiveConfig, DevTool } from '@monster-js/core';
+import { Observable, OnReceiveConfig, DevTool, Service } from '@monster-js/core';
 import { ActionKeys } from './interfaces/action-keys.interface';
 import { Actions } from './interfaces/actions.interface';
 import { DevToolAction } from './interfaces/dev-tool-action.interface';
@@ -8,13 +8,14 @@ import { objectToObservables } from './utils/object-to-observables';
 
 const NORMAL_SET_DEVTOOL_KEY = '@STORE_SET';
 
+@Service({ singleton: true })
 export class Store<T = any> implements OnReceiveConfig {
 
     /**
      * Contains the state of the store
      * the properties of the state objects are observables
      */
-    private state: { [key in keyof T]: CustomObservable<T[key]> } = null!;
+    private state: { [key in keyof T]: Observable<T[key]> } = null!;
     private values: T = null!;
 
 
@@ -77,7 +78,7 @@ export class Store<T = any> implements OnReceiveConfig {
         this.devToolSet(action.type);
     }
 
-    public select<K extends keyof T>(key: K): CustomObservable<T[K]> {
+    public select<K extends keyof T>(key: K): Observable<T[K]> {
         return this.state[key];
     }
 
