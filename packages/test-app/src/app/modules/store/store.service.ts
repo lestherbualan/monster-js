@@ -1,4 +1,6 @@
 import { Service } from "@monster-js/core";
 
-@Service()
-export class StoreService { }
+@Service({ singleton: true })
+export class StoreService {
+    count: number = 100;
+}

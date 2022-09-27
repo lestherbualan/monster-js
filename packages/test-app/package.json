@@ -5,7 +5,7 @@
   "scripts": {
     "start": "mn serve",
     "build": "mn build",
-    "build-prod": "mn build --env prod"
+    "build-prod": "mn build --mode production"
   },
   "keywords": [],
   "author": "",

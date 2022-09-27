@@ -12,7 +12,6 @@ export interface Module {
     pipes?: FunctionPipe[];
     root?: FunctionComponent;
     services?: (ServiceConstructor | [ServiceConstructor, any])[];
-    diSource?: Map<Constructor, DIDataSource>;
 
     exports?: {
         components?: FunctionComponent[];
@@ -22,5 +21,6 @@ export interface Module {
     };
 
     init?: boolean;
+    diSource?: Map<Constructor, DIDataSource>;
     definedSelectors?: string[];
 }

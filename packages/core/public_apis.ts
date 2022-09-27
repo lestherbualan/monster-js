@@ -71,6 +71,7 @@ export { inject } from "./src/dependency-injection/inject";
  * services
  */
 export { Service } from "./src/service/service.decorator";
+export { globalService } from "./src/service/global-service";
 
 /**
  * interfaces

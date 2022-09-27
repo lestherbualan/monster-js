@@ -1,6 +1,7 @@
 import { ComponentInstance } from "../component/interfaces/component-instance.interface";
 import { MonsterWebComponent } from "../component/interfaces/monster-web-component.interface";
 import { Constructor } from "../interfaces/constructor.interface";
+import { GLOBAL_DI_SOURCE } from "../service/global-data-source";
 import { DIDataSource } from "./interfaces/di-data-source.interface";
 
 const construct = (dataSource: DIDataSource, context: ComponentInstance) => {
@@ -38,11 +39,20 @@ export function inject<T>(context: ComponentInstance, target: Constructor<T>): T
 
 
     /**
+     * If data source is not in component's data source
+     * then check if it exists in global
+     */
+    if (!dataSource) {
+        dataSource = GLOBAL_DI_SOURCE.get(target);
+    }
+
+
+    /**
      * If data source is not found
      * then throw an error
      */
     if (!dataSource) {
-        console.error(`The service '${(target as any).name}' is not registered in the module!`);
+        console.error(`The service '${(target as any).name}' is not registered in the module or as a global service!`);
         return;
     }
 
