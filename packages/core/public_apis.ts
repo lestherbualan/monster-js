@@ -39,6 +39,11 @@ export { createWatcher } from "./src/watcher/create-watcher";
 export { DirectiveParam } from "./src/directives/interfaces/directive-params.interface";
 export { dirCreateWatcher } from "./src/directives/dir-create-watcher";
 export { directive } from "./src/directives/directive";
+export { dirAfterInit } from "./src/directives/hooks/dir-after-init";
+export { dirOnchangeDetection } from "./src/directives/hooks/dir-on-change-detection";
+export { dirOnDestroy } from "./src/directives/hooks/dir-on-destroy";
+export { dirOnPropsChange } from "./src/directives/hooks/dir-on-props-change";
+export { dirOnViewChange } from "./src/directives/hooks/dir-on-view-changes";
 
 /**
  * pipes
@@ -66,3 +71,8 @@ export { inject } from "./src/dependency-injection/inject";
  * services
  */
 export { Service } from "./src/service/service.decorator";
+
+/**
+ * interfaces
+ */
+export { Subscription } from './src/interfaces/subscription.interface';

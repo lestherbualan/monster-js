@@ -8,7 +8,7 @@ import { processGuards } from './utils/process-guards';
 import { routeMatcher } from './utils/route-matcher';
 import { validateRouteProps } from './utils/validate-route-props';
 
-function routeFn(route: Route) {
+export function route(route: Route): any {
 
     /**
      * Validate route props
@@ -68,4 +68,4 @@ function routeFn(route: Route) {
     ></view.selector>
 };
 
-export const route = component(routeFn, 'app-route');
+component(route, 'app-route');

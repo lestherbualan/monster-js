@@ -2,7 +2,7 @@ import { directive, DirectiveParam, dirCreateWatcher, dirOnDestroy, Subscription
 import { InternalService } from './internal.service';
 import { routeMatcher } from './utils/route-matcher';
 
-function routerDirectiveFn(params: DirectiveParam) {
+export function routerDir(params: DirectiveParam) {
     const internalService = new InternalService();
     const { directives, element } = params;
     const { link, linkActive, linkActiveExact } = directives;
@@ -41,4 +41,4 @@ function routerDirectiveFn(params: DirectiveParam) {
     }
 }
 
-export const routerDirective = directive(routerDirectiveFn, 'router');
+directive(routerDir, 'router');
