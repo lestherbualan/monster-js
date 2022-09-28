@@ -44,30 +44,33 @@ To create a project using the MonsterJS CLI we can check the [CLI documentation]
 After the setup is complete, you can see the file structure of the project in the current directory.
 
 ```bash
-.monster
+.config
     └── rollup.config.js
 node_modules
 src
     └── app
-        ├── app.tsx
+        ├── app.component.tsx
+        ├── app.component.scss
+        ├── app.module.ts
     ├── assets
     └── environments
-        ├── dev.js
-        └── prod.js
+        ├── environment.ts
+        └── environment.prod.ts
     ├── index.html
     ├── index.ts
-    ├── styles.scss
-    └── types.d.ts
+    └── styles.scss
 package.json
 tsconfig.json
 ```
 
-* `.monster` Contains the configurations needed for the MonsterJS project.
-* `.monster/rollup.config.js` The rollup configuration of the project.
+* `.config` Contains the configurations needed for the MonsterJS project.
+* `.config/rollup.config.js` The rollup configuration of the project.
 * `node_modules/` This is where the installed node packages are located.
 * `src/` A directory that contains the source code and assets of your application.
 * `src/app/` This is where the codes related to the application are located.
-* `src/app/app.tsx` Contains the ts codes of the root component. Any other components must be a child of this component.
+* `src/app/app.component.tsx` Contains the ts codes of the root component. Any other components must be a child of this component.
+* `src/app/app.component.scss` Styles of the root component.
+* `src/app/app.module.ts` The codes of the application's root module.
 * `src/assets/` This is the recommended directory to put all of the asset files.
 * `src/environments/` Contains the different environment files for the project.
 * `src/environments/environment.ts` The development environment variables of the project.

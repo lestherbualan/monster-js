@@ -5,6 +5,7 @@
 export { component } from "./src/component/component";
 export { createComponent } from "./src/component/create-component";
 export { renderChild } from "./src/view-engine/render-child";
+export { externalComponents } from "./src/component/external-components";
 
 /**
  * view engine

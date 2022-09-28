@@ -64,37 +64,28 @@ mn generate service greeting --singleton
 
 ## Register service
 
-Before we can use a service we need to register it in our component.
+Before we can use a service we need to register it inside a module so that all services and components registered in that module can also use this service.
 
 Example.
 
 ```tsx
-import { services } from '@monster-js/core';
+import { Module } from '@monster-js/core';
 import { GreetingService } from './greeting.service';
 
-function app() {
-    return <h1>App component</h1>
-}
-
-services(app, [GreetingService]);
+export const GreetingModule: Module = {
+    services: [GreetingService]
+};
 ```
 
 ### Register with config
 
 ```tsx
-import { services } from '@monster-js/core';
+import { Module } from '@monster-js/core';
 import { GreetingService } from './greeting.service';
 
-function app() {
-    return <h1>App component</h1>
-}
-
-services(app, [
-    {
-        service: GreetingService,
-        config: { message: 'hello world' }
-    }
-]);
+export const GreetingModule: Module = {
+    services: [[GreetingService, { message: 'hello world' }]]
+};
 ```
 
 ## Register service in global
@@ -114,12 +105,9 @@ globalService(GreetingService);
 
 ```tsx title="src/index.ts"
 import { globalService } from '@monster-js/core';
-import { GreetingService } './greeting.service';
+import { GreetingService } from './greeting.service';
 
-globalService({
-    service: GreetingService,
-    config: { message: 'hello world' }
-});
+globalService([ GreetingService, { message: 'hello world' } ]);
 ```
 
 ## Service lifecycle hooks

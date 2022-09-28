@@ -11,9 +11,7 @@ const serviceData = `import { Service } from "@monster-js/core";
 export class <serviceName>Service { }
 `;
 
-const singleton = `{
-    singleton: true
-}`;
+const singleton = `{ singleton: true }`;
 
 export function generateService(name: string, options: { [key: string]: any; }) {
     const baseName = basename(name);

@@ -6,8 +6,7 @@
   "main": "index.js",
   "sideEffects": false,
   "workspaces": [
-    "packages/*",
-    "docs"
+    "packages/*"
   ],
   "scripts": {
     "lint": "npm run lint-core && npm run lint-tester && npm run lint-http && npm run lint-router && npm run lint-store",
