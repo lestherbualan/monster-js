@@ -14,7 +14,7 @@ export const <moduleName>Module: Module = {
 export function generateModule(name: string, options: { [key: string]: any; }) {
     const baseName = basename(name);
     const fullDirPath = resolve(process.cwd(), 'src/app', name);
-    const fullPath = resolve(`${fullDirPath}.module.ts`)
+    const fullPath = resolve(fullDirPath, `${baseName}.module.ts`);
 
     // check if files don't exists
     // if yes, then throw an error

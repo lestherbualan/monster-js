@@ -1,6 +1,6 @@
 {
   "name": "@monster-js/router",
-  "version": "1.4.18",
+  "version": "1.4.19",
   "description": "",
   "main": "./public_apis.ts",
   "keywords": [],
