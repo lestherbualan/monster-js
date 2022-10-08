@@ -40,12 +40,16 @@ export const initialState: StoreState<InitialState> = {
 
 ### Setting initial state
 
+To set the initial state of the store, we need to pass the initial state as a service config when we register the store as a global service.
+
+Example.
+
 ```tsx title="src/index.ts"
+import { globalService } from '@monster-js/core';
 import { Store } from '@monster-js/store';
 import { initialState } from './initial-state';
 
-const store = new Store();
-store.initialState(initialState);
+globalService([Store, initialState]);
 ```
 
 ## Setter
@@ -56,16 +60,15 @@ The change will be reflected to the components that has a subscription to this s
 Example.
 
 ```tsx
+import { inject } from '@monster-js/core';
 import { Store } from '@monster-js/store';
 import { InitialState } from './initial-state';
 
-function app() {
-    const store = new Store<InitialState>();
-
+export function app() {
+    const store = inject(this, Store<InitialState>);
     const buttonClick = () => {
         store.set('count', 100);
     }
-
     ...
 }
 ```
@@ -77,16 +80,15 @@ To get a value from store we can call the `get` method that returns a specific s
 Example.
 
 ```tsx
+import { inject } from '@monster-js/core';
 import { Store } from '@monster-js/store';
 import { InitialState } from './initial-state';
 
-function app() {
-    const store = new Store<InitialState>();
-
+export function app() {
+    const store = inject(this, Store<InitialState>);
     const buttonClick = () => {
         console.log(store.get('count'));
     }
-
     ...
 }
 ```
@@ -98,18 +100,17 @@ Store also offers a way to subscribe for changes of each item of the state.
 Example.
 
 ```tsx
+import { inject } from '@monster-js/core';
 import { Store } from '@monster-js/store';
 import { InitialState } from './initial-state';
 
-function app() {
-    const store = new Store<InitialState>();
-
+export function app() {
+    const store = inject(this, Store<InitialState>);
     const buttonClick = () => {
         store.select('count').subscribe(count => {
             console.log(count);
         });
     }
-
     ...
 }
 ```
@@ -121,24 +122,21 @@ All subscriptions must be unsubscribe when the component is destroyed or it will
 Example.
 
 ```tsx
-import { onDestroy } from '@monster-js/core';
+import { onDestroy, inject } from '@monster-js/core';
 import { Store, Subscription } from '@monster-js/store';
 import { InitialState } from './initial-state';
 
-function app() {
+export function app() {
     let subscription: Subscription;
-    const store = new Store<InitialState>();
-
+    const store = inject(this, Store<InitialState>);
     const buttonClick = () => {
         subscription = store.select('count').subscribe(count => {
             console.log(count);
         });
     }
-
     onDestroy(this, () => {
         subscription.unsubscribe();
     });
-
     ...
 }
 ```
@@ -226,17 +224,16 @@ Dispatch action is a way to set the state of the store using an action.
 Example.
 
 ```tsx
+import { inject } from '@monster-js/core';
 import { Store } from '@monster-js/store';
 import { InitialState } from './initial-state';
 import { setCount } from './count.actions';
 
-function app() {
-    const store = new Store<InitialState>();
-
+export function app() {
+    const store = inject(this, Store<InitialState>);
     const buttonClick = () => {
         store.action(setCount(100));
     }
-
     ...
 }
 ```

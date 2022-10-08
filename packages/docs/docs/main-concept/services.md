@@ -88,7 +88,7 @@ export const GreetingModule: Module = {
 };
 ```
 
-## Register service in global
+## Global service
 
 If we want our service to be available to all our components inside our application, we can also register the service as a global service.
 

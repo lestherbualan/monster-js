@@ -16,29 +16,21 @@ We can install the router package by running the following command in the root d
 npm install @monster-js/router
 ```
 
-## Define router component
+## Register the router module
 
-Router is just a component so we need to define it first before we can use it.
-We can define the router component like any other component inside `src/index.ts` file.
+Router must be registered to the module first before we can use it.
+We can register the individual apis or register the whole router module to the module where we want to use the router.
 
 Example.
 
-```tsx title="src/index.ts"
-import { getSelector } from '@monster-js/core';
-import { route } from '@monster-js/router';
+```tsx
+import { Module } from '@monster-js/core';
+import { RouterModule } from '@monster-js/router';
 
-customElement.define(getSelector(route), route);
+export const AppModule: Module = {
+    modules: [RouterModule]
+};
 ```
-
-or
-
-```tsx title="src/index.ts"
-import { defineComponent } from '@monster-js/core';
-import { route } from '@monster-js/router';
-
-defineComponent(route);
-```
-
 ## Creating a route
 
 Route is just a component provided by the router package.

@@ -74,11 +74,11 @@ Example.
 
 ```tsx
 function app() {
-    const httpClient = new HttpClient();
+    const http = inject(this, HttpClient);
     const [ user, setUser ] = useState(this);
 
     afterInit(this, async () => {
-        const user = await httpClient.get('/api/v1/user');
+        const user = await http.get('/api/v1/user');
         setUser(user);
     });
 
@@ -100,13 +100,7 @@ Http supports different http verbs like GET, POST, PUT, PATCH, and DELETE.
 Example.
 
 ```tsx
-export class SampleService {
-    http = new HttpClient();
-
-    async getAll() {
-        return await this.http.get('/get-all');
-    }
-}
+await http.get('/get-all');
 ```
 
 #### Parameters
@@ -126,13 +120,7 @@ export class SampleService {
 Example.
 
 ```tsx
-export class SampleService {
-    http = new HttpClient();
-
-    async deleteOne(id: number) {
-        return await this.http.delete(`/delete-item/${id}`);
-    }
-}
+await http.delete(`/delete-item/${id}`);
 ```
 
 #### Parameters
@@ -152,13 +140,7 @@ export class SampleService {
 Example.
 
 ```tsx
-export class SampleService {
-    http = new HttpClient();
-
-    async create(body: CustomObject) {
-        return await this.http.post(`/create-item`, body);
-    }
-}
+await http.post(`/create-item`, body);
 ```
 
 #### Parameters
@@ -179,13 +161,7 @@ export class SampleService {
 Example.
 
 ```tsx
-export class SampleService {
-    http = new HttpClient();
-
-    async update(id: number, body: CustomObject) {
-        return await this.http.put(`/update-item/${id}`, body);
-    }
-}
+await http.put(`/update-item/${id}`, body);
 ```
 
 #### Parameters
@@ -206,13 +182,7 @@ export class SampleService {
 Example.
 
 ```tsx
-export class SampleService {
-    http = new HttpClient();
-
-    async update(id: number, body: CustomObject) {
-        return await this.http.patch(`/update-item/${id}`, body);
-    }
-}
+await http.patch(`/update-item/${id}`, body);
 ```
 
 #### Parameters
