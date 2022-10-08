@@ -84,10 +84,6 @@ const config = {
                 to: '/docs/category/getting-started',
               },
               {
-                label: 'Unit testing',
-                to: '/docs/category/unit-testing',
-              },
-              {
                 label: 'CLI',
                 to: '/docs/category/cli',
               },
