@@ -1,11 +1,16 @@
-import { ComponentInstance } from "../component/interfaces/component-instance.interface";
+import { ComponentInstanceInterface } from "../interfaces/component-instance.interface";
+import { ComponentInterface } from "../interfaces/component-interface";
+import { Container } from "../dependency-injection/container";
 
-export function viewPipe(context: ComponentInstance, pipeSelector: string, value: any, params: any[] = []) {
-    const pipe = context.pipes[pipeSelector];
+export function viewPipe(context: ComponentInstanceInterface, pipeSelector: string, value: any, params: any[] = []) {
+    const component: ComponentInterface = context.constructor as any;
+    const pipe = component.pipes[pipeSelector];
     if (!pipe) {
-        console.error(`The pipe ${pipeSelector} is not registered in the component.`);
+        console.error(`The pipe ${pipeSelector} is not registered in ${component.dataSource.name}.`);
         return;
     } else {
-        return pipe(value, params)
+        const di = new Container(component.dataSource!);
+        const instance = di.resolve(pipe);
+        return instance.transform(value, params);
     }
 }

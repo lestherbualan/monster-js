@@ -1,9 +1,9 @@
-import { ComponentInstance } from "../component/interfaces/component-instance.interface";
-import { Watcher } from "../watcher/interfaces/watcher.interface";
+import { ComponentInstanceInterface } from "../interfaces/component-instance.interface";
+import { WatcherInterface } from "../interfaces/watcher.interface";
 
-export function attributeBinding(context: ComponentInstance, element: HTMLElement, attributes: { [key: string]: () => any; }) {
+export function attributeBinding(context: ComponentInstanceInterface, element: HTMLElement, attributes: { [key: string]: () => any; }) {
 
-    const watcher: Watcher = {
+    const watcher: WatcherInterface = {
         val: {},
         isConnected: () => element.isConnected,
         isUpdated: () => {
@@ -32,6 +32,6 @@ export function attributeBinding(context: ComponentInstance, element: HTMLElemen
         element.setAttribute(key, currentValue);
     }
 
-    context.watchers.push(watcher);
+    context.$wrapper.changeDetection.addWatcher(watcher);
     return element;
 }

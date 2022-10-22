@@ -1,6 +1,7 @@
 {
     "extends": "../../tsconfig",
     "compilerOptions": {
-        "outDir": "./dist"
+        "outDir": "./dist",
+        "types": ["@monster-js/core/polyfill"]
     }
 }

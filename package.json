@@ -1,50 +1,35 @@
 {
   "name": "monster-js",
   "private": true,
-  "version": "1.0.1",
-  "description": "",
+  "version": "1.4.31",
   "main": "index.js",
-  "sideEffects": false,
+  "license": "MIT",
   "workspaces": [
-    "packages/*",
-    "docs"
+    "packages/*"
   ],
   "scripts": {
-    "lint": "npm run lint-core && npm run lint-tester && npm run lint-http && npm run lint-router && npm run lint-store",
-    "lint-core": "tsc -p packages/core --noEmit",
-    "lint-tester": "tsc -p packages/tester --noEmit",
-    "lint-http": "tsc -p packages/http --noEmit",
-    "lint-router": "tsc -p packages/router --noEmit",
-    "lint-store": "tsc -p packages/store --noEmit",
-    "start-docs": "npm start -w @monster-js/docs",
-    "deploy-patch": "npm run version-patch && npm run build && npm run publish",
-    "build": "npm run build-cli && npm run build-transformer",
-    "build-cli": "npm run build -w @monster-js/cli",
-    "build-transformer": "npm run build -w @monster-js/transformer",
-    "version-patch": "npm run version-patch-core && npm run version-patch-http && npm run version-patch-router && npm run version-patch-store && npm run version-patch-tester && npm run version-patch-transformer && npm run version-patch-cli",
-    "version-patch-core": "npm version patch -w @monster-js/core",
-    "version-patch-http": "npm version patch -w @monster-js/http",
-    "version-patch-router": "npm version patch -w @monster-js/router",
-    "version-patch-store": "npm version patch -w @monster-js/store",
-    "version-patch-tester": "npm version patch -w @monster-js/tester",
-    "version-patch-transformer": "npm version patch -w @monster-js/transformer",
-    "version-patch-cli": "npm version patch -w @monster-js/cli",
-    "publish": "npm run publish-core && npm run publish-http && npm run publish-router && npm run publish-store && npm run publish-tester && npm run publish-transformer && npm run publish-cli",
-    "publish-core": "npm publish -w @monster-js/core",
-    "publish-http": "npm publish -w @monster-js/http",
-    "publish-router": "npm publish -w @monster-js/router",
-    "publish-store": "npm publish -w @monster-js/store",
-    "publish-tester": "npm publish -w @monster-js/tester",
-    "publish-transformer": "npm publish -w @monster-js/transformer",
-    "publish-cli": "npm publish -w @monster-js/cli"
+    "update-submodules": "git submodule update --recursive --remote",
+    "lint": "npm run lint -w @monster-js/cli && npm run lint -w @monster-js/core && npm run lint -w @monster-js/router && npm run lint -w @monster-js/store && npm run lint -w @monster-js/tester",
+    "publish": "npm run update-submodules && npm run lint && npm run publish-cli && npm run publish-core && npm run publish-router && npm run publish-store && npm run publish-tester && npm run publish-transformer",
+    "publish-cli": "npm version patch -w @monster-js/cli && npm run build -w @monster-js/cli && npm publish -w @monster-js/cli",
+    "publish-core": "npm version patch -w @monster-js/core && npm publish -w @monster-js/core",
+    "publish-router": "npm version patch -w @monster-js/router && npm publish -w @monster-js/router",
+    "publish-store": "npm version patch -w @monster-js/store && npm publish -w @monster-js/store",
+    "publish-tester": "npm version patch -w @monster-js/tester && npm publish -w @monster-js/tester",
+    "publish-transformer": "npm version patch -w @monster-js/transformer && npm publish -w @monster-js/transformer",
+    "deploy-docs": "npm run deploy-page -w @monster-js/docs"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "engines": {
+    "node": "^14.15.0 || >=16.10.0"
+  },
   "devDependencies": {
-    "@types/jasmine": "^4.3.0",
-    "@types/karma": "^6.3.3",
-    "jasmine": "^4.4.0",
-    "typescript": "^4.8.3"
+    "@babel/plugin-proposal-decorators": "^7.19.3",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/node": "^18.6.4",
+    "babel-loader": "^8.2.5",
+    "babel-plugin-transform-typescript-metadata": "^0.3.2",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.5.6",
+    "typescript": "^4.7.4"
   }
 }

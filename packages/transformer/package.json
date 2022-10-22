@@ -1,22 +1,16 @@
 {
   "name": "@monster-js/transformer",
-  "version": "1.4.14",
-  "description": "",
-  "main": "./dist/index.js",
-  "type": "module",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "scripts": {
-    "build": "tsc -p ."
+  "version": "1.4.32",
+  "description": "Testing tools for MonsterJS framework.",
+  "author": "Darius Bualan Jr.",
+  "license": "MIT",
+  "exports": {
+    "./css": "./src/monster-css-transformer.js",
+    "./jsx": "./src/monster-jsx-transformer.js"
   },
   "dependencies": {
-    "@babel/generator": "^7.19.0",
-    "@babel/parser": "^7.19.1",
-    "@babel/traverse": "^7.19.1",
-    "@rollup/pluginutils": "^4.2.1",
-    "css-tree": "^2.2.1",
-    "sass": "^1.55.0"
+    "css-tree": "^2.1.0",
+    "sass": "^1.52.2"
   },
   "publishConfig": {
     "access": "public"
@@ -39,8 +33,5 @@
       "type": "individual",
       "url": "https://www.paypal.com/paypalme/dariusbualan"
     }
-  ],
-  "devDependencies": {
-    "typescript": "^4.8.3"
-  }
+  ]
 }

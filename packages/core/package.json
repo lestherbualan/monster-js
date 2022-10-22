@@ -1,38 +1,47 @@
 {
   "name": "@monster-js/core",
-  "version": "1.4.14",
-  "description": "",
-  "main": "./public_apis.ts",
+  "version": "1.4.32",
+  "main": "src/core.ts",
+  "description": "Simple but powerful JavaScript framework.",
+  "author": "Darius Bualan Jr.",
   "exports": {
-    ".": "./public_apis.ts",
-    "./reflection": "./src/dependency-injection/reflect.ts"
+    ".": "./src/core.ts",
+    "./polyfill": "./src/polyfill.ts",
+    "./module": "./src/module.ts",
+    "./http": "./src/http.ts"
   },
   "scripts": {
-    "build": "webpack"
+    "lint": "tsc --noEmit -p ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "javascript",
+    "monster js",
+    "framework",
+    "web components",
+    "components"
+  ],
+  "typesVersions": {
+    "*": {
+      "polyfill": [
+        "./src/polyfill.ts"
+      ],
+      "module": [
+        "./src/module.ts"
+      ],
+      "http": [
+        "./src/http.ts"
+      ]
+    }
+  },
+  "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://monster-js.org",
   "repository": {
     "type": "git",
-    "url": "https://github.com/monster-js/monster-js"
+    "url": "https://github.com/monster-js/core"
   },
-  "funding": [
-    {
-      "type": "patreon",
-      "url": "https://www.patreon.com/monsterjs"
-    },
-    {
-      "type": "github",
-      "url": "https://github.com/sponsors/monster-js"
-    },
-    {
-      "type": "individual",
-      "url": "https://www.paypal.com/paypalme/dariusbualan"
-    }
-  ]
+  "peerDependencies": {
+    "rxjs": "^7.5"
+  }
 }

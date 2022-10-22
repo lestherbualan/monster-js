@@ -1,8 +1,0 @@
-- micro frontend documentation
-- micro frontend implementation
-	- generate micro frontend setup like angular library project setup
-
-- implement modules
-- implement custom elements
-
-- create vscode plugin for style

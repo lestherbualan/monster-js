@@ -1,11 +1,11 @@
-import { MonsterWebComponent } from "@monster-js/core";
-import { FunctionGuard } from "../types/function-guard.type";
+import { ComponentInterface } from "@monster-js/core";
+import { ClassModuleInterface } from "@monster-js/core/module";
 
-export interface Route {
-    component: MonsterWebComponent;
-    lazyComponent: () => Promise<MonsterWebComponent>;
+export interface RouteInterface {
     path: string;
-    exact: boolean;
-    redirectTo: string;
-    guards: FunctionGuard[];
+    component?: ComponentInterface;
+    exact?: boolean;
+    redirectTo?: string;
+    module?: () => Promise<ClassModuleInterface>;
+    guards?: any[];
 }

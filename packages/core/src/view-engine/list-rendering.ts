@@ -1,13 +1,19 @@
-import { ComponentInstance } from "../component/interfaces/component-instance.interface";
-import { Watcher } from "../watcher/interfaces/watcher.interface";
+import { ComponentInstanceInterface } from "../interfaces/component-instance.interface";
+import { WatcherInterface } from "../interfaces/watcher.interface";
 
-export function listRendering(context: ComponentInstance, elementCaller: (index?: number) => HTMLElement, valueCaller: () => any[]): DocumentFragment {
+export function listRendering(
+    context: ComponentInstanceInterface,
+    elementCaller: (index?: number) => HTMLElement,
+    valueCaller: () => any[],
+    forUpdate: () => void = () => {}
+): DocumentFragment {
+    forUpdate = forUpdate.bind(context);
     const fragment = document.createDocumentFragment();
     const comment = document.createComment('For');
     let elements: HTMLElement[] = [];
     fragment.appendChild(comment);
 
-    const watcher: Watcher = {
+    const watcher: WatcherInterface = {
         val: {
             oldValue: [],
             newValue: []
@@ -42,13 +48,14 @@ export function listRendering(context: ComponentInstance, elementCaller: (index?
             elements = elements.filter(element => !!element);
             watcher.val.oldValue = newValue;
             delete watcher.val.newValue;
+            forUpdate();
         }
     };
 
     watcher.val.newValue = valueCaller();
     watcher.update(watcher.val);
 
-    context.cWatchers.push(watcher);
+    context.$wrapper.changeDetection.addWatcher(watcher, true);
 
     return fragment;
 }

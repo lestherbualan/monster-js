@@ -1,56 +1,67 @@
-import { CustomObservable, OnReceiveConfig, DevTool } from '@monster-js/core';
-import { ActionKeys } from './interfaces/action-keys.interface';
-import { Actions } from './interfaces/actions.interface';
-import { DevToolAction } from './interfaces/dev-tool-action.interface';
-import { RawAction } from './interfaces/raw-action.interface';
-import { StoreState } from './interfaces/store-state.interface';
+import { ObjectInterface, OnReceiveConfig, Service } from '@monster-js/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { DevToolActionInterface } from './interfaces/dev-tool-action.interface';
+import { RawActionInterface } from './interfaces/raw-action.interface';
+import { StoreConfigInterface } from './interfaces/store-config.interface';
+import { StoreModuleConfigInterface } from './interfaces/store-module-config.interface';
 import { objectToObservables } from './utils/object-to-observables';
 
 const NORMAL_SET_DEVTOOL_KEY = '@STORE_SET';
 
-export class Store<T = any> implements OnReceiveConfig {
+@Service({ singleton: true })
+export class Store<T> implements OnReceiveConfig {
 
     /**
      * Contains the state of the store
      * the properties of the state objects are observables
      */
-    private state: { [key in keyof T]: CustomObservable<T[key]> } = null!;
+    private resetData: string = '';
+    private state: { [key in keyof T]: BehaviorSubject<T[key]> } = null!;
     private values: T = null!;
 
 
-    private actions: Actions = {};
-    private actionKeys: ActionKeys<T> = {};
+    private actions: ObjectInterface<(() => any)[]> = {};
+    private actionKeys: ObjectInterface<keyof T> = {};
 
-    private devTool: DevTool = new DevTool();
-
-    private static instance: Store;
-
-    constructor() {
-        if (Store.instance) {
-            return Store.instance;
-        }
-        Store.instance = this;
-    }
+    private static enableDevTools: boolean;
+    private devTool: any;
 
     private setupDevTool() {
-        this.devTool.subscribe((message: DevToolAction) => {
-            if (message.type === 'DISPATCH' && message.state) {
-                // set state here
-                const state = JSON.parse(message.state);
+        if (this.isDevToolsEnabled()) {
+            this.devTool = (window as any).__REDUX_DEVTOOLS_EXTENSION__.connect();
+            this.devTool.subscribe((message: DevToolActionInterface) => {
+                if (message.type === 'DISPATCH' && message.state) {
+                    // set state here
+                    const state = JSON.parse(message.state);
 
-                for (const key in state) {
-                    this.doSet(key as any, state[key]);
+                    for (const key in state) {
+                        this.doSet(key as any, state[key]);
+                    }
                 }
-            }
-        });
-        this.devTool.init(this.values);
+            });
+            this.devTool.init(this.values);
+        }
     }
 
-    public onReceiveConfig(config: StoreState<T>) {
-        this.initialState(config);
+    private isDevToolsEnabled() {
+        return !!Store.enableDevTools;
     }
 
-    public initialState(config: StoreState<T>) {
+    public static config(config: StoreModuleConfigInterface) {
+        Store.enableDevTools = !!config.enableDevTools;
+        return Store;
+    }
+
+    public reset<K extends keyof T>(key?: K) {
+        if (key) {
+            this.set(key, JSON.parse(this.resetData)[key]);
+        } else {
+            this.state = objectToObservables<T>(JSON.parse(this.resetData));
+        }
+    }
+
+    public onReceiveConfig(config: StoreConfigInterface<T>) {
+        this.resetData = JSON.stringify(config.state);
         this.state = objectToObservables<T>(config.state as any);
         this.values = config.state;
         this.actions = config.actions || {};
@@ -61,13 +72,13 @@ export class Store<T = any> implements OnReceiveConfig {
     private setupActions(): void {
         for (const key in this.actions) {
             this.actions[key].forEach(action => {
-                const actionResult: RawAction = action();
+                const actionResult: RawActionInterface = action();
                 this.actionKeys[actionResult.type] = key as keyof T;
             });
         }
     }
 
-    public action(action: RawAction) {
+    public action(action: RawActionInterface) {
         const key = this.actionKeys[action.type];
         if (key === undefined) {
             throw `The action '${action.type}' is not registered in the action array.`;
@@ -77,7 +88,7 @@ export class Store<T = any> implements OnReceiveConfig {
         this.devToolSet(action.type);
     }
 
-    public select<K extends keyof T>(key: K): CustomObservable<T[K]> {
+    public select<K extends keyof T>(key: K): Observable<T[K]> {
         return this.state[key];
     }
 
@@ -87,7 +98,9 @@ export class Store<T = any> implements OnReceiveConfig {
     }
 
     private devToolSet(actionType: string) {
-        this.devTool.send(actionType, this.values);
+        if (this.isDevToolsEnabled()) {
+            this.devTool.send(actionType, this.values);
+        }
     }
 
     public set<K extends keyof T>(key: K, value: T[K]): void {
@@ -99,3 +112,16 @@ export class Store<T = any> implements OnReceiveConfig {
         return this.values[key];
     }
 }
+
+/**
+ * action [done]
+ * reducer [done]
+ * store [done]
+ * selector
+ * async pipe
+ * effects [in progress]
+ */
+
+/**
+ * Added time travel debugging using redux dev tools
+ */

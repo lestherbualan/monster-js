@@ -1,6 +1,5 @@
-import colors from 'colors';
+import { red } from 'chalk';
 
-export async function logError(message: string) {
-    const text = colors.red('ERROR');
-    console.log(`[${text}]: ${message}`);
+export function logError(message: string) {
+    console.log(red(`[ERROR]: ${message}`));
 }
