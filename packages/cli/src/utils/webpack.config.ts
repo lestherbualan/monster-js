@@ -1,4 +1,3 @@
-import { EnvironmentPlugin } from "webpack";
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 const path = require('path');
 
@@ -9,10 +8,18 @@ interface WebpackConfigArgsInterface {
 const DEFAULT_OUTPUT = 'dist';
 
 export const WebpackConfig = (env: any, args: WebpackConfigArgsInterface = {}) => {
-    const environment = require(path.resolve(process.cwd(), `src/environments/${env.environment}.json`));
+
+
+    /**
+     * https://webpack.js.org/guides/environment-variables/
+     */
+    let environment: any = 'src/environments/environment.ts';
+    if (env.environment) {
+        environment = `src/environments/environment.${env.environment}.ts`;
+    }
 
     return {
-        mode: environment.MODE, // development | production
+        mode: environment.mode || 'development', // development | production | none | defaults to development
         entry: {
             index: './src/index.ts',
             polyfill: './src/polyfill.ts'
@@ -33,7 +40,6 @@ export const WebpackConfig = (env: any, args: WebpackConfigArgsInterface = {}) =
             }
         },
         plugins: [
-            new EnvironmentPlugin(environment),
             new CopyWebpackPlugin({
                 patterns: [
                     { from: "src/index.html", to: "" },
@@ -56,12 +62,10 @@ export const WebpackConfig = (env: any, args: WebpackConfigArgsInterface = {}) =
                 },
                 {
                     test: /\.(ts|tsx)$/i,
-                    // exclude: ['/node_modules/'],
                     use: {
                         loader: require.resolve('babel-loader'),
                         options: {
                             presets: [
-                                // require.resolve("@babel/preset-env"),
                                 require.resolve("@babel/preset-typescript")
                             ],
                             plugins: [
@@ -69,7 +73,6 @@ export const WebpackConfig = (env: any, args: WebpackConfigArgsInterface = {}) =
                                 require.resolve("@monster-js/transformer/jsx"),
                                 [require.resolve("@babel/plugin-proposal-decorators"), { "legacy": true }],
                                 require.resolve("@babel/plugin-proposal-class-properties"),
-                                // require.resolve("@babel/plugin-transform-runtime")
                             ]
                         }
                     }
@@ -81,7 +84,10 @@ export const WebpackConfig = (env: any, args: WebpackConfigArgsInterface = {}) =
             ],
         },
         resolve: {
-            extensions: ['.tsx', '.ts', '.js']
+            extensions: ['.tsx', '.ts', '.js'],
+            alias: {
+                [path.resolve(process.cwd(), 'src/environments/environment')]: path.resolve(environment)
+            }
         },
         devtool: 'source-map'
     }
