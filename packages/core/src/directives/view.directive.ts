@@ -1,6 +1,6 @@
-import { DirectiveArgInterface } from "../interfaces/directive-arg.interface";
 import { watch } from "../utils/watch";
 import { Directive } from "./directive.decorator";
+import { DirectiveArgInterface } from "../interfaces/directive-arg.interface";
 
 @Directive('v')
 export class ViewDirective {
@@ -15,10 +15,15 @@ export class ViewDirective {
         const valueCaller = param.directive.get;
         const value = valueCaller();
 
-        watch(() => {
-            const newVal = valueCaller();
-            return Object.keys(newVal).map(key => newVal[key]).join();
-        }, param.element, param.component, () => this.updateClassList(valueCaller(), param.element));
+        watch(
+            () => {
+                const newVal = valueCaller();
+                return Object.keys(newVal).map(key => newVal[key]).join();
+            },
+            param.element,
+            param.component,
+            () => this.updateClassList(valueCaller(), param.element)
+        );
 
         this.updateClassList(value, param.element);
     }

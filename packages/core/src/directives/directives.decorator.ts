@@ -10,23 +10,16 @@ export function Directives(...directives: DirectiveInterface[]) {
 
         checkComponentDataSource(target);
 
-        const di = new Container(target.dataSource!);
+        if (!target.directives) target.directives = {};
 
-        if (!target.directives) {
-            target.directives = {};
-        }
         directives.forEach(directive => {
-            if (directive.namespace && !target.directives![directive.namespace]) {
-                target.directives![directive.namespace] = [];
-            }
+            if (directive.namespace && !target.directives![directive.namespace]) target.directives![directive.namespace] = [];
             target.directives![directive.namespace!].push(directive);
         });
 
         // clean duplicate directives
-        for (const key in target.directives) {
-            target.directives[key] = removeDuplicates(target.directives[key]);
-        }
+        for (const key in target.directives) target.directives[key] = removeDuplicates(target.directives[key]);
 
-        registerDirectivesToDI(target.directives, di);
+        registerDirectivesToDI(target.directives, new Container(target.dataSource!));
     }
 }

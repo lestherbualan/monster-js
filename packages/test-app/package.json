@@ -6,7 +6,7 @@
   "scripts": {
     "start": "mn serve",
     "build": "mn build --mode none",
-    "build-prod": "mn build --mode=production --env=prod && ls -lh dist",
+    "build-prod": "mn build --mode=production --env=prod && ls -l dist",
     "lint": "tsc --noEmit"
   },
   "devDependencies": {
