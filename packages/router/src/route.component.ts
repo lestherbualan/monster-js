@@ -9,7 +9,8 @@ import {
     OnInit,
     PropsService,
     renderChild,
-    Services
+    Services,
+    viewProps
 } from '@monster-js/core';
 import { RouteInterface } from './interfaces/route.interface';
 import { InternalService } from './utils/internal.service';
@@ -179,8 +180,10 @@ export class Route implements OnInit, OnDestroy {
     }
 
     render(): any {
-        return ifCondition(this, () => renderChild(this.selector, {}, [], this, {
-            params: () => this.paramCaller
-        } as any), () => this.isActive && !!this.selector);
+        return ifCondition(
+            this,
+            () => viewProps(this, renderChild(this.selector, this) as any, { params: () => this.paramCaller }) ,
+            () => this.isActive && !!this.selector
+        );
     }
 }

@@ -1,4 +1,3 @@
-implement and document props in custom element
 implement a way to check if the 'is' attribute of an element has a corresponding component registered in the module
     - possible way is to add an "isComponent('custom-button', this, element)" function during jsx transformation
 add implementation and documentation to define component using 'defineGlobalComponent' function
