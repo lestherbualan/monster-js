@@ -1,10 +1,7 @@
-import { HostHelper } from "./host-helper";
-
-export class ComponentParser<T> extends HostHelper<T> {
+export class ComponentParser<T> {
     protected _host: HTMLElement;
 
     constructor(element: HTMLElement) {
-        super();
         this._host = element;
     }
 }

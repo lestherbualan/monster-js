@@ -1,12 +1,12 @@
 import { GlobalComponents } from '@monster-js/core';
 import '@monster-js/core/polyfill';
-import { BaseModuleGlobal, Module, ModuleConfigInterface } from "@monster-js/core/module";
+import { Module, ModuleConfigInterface } from "@monster-js/core/module";
 import { CreateTestModuleConfigInterface } from './create-test-module';
 
 export interface TestModuleConfigInterface extends ModuleConfigInterface, CreateTestModuleConfigInterface { }
 
 export function defineTestModule(config: TestModuleConfigInterface) {
-    const testModule = class extends BaseModuleGlobal {};
+    const testModule = class {};
     Module(config)(testModule);
     new testModule();
 

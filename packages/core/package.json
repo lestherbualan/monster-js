@@ -10,6 +10,9 @@
     "./module": "./src/module.ts",
     "./http": "./src/http.ts"
   },
+  "scripts": {
+    "lint": "tsc --noEmit -p ."
+  },
   "keywords": [
     "javascript",
     "monster js",

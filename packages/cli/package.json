@@ -8,7 +8,7 @@
     "node": "^14.15.0 || >=16.10.0"
   },
   "scripts": {
-    "lint": "tsc --noEmit",
+    "lint": "tsc --noEmit -p .",
     "build": "tsc --project . && npm run copy:assets",
     "watch": "npm run build && npm run lint && tsc --watch --project .",
     "copy:assets": "ncp ./src/assets ./dist/src/assets"

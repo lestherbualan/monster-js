@@ -8,12 +8,12 @@ import { addUrlParams } from "./utils/add-url-params";
 import { formatHeaders } from "./utils/format-headers";
 import { formatUrl } from "./utils/format-url";
 import { Service } from '../service/service.decorator';
-import { OnReceiveConfigImpl } from '../interfaces/impls/on-receive-config.impl';
+import { OnReceiveConfig } from '../interfaces/impls/on-receive-config.impl';
 import { ObjectInterface } from '../interfaces/object.interface';
 import { Container } from '../dependency-injection/container';
 
 @Service()
-export class HttpClient implements OnReceiveConfigImpl {
+export class HttpClient implements OnReceiveConfig {
 
   private config: BaseHttpInterceptor | null = null;
 
