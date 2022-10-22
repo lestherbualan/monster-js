@@ -38,25 +38,17 @@ You can contact the team by sending us an email to [mfpjayb@gmail.com](mailto:mf
 
 ## Support us
 
-MonsterJS is licensed with an MIT license and it is completely free to use software.
+MonsterJS is licensed with an MIT license and it is completely free-to-use software.
 However, maintaining the code and develop new features requires some financial backing.
-You can support the development of MonsterJS by following this [link](/#support-us-section)
 
-<!--
-#### One-time donation
+<p>
+<img width="15px" height="15px" style={{marginRight: "5px"}} src='https://github.githubassets.com/images/icons/emoji/heart.png'></img>
+You can support the development of MonsterJS using the following links:
+</p>
 
-import paypalImg from './assets/paypal.png';
-
-export const Image = ({children, color}) => (
-    <a href="https://www.paypal.com/paypalme/dariusbualan" target="_blank">
-        <img src={paypalImg} alt="Paypal" style={{ width: '200px' }} />
-    </a>
-);
-
-<Image />
--->
-
-<!-- #### Recurring donations -->
+- [One-time donation](https://www.paypal.com/paypalme/dariusbualan)
+- Become a [patreon sponsor](https://www.patreon.com/monsterjs)
+- Become a [github sponsor](https://github.com/sponsors/monster-js)
 
 ## License
 
