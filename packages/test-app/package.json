@@ -5,7 +5,7 @@
   "sideEffects": [ "*.css", "*.scss" ],
   "scripts": {
     "start": "mn serve",
-    "build": "mn build",
+    "build": "mn build --mode none",
     "build-prod": "mn build --mode=production --env=prod && ls -lh dist",
     "lint": "tsc --noEmit"
   },
