@@ -7,12 +7,14 @@ import { WebpackConfig } from "../../utils/webpack.config";
 export function serveCommand(program: Command) {
     program.command("serve")
         .description("Build your application")
-        .option("--env <value>", "Serve the project using the specified environment.", 'dev')
+        .option("--env <value>", "Serve the project using the specified environment.")
+        .option("--mode <value>", "Serve the project in 'development', 'production', or 'none' mode. See https://webpack.js.org/configuration/mode/ for more info about the different modes", 'development')
         .option("--port <value>", "Set the port for the local development server", '4000')
         .option("--open", "Opens a browser when local development server is ready.", false)
         .action((options: ObjectInterface) => {
             const env = options.env;
-            const config = WebpackConfig({ environment: env });
+            const mode = options.mode;
+            const config = WebpackConfig({ environment: env, mode });
 
             const compiler = webpack(config);
 

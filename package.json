@@ -8,6 +8,7 @@
     "packages/*"
   ],
   "scripts": {
+    "update-readme": "ncp ./packages/docs/docs/getting-started/what-is-monster-js.mdx ./README.md",
     "update-submodules": "git submodule update --recursive --remote",
     "lint": "npm run lint -w @monster-js/cli && npm run lint -w @monster-js/core && npm run lint -w @monster-js/router && npm run lint -w @monster-js/store && npm run lint -w @monster-js/tester",
     "publish": "npm run update-submodules && npm run lint && npm run publish-cli && npm run publish-core && npm run publish-router && npm run publish-store && npm run publish-tester && npm run publish-transformer",

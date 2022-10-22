@@ -1,8 +1,5 @@
-export const createElement = (name: string, attributes: { [key: string]: any; } = {}, children: (HTMLElement | Text)[] = []) => {
+export const createElement = (name: string, isAttribute: string) => {
     const options: ElementCreationOptions = {};
-    if (attributes.is) options.is = attributes.is;
-    const element = document.createElement(name, options);
-    Object.keys(attributes).forEach(key => element.setAttribute(key, attributes[key]));
-    element.append(...children);
-    return element;
+    if (isAttribute) options.is = isAttribute;
+    return document.createElement(name, options);
 }

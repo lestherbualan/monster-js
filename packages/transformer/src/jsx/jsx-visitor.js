@@ -9,6 +9,9 @@ const VIEW_DIRECTIVE = 'viewDirective';
 const VIEW_PIPE = 'viewPipe';
 const IF_CONDITION = 'ifCondition';
 const LIST_RENDERING = 'listRendering';
+const VIEW_PROPS = 'viewProps';
+const ADD_ATTRIBUTES = 'addAttributes';
+const APPEND_CHILDREN = 'appendChildren';
 
 let programPathGetter;
 const CONTEXT = {
@@ -40,6 +43,7 @@ module.exports = function (babel, elementKeyGetter = () => null, importedProgram
         const directives = [];
         const attributes = [];
         let ifCondition = null;
+        let isAttribute = null;
         
         path.traverse({
           JSXExpressionContainer(path2) {
@@ -54,6 +58,10 @@ module.exports = function (babel, elementKeyGetter = () => null, importedProgram
               type: 'StringLiteral',
               value: ''
             };
+          }
+          
+          if (attr.name.name === 'is') {
+            isAttribute = attr.value.value;
           }
           
           if (attr.name.namespace && (attr.name.namespace.name === 'on' || attr.name.namespace.name === 'on-prevent')) {
@@ -91,10 +99,16 @@ module.exports = function (babel, elementKeyGetter = () => null, importedProgram
           }
         });
         
-        transformElement(path);
-        applyProps(path, props);
+        if (path.node.openingElement.name.name.indexOf('-') > -1) {
+          renderChild(path);
+        } else {
+          transformElement(path, isAttribute);
+        }
+        
         addAttributes(path, attributes, elementKeyGetter());
         addChildren(path, path.node.children);
+        
+        applyProps(path, props);
         addEvent(path, events);
         transformAttributeBindings(path, attributeBindings);
         transformDirective(path, directives);
@@ -362,7 +376,7 @@ function transformDirective({node}, directives) {
   }
 }
 
-function applyProps({node}, props) {
+function renderChild({node}, props) {
   const { openingElement } = node;
   let name = openingElement.name.name;
   
@@ -374,39 +388,50 @@ function applyProps({node}, props) {
       type: 'Identifier',
       name: RENDER_CHILD
     };
-    node.arguments[0] = {
-      type: 'StringLiteral',
-      value: name
-    };
-
-    if (!node.arguments[1]) {
-      node.arguments[1] = {
-        type: 'ObjectExpression',
-        properties: []
-      };
-    }
-    if (!node.arguments[2]) {
-      node.arguments[2] = {
-        type: 'ArrayExpression',
-        elements: []
-      }
-    }
-    node.arguments.push(CONTEXT);
-    node.arguments.push({
-      type: 'ObjectExpression',
-      properties: props.map(prop => {
-        return {
-          type: 'ObjectProperty',
-          key: formatObjectKey(prop.name.name.name),
-          value: {
-            type: 'ArrowFunctionExpression',
-            params: [],
-            body: prop.value.expression || prop.value
-          }
-        };
-      })
-    });
+    node.arguments = [
+      {
+        type: 'StringLiteral',
+        value: name
+      },
+      CONTEXT
+    ];
   }
+}
+
+function applyProps({node}, props) {
+  if (props.length === 0) {
+    return;
+  }
+  const { openingElement } = node;
+  let name = openingElement.name.name;
+  
+  addImport(VIEW_PROPS);
+    
+  const originalNode = {...node};
+    
+  node.type = 'CallExpression';
+  node.callee = {
+    type: 'Identifier',
+    name: VIEW_PROPS
+  };
+  node.arguments = [
+    CONTEXT,
+    originalNode
+  ];
+  node.arguments.push({
+    type: 'ObjectExpression',
+    properties: props.map(prop => {
+      return {
+        type: 'ObjectProperty',
+        key: formatObjectKey(prop.name.name.name),
+        value: {
+          type: 'ArrowFunctionExpression',
+          params: [],
+          body: prop.value.expression || prop.value
+        }
+      };
+    })
+  });
 }
 
 function transformTextBinding(text) {
@@ -478,7 +503,7 @@ function transformJSXText(node) {
 }
 
 
-function transformElement(path) {
+function transformElement(path, isAttribute) {
   addImport(CREATE_ELEMENT);
   const openingElement = path.node.openingElement;
   path.node.type = 'CallExpression';
@@ -489,19 +514,36 @@ function transformElement(path) {
   path.node.arguments = [
     { type: 'StringLiteral', value: openingElement.name.name }
   ];
+  if (isAttribute) {
+    path.node.arguments.push({
+      type: 'StringLiteral',
+      value: isAttribute
+    });
+  }
 }
 
 function addChildren(path, children) {
   if (children.length > 0) {
-    path.node.arguments[2] = {
-      type: 'ArrayExpression',
-      elements: children.map(child => {
-        if (child.type === 'JSXExpressionContainer') {
-          return transformTextBinding(child);
-        }
-        return child;
-      })
-    }
+    addImport(APPEND_CHILDREN);
+    
+    const originalNode = {...path.node};
+    path.node.type = 'CallExpression';
+    path.node.callee = {
+      type: 'Identifier',
+      name: APPEND_CHILDREN
+    };
+    path.node.arguments = [
+      originalNode,
+      {
+        type: 'ArrayExpression',
+        elements: children.map(child => {
+          if (child.type === 'JSXExpressionContainer') {
+            return transformTextBinding(child);
+          }
+          return child;
+        })
+      }
+    ];
   }
 }
 
@@ -519,16 +561,26 @@ function formatObjectKey(name) {
 }
 
 function addAttributes(path, attributes, elementKey) {
-  path.node.arguments[1] = {
-    type: 'ObjectExpression',
-    properties: attributes.map(attr => {
-      return {
-        type: 'ObjectProperty',
-        key: formatObjectKey(attr.name.name),
-        value: attr.value
-      }
-    })
+  addImport(ADD_ATTRIBUTES);
+  const originalNode = {...path.node};
+  path.node.type = 'CallExpression';
+  path.node.callee = {
+    type: 'Identifier',
+    name: ADD_ATTRIBUTES
   };
+  path.node.arguments = [
+    originalNode,
+    {
+      type: 'ObjectExpression',
+      properties: attributes.map(attr => {
+        return {
+          type: 'ObjectProperty',
+          key: formatObjectKey(attr.name.name),
+          value: attr.value
+        }
+      })
+    }
+  ];
   if (elementKey) {
     path.node.arguments[1].properties.push({
       type: 'ObjectProperty',

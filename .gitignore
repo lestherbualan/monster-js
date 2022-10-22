@@ -2,4 +2,3 @@
 dist
 .vscode
 **/yarn-error.log
-packages/test-app
