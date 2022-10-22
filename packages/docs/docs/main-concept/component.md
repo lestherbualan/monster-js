@@ -209,6 +209,7 @@ That means we need to attach the component in a `<button></button>` element like
 
 Component must be defined before we can use it.
 Since MonsterJS components are web components, we can use the `customElement.define` as long as we have the MonsterJS polyfill referenced in `src/index.html`.
+Please check [polyfill](/docs/useful-topics/polyfill) for more information about the MonsterJS polyfill.
 
 Example.
 ```javascript
