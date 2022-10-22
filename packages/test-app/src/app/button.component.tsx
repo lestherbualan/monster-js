@@ -1,5 +1,6 @@
-import { Attr, Component, CustomElement, PropsService } from "@monster-js/core";
+import { Attr, Component, CustomElement, PropsService, Services } from "@monster-js/core";
 
+@Services(PropsService)
 @CustomElement(HTMLButtonElement, 'button')
 @Component('app-button')
 export class ButtonComponent {

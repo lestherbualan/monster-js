@@ -20,6 +20,7 @@ mn build
 | Option | Description | Value type | Default |
 | --- | --- | --- | --- |
 | --env <value\> | Build the project using the specified environment. | string | dev |
+| --mode <value\> | Build the project in 'development', 'production', or 'none' mode. See [webpack mode](https://webpack.js.org/configuration/mode/) for more info about the different modes. | string | development |
 | --output <value\> | The directory where it should output the bundles, assets and other files. | string | dist |
 
 Example.

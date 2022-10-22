@@ -12,6 +12,7 @@ export { useState } from './component/utils/use-state';
 export { fnComponent } from './component/utils/fn-component';
 export { CustomElement } from './component/custom-element.decorator';
 export { defineComponent } from './component/define-component';
+export { globalComponent } from './utils/global-component';
 
 /**
  * Attributes

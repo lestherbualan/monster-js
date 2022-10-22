@@ -4,7 +4,7 @@
   "license": "MIT",
   "sideEffects": [ "*.css", "*.scss" ],
   "scripts": {
-    "start": "mn serve --env=prod",
+    "start": "mn serve",
     "build": "mn build",
     "build-prod": "mn build --mode=production --env=prod && ls -lh dist",
     "lint": "tsc --noEmit"
