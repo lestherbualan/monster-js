@@ -9,7 +9,7 @@
   },
   "scripts": {
     "lint": "tsc --noEmit -p .",
-    "build": "tsc --project . && npm run copy:assets",
+    "build": "rm -rf ./dist && tsc --project . && npm run copy:assets",
     "watch": "npm run build && npm run lint && tsc --watch --project .",
     "copy:assets": "ncp ./src/assets ./dist/src/assets"
   },
