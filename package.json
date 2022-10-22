@@ -8,15 +8,6 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "yarn build-core && yarn build-router && yarn build-store && yarn build-tester",
-    "build-core": "tsc --project packages/core",
-    "build-router": "tsc --project packages/router",
-    "build-store": "tsc --project packages/store",
-    "build-tester": "tsc --project packages/tester",
-    "watch-core": "tsc --watch --project packages/core",
-    "watch-router": "tsc --watch --project packages/router",
-    "watch-store": "tsc --watch --project packages/store",
-    "test": "karma start"
   },
   "engines": {
     "node": "^14.15.0 || >=16.10.0"
