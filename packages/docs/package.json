@@ -12,7 +12,8 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "deploy-page": "cmd /C \"set \"GIT_USER=mfpjayb\" && set CURRENT_BRANCH=master && set USE_SSH=true && npm run build && npm run deploy\""
   },
   "dependencies": {
     "@docusaurus/core": "2.1.0",
