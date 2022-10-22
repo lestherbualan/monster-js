@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 12
 ---
 
 # Pipes
@@ -7,89 +7,140 @@ sidebar_position: 8
 Pipes are used to transform a string, object, number and other values for display.
 They are very useful because it can be used directly in template or logic in all of our components.
 
+## Register pipe
+
+Unlike directives, pipes provided by the core package are not automatically available in all components by default.
+We need to register them to component or module before we can use it.
+
+Here are the examples on how to register a pipe in component and in module.
+
+#### In component
+
+```typescript
+import { Pipes, LowercasePipe } from '@monster-js/core';
+
+@Pipes(LowercasePipe)
+@Component('app-greeting')
+export class Greeting {
+    render() {
+        return <h1>{ 'Hello World!' | lowercase }</h1>
+    }
+}
+```
+
+#### In Module
+
+```typescript
+import { LowercasePipe } from '@monster-js/core';
+import { Module } from '@monster-js/core/module';
+
+@Module({
+    pipes: [LowercasePipe]
+})
+export class GreetingModule { }
+```
+
+## Template pipes
+
+In the template, we can use the pipes inside jsx expression container `{}`.
+The syntax is `{ <value> | <pipe selector> }`.
+
+Example.
+
+```typescript
+<label>{ 'Hello World' | lowercase }</label>
+```
+
+In the example above, the `lowercase` is the pipe.
+
+:::danger
+Template pipes may throw a typescript type checking error since the pipe operator is originally an arithmetic operator that accepts any, number and bigint values.
+A temporary fix for this is to set our values to type any.
+This error will be addressed in later releases.
+:::
+
+Template pipes can also be chained to another pipe.
+
+Example.
+
+```typescript
+<label>{ 'Hello World 123' | lowercase | removeNumeric }</label>
+```
+
+In the example above, the `lowercase` pipe will run first and the `removeNumeric` pipe will run after the lowercase pipe.
+
+## Logic pipes
+
+To use the pipe in our component's logic, we need to inject the pipe in the constructor.
+After injecting the pipe, we can now call the `transform(value: any, ...params?: any[])` method of the pipe to transform values.
+
+Example.
+
+```typescript
+import { Component, Pipes } from '@monster-js/core';
+import { LowercasePipe } from './lowercase.pipe';
+
+@Pipes(LowercasePipe)
+@Component('app-greeting')
+export class Greeting {
+
+    message = 'Hello World!';
+
+    constructor(private lowercasePipe: LowercasePipe) {}
+
+    onInit() {
+        this.message = this.lowercasePipe.transform(this.message);
+    }
+
+    render() {
+        return <h1>{this.message}</h1>
+    }
+}
+```
+
 ## Available pipes
 
 Here are some usable pipes included in the core package.
 
-| Pipes | Selector| Description |
-| --- | --- | --- |
-| uppercasePipe | uppercase | Used to transform string into uppercase. |
-| lowercasePipe | lowercase | Used to transform string into lowercase. |
-
-## Register pipe
-
-Unlike directives, pipes provided by the core package are not automatically available in all components by default.
-We need to register them to component before we can use it.
-To register a pipe, we can use the `pipes(<component>, <array_of_pipes>)` function.
-
-Example.
-
-```tsx
-import { component, pipes } from '@monster-js/core';
-import uppercasePipe from './uppercase.pipe';
-
-function app() {
-    return <h1>App</h1>
-}
-
-pipes(app, [uppercasePipe]);
-export default component(app, 'app-root');
-```
-
-## Pipe in template
-
-After the pipe is registered in the component we can now easily use it inside the component's template.
-
-Example.
-
-```tsx
-import { component, pipes } from '@monster-js/core';
-import uppercasePipe from './uppercase.pipe';
-
-function app() {
-    const greeting = 'Hello World!';
-    return <h1>{greeting | uppercase}</h1>
-}
-
-pipes(app, [uppercasePipe]);
-export default component(app, 'app-root');
-```
-
-In the example above, the `uppercase` inside the jsx expression container(`{greeting | uppercase}`) is the selector for the `uppercasePipe`.
-
-## Pipe in logic
-
-Using the pipe inside the logic is just like calling a function.
-If a pipe is not used inside the template, then no need to register the pipe in the component.
-
-Example.
-
-```tsx
-import { component, pipes } from '@monster-js/core';
-import uppercasePipe from './uppercase.pipe';
-
-function app() {
-    const greeting = uppercasePipe('Hello World!');
-    return <h1>{greeting}</h1>
-}
-
-export default component(app, 'app-root');
-```
+<!-- 
+Date pipe resources
+https://github.com/angular/angular/blob/main/packages/common/src/pipes/date_pipe.ts
+-->
+| Pipe | Description |
+| --- | --- |
+| [LowercasePipe](/docs/useful-topics/available-pipes#lowercasepipe) | Transform string into lowercase. |
+| [UppercasePipe](/docs/useful-topics/available-pipes#uppercasepipe) | Transform string into uppercase. |
 
 ## Pipe with parameters
 
 Pipes can also have one or more parameters to be used during transformation.
 
-```tsx title="In template"
-function app() {
-    const greeting = 'Hello World!';
-    return <h1>{greeting | uppercase('default value', 'invalid string')}</h1>
-}
+#### In template
+
+```typescript
+<label>{this.date | date('YYYY-MM-DD', 'Invalid date')}</label>
 ```
 
-```tsx title="In logic"
-function app() {
-    const greeting = uppercasePipe('Hello World!', ['default value', 'invalid string']);
-    return <h1>{greeting}</h1>
+#### In logic
+
+```typescript
+import { Component, Pipes } from '@monster-js/core';
+import { DatePipe } from './date.pipe';
+
+@Pipes(DatePipe)
+@Component('app-greeting')
+export class DateComponent {
+
+    date = new Date();
+
+    constructor(private datePipe: DatePipe) {}
+
+    onInit() {
+        this.date = this.datePipe.transform(this.date, 'YYYY-MM-DD', 'Invalid date');
+    }
+
+    render() {
+        return <h1>{this.date}</h1>
+    }
 }
 ```

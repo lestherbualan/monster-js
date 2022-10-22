@@ -1,23 +1,29 @@
 ---
-sidebar_position: 13
+sidebar_position: 16
 ---
 
 # Conditional rendering
 
-Conditional rendering is used to conditionally render an element to the DOM tree.
-It uses the `view:if` directive which removes an element from the dom if the value is a falsy and append the element if otherwise.
+Conditional rendering is used to conditionally render an element to the dom.
+It uses the `v:if` directive which removes an element from the dom if the value is a falsy and append the element if otherwise.
 
 ## Syntax
 
-The syntax of conditional rendering directive is `view:if={<boolean>}`.
+The syntax of conditional rendering directive is `v:if={<boolean>}`.
 
 ## Using conditional rendering
 
-Example.
+Here's an example on how to use conditional rendering.
 
-```tsx
-function app() {
-    const [ toggle ] = useState(this, true);
-    return <h1 view:if={toggle()}>Hello World!</h1>
+```typescript
+import { Component } from '@monster-js/core';
+
+@Component('app-greeting')
+export class Greeting {
+    toggle = true;
+
+    render() {
+        return <h1 v:if={this.toggle}>Hello World!</h1>
+    }
 }
 ```

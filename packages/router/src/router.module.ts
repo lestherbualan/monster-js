@@ -1,12 +1,13 @@
-import { Module } from "@monster-js/core";
-import { route } from "./route";
-import { routerDir } from "./router.directive";
+import { Module } from "@monster-js/core/module";
+import { Route } from "./route.component";
+import { RouterDirective } from "./router.directive";
 import { RouterService } from "./router.service";
 
-export const RouterModule: Module = {
+@Module({
     exports: {
-        components: [route],
-        directives: [routerDir],
-        services: [RouterService]
+        directives: [RouterDirective],
+        services: [RouterService],
+        components: [Route]
     }
-};
+})
+export class RouterModule {}

@@ -1,11 +1,11 @@
-import { ComponentInstance } from "../component/interfaces/component-instance.interface";
-import { Watcher } from "../watcher/interfaces/watcher.interface";
+import { ComponentInstanceInterface } from "../interfaces/component-instance.interface";
+import { WatcherInterface } from "../interfaces/watcher.interface";
 
-export function textBinding(context: ComponentInstance, valueCaller: () => any): Text {
+export function textBinding(context: ComponentInstanceInterface, valueCaller: () => any): Text {
     const val = valueCaller();
     const text = document.createTextNode(val);
 
-    const watcher: Watcher = {
+    const watcher: WatcherInterface = {
         val,
         isConnected: () => text.isConnected,
         isUpdated: () => {
@@ -19,7 +19,7 @@ export function textBinding(context: ComponentInstance, valueCaller: () => any):
         update: (newValue: any) => text.textContent = newValue
     };
 
-    context.watchers.push(watcher);
+    context.$wrapper.changeDetection.addWatcher(watcher);
 
     return text;
 }

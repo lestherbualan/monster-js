@@ -1,4 +1,4 @@
-export interface DevToolAction {
+export interface DevToolActionInterface {
     id: string;
     source: string;
     state: string;

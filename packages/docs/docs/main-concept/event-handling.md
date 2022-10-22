@@ -1,42 +1,53 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # Event handling
 
-Event handling is a way to handle the user interaction with the UI.
-It uses the directive `on:<event_name>={<handler>}` or `on-prevent:<event_name>={<handler>}`.
-This allows the component to respond to user action on the UI like button clicks, text inputs, drag elements and other actions.
+Event handling is a directive lets the component to respond to user action on the UI like button clicks, text inputs, drag elements and other actions.
+It uses a directive with namespace of `on` to bind the component methods to an element as an event listener.
 
 ## Syntax
 
-The syntax of event handling directive is `on:<event_name>={<handler>}`.
-The `handler` must be a function declaration and not a function call expression.
+The syntax of event handling directive is `on:<event_name>={<component_method>}`.
+The component_method must be a function and not a function call expression.
 
 Example.
 
-```tsx
-function app() {
-    const clickMe = () => {
+```typescript
+import { Component } from '@monster-js/core';
+
+@Component('app-greeting')
+export class Greeting {
+    clickMe() {
         console.log('Hello World!');
     }
-    return <button on:click={clickMe}>Greet</button>
+
+    render() {
+        return <button on:click={this.clickMe}>Greet</button>
+    }
 }
 ```
 
-## Event handler params
+## Method parameters
 
 Since event handling directive accepts a function as directive value.
 We need to pass an unnamed function or fat arrow function and return the call expression of the component method in order for us to be able to pass some parameters to it.
 
 Example.
 
-```tsx
-function app() {
-    const clickMe = (name: string) => {
+```typescript
+import { Component } from '@monster-js/core';
+
+@Component('app-greeting')
+export class Greeting {
+    clickMe(name: string) {
         console.log(`Hello ${name}!`);
     }
-    return <button on:click={() => clickMe('Jay')}>Greet</button>
+
+    render() {
+        return <button on:click={() => this.clickMe('Johnny')}>Greet</button>
+    }
 }
 ```
 
@@ -44,24 +55,36 @@ function app() {
 
 We can also get the event variable that holds the data of the event.
 
-```tsx
-function app() {
-    const clickMe = (event) => {
+Example.
+
+```typescript
+import { Component } from '@monster-js/core';
+
+@Component('app-greeting')
+export class Greeting {
+    clickMe(event) {
         console.log(event);
     }
-    return <button on:click={(event) => clickMe(event)}>Greet</button>
+
+    render() {
+        return <button on:click={(event) => this.clickMe(event)}>Greet</button>
+    }
 }
 ```
 
 or just simply
 
-```tsx
-function app() {
-    const clickMe = (event) => {
+```typescript
+import { Component } from '@monster-js/core';
+
+@Component('app-greeting')
+export class Greeting {
+    clickMe(event) {
         console.log(event);
     }
-    return <button on:click={clickMe}>Greet</button>
+
+    render() {
+        return <button on:click={this.clickMe}>Greet</button>
+    }
 }
 ```
-
-will also work.

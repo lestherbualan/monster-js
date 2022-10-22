@@ -1,5 +1,5 @@
 ---
-sidebar_position: 12
+sidebar_position: 15
 ---
 
 # List rendering
@@ -8,55 +8,73 @@ List rendering directive allows developers to render a list of element based on 
 
 ## Syntax
 
-The syntax of list rendering directive is `view:for={<array>}`.
+The syntax of list rendering directive is `v:for={<array>}`.
 
 ## Using list rendering
 
+Here's an example on how to use list rendering.
+
 Example.
 
-```tsx
-function app() {
-    const array = [1, 2, 3];
-    return <p view:for={array}>Hello World!</p>
+```typescript
+import { Component } from '@monster-js/core';
+
+@Component('app-greeting')
+export class Greeting {
+
+    array = [1, 2, 3];
+
+    render() {
+        return <p v:for={this.array}>Hello World!</p>
+    }
 }
 ```
 
 The example code above will generate a list of elements that looks like the following:
 
-```tsx
+```html
 <p>Hello World!</p>
 <p>Hello World!</p>
 <p>Hello World!</p>
 ```
 
-There are three `<p>` tags since there are three elements in the provided array.
+Three `<p>` tags since there are three elements inside `this.array`.
 
-List item name
+## List item name
 
-`view:for-item="<item_name>"`
+`v:for-item="<item name>"`
 
 It allows developers to set the variable name of the list item and display it in view.
 If no list item directive is provided, it is `$item` by default.
 
 Example.
 
-```tsx
-declare const listItem: string;
-function app() {
-    const array = ['foo', 'bar', 'bazz'];
-    return <p view:for={array} view:for-item="listItem">Hello {listItem}!</p>
+```typescript
+import { Component } from '@monster-js/core';
+
+@Component('app-greeting')
+export class Greeting {
+
+    array = ['foo', 'bar', 'bazz'];
+
+    render() {
+        return <p v:for={this.array} v:for-item="listItem">Hello {listItem}!</p>
+    }
 }
 ```
 
-:::caution
+:::note
 The codes above might throw a typescript linter error `Cannot find name 'listItem'` since `listItem` is not defined.
-A temporary fix for this is to declare the list item above our component and below the import statement list the following:
-`declare const listItem: string;`
+A temporary fix for this is to declare the list item above our component and below the import statements list the following.
+
+```typescript
+declare const listItem: string;
+```
 :::
 
 The example code above will generate a list of elements that looks like the following:
 
-```tsx
+```html
 <p>Hello foo!</p>
 <p>Hello bar!</p>
 <p>Hello bazz!</p>
@@ -64,32 +82,66 @@ The example code above will generate a list of elements that looks like the foll
 
 ## List index
 
-`view:for-index="<index_name>"`
+`v:for-index="<index name>"`
 
 It allows developers to set the variable name of the list item index.
 If no list index directive is provided, it is `$index` by default.
 
 Example.
 
-```tsx
-declare const listIndex: number;
-function app() {
-    const array = ['foo', 'bar', 'bazz'];
-    return <p view:for={array} view:for-index="listIndex">Index {listIndex}!</p>
+```typescript
+import { Component } from '@monster-js/core';
+
+@Component('app-greeting')
+export class Greeting {
+
+    array = ['foo', 'bar', 'bazz'];
+
+    render() {
+        return <p v:for={this.array} v:for-index="listIndex">Hello {listIndex}!</p>
+    }
 }
 ```
 
-
-:::caution
+:::note
 The codes above might throw a typescript linter error `Cannot find name 'listIndex'` since `listIndex` is not defined.
-A temporary fix for this is to declare the list item above our component and below the import statement list the following:
-`declare const listIndex: string;`
+A temporary fix for this is to declare the list item above our component and below the import statements list the following.
+
+```typescript
+declare const listIndex: number;
+```
 :::
 
 The example code above will generate a list of elements that looks like the following:
 
-```tsx
-<p>Index 0!</p>
-<p>Index 1!</p>
-<p>Index 2!</p>
+```html
+<p>Hello 0!</p>
+<p>Hello 1!</p>
+<p>Hello 2!</p>
+```
+
+## Update event
+
+`v:for-update={<callback function>}`
+
+List rendering is able to trigger an event if there is a change in the length of the array.
+
+Example.
+
+```typescript
+import { Component } from '@monster-js/core';
+
+@Component('app-greeting')
+export class Greeting {
+
+    array = [1, 2, 3];
+
+    arrayLengthUpdated() {
+        console.log('array length is updated');
+    }
+
+    render() {
+        return <p v:for={this.array} v:for-update={this.arrayLengthUpdated}>Hello World!</p>
+    }
+}
 ```

@@ -1,0 +1,15 @@
+import { Guard } from '@monster-js/router';
+import { Observable } from 'rxjs';
+
+@Guard
+export class __GuardNameCamelCase__Guard {
+
+    public canActivate(): Observable<boolean> | boolean {
+        return true;
+    }
+
+    public canDeactivate(): Observable<boolean> | boolean {
+        return true;
+    }
+
+}

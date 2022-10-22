@@ -1,13 +1,13 @@
-import { ComponentInstance } from "../component/interfaces/component-instance.interface";
-import { Watcher } from "../watcher/interfaces/watcher.interface";
+import { ComponentInstanceInterface } from "../interfaces/component-instance.interface";
+import { WatcherInterface } from "../interfaces/watcher.interface";
 
-export function ifCondition(context: ComponentInstance, elementCaller: () => HTMLElement, valueCaller: () => any) {
+export function ifCondition(context: ComponentInstanceInterface, elementCaller: () => HTMLElement, valueCaller: () => any) {
     const fragment = document.createDocumentFragment();
     const comment = document.createComment('If');
     let element: HTMLElement = null;
     fragment.appendChild(comment);
 
-    const watcher: Watcher = {
+    const watcher: WatcherInterface = {
         val: !!valueCaller(),
         isConnected: () => comment.isConnected,
         isUpdated: () => {
@@ -34,7 +34,7 @@ export function ifCondition(context: ComponentInstance, elementCaller: () => HTM
         fragment.appendChild(element);
     }
 
-    context.cWatchers.push(watcher);
+    context.$wrapper.changeDetection.addWatcher(watcher, true);
 
     return fragment;
 }

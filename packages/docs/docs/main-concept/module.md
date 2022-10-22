@@ -1,11 +1,11 @@
 ---
-sidebar_position: 1.5
+sidebar_position: 3
 ---
 
 # Module
 
 Module is a way to group components, directives, services, pipes and modules of application that are related to each other.
-This feature is very helpful in organizing the codes to make the project more maintainable as it grows larger.
+This feature is very helpful in organizing the codes to make the project more maintainable as it grows in scale.
 Another cool thing for a MonsterJS module is that it is lazy loaded when used in a route.
 
 ## Root component
@@ -16,16 +16,17 @@ Root component is the last component to be defined to make sure all the child co
 
 Example.
 
-```tsx
-import { Module } from '@monster-js/core';
-import { app } from './app.component';
+```typescript
+import { Module } from "@monster-js/core";
+import { App } from "./app.component";
 
-export const AppModule: Module = {
-    root: app
-};
+@Module({
+    root: App
+})
+export class AppModule {}
 ```
 
-In the example above, the `app` is the root component.
+In this example, `App` is the root component.
 
 ## Register components
 
@@ -33,21 +34,22 @@ Components can be registered to a module so that they can interact with each oth
 
 For example, we have a parent component and a child component.
 The child component is rendered inside the view of the parent component.
-So the parent and child components needs to be registered in the same module.
+So the parent and child components needs to be registered in the module.
 
 Example.
 
-```tsx
-import { Module } from '@monster-js/core';
-import { parent } from './parent.component';
-import { child } from './child.component';
+```typescript
+import { Module } from '@monster-js/core/module';
+import { Parent } from './parent.component';
+import { Child } from './child.component';
 
-export const AppModule: Module = {
-    components: [parent, child]
-};
+@Module({
+    components: [Parent, Child]
+})
+export class AppModule { }
 ```
 
-:::info
+:::note
 Components must be registered to a one module only.
 :::
 
@@ -55,30 +57,35 @@ Components must be registered to a one module only.
 
 Components defined in a module cannot be defined in another module.
 
-For the example above, if the parent and child components are registered in different modules, we need to export the component that will be used in another module and import the module to the module that needs the exported component.
+For the example above,
+if the parent and child components are registered in different modules,
+we need to export the component that will be used in another module and import the module to the module that needs the exported component.
 
 Example.
+#### Child module
+```typescript
+import { Module } from '@monster-js/core/module';
+import { Child } from './child.component';
 
-```tsx title="Child module"
-import { Module } from '@monster-js/core';
-import { child } from './child.component';
-
-export const ChildModule: Module = {
+@Module({
     exports: {
-        components: [child]
+        components: [Child]
     }
-};
+})
+export class ChildModule { }
 ```
 
-```tsx title="Parent module"
-import { Module } from '@monster-js/core';
-import { parent } from './parent.component';
+#### Parent module
+```typescript
+import { Module } from '@monster-js/core/module';
+import { Parent } from './parent.component';
 import { ChildModule } from './child.module';
 
-export const ChildModule: Module = {
-    components: [parent],
+@Module({
+    components: [Parent],
     modules: [ChildModule]
-};
+})
+export class ParentModule { }
 ```
 
 ## Register services
@@ -88,31 +95,33 @@ A service can be registered to any number of modules unlike components which can
 
 Example.
 
-```tsx
-import { Module } from '@monster-js/core';
+```typescript
+import { Module } from '@monster-js/core/module';
 import { GreetingService } from './greeting.service';
 
-export const AppModule: Module = {
+@Module({
     services: [GreetingService]
-};
+})
+export class AppModule { }
 ```
 
 ## Export services
 
-A service can also be exported from a module.
+A service can also be exported from the module.
 Exported services can be used by the components inside the module that imports the module that has the exported services.
 
 Example.
 
-```tsx
-import { Module } from '@monster-js/core';
+```typescript
+import { Module } from '@monster-js/core/module';
 import { GreetingService } from './greeting.service';
 
-export const AppModule: Module = {
+@Module({
     exports: {
         services: [GreetingService]
     }
-};
+})
+export class AppModule { }
 ```
 
 ## Register directives
@@ -122,13 +131,14 @@ A directive can be registered to any number of modules unlike components which c
 
 Example.
 
-```tsx
-import { Module } from '@monster-js/core';
-import { highlightDir } from './highlight.directive';
+```typescript
+import { Module } from '@monster-js/core/module';
+import { HighlightDirective } from './highlight.directive';
 
-export const AppModule: Module = {
-    directives: [highlightDir]
-};
+@Module({
+    directives: [HighlightDirective]
+})
+export class AppModule { }
 ```
 
 ## Export directives
@@ -138,15 +148,16 @@ Exported directives can be used by the components inside the module that imports
 
 Example.
 
-```tsx
-import { Module } from '@monster-js/core';
-import { highlightDir } from './highlight.directive';
+```typescript
+import { Module } from '@monster-js/core/module';
+import { HighlightDirective } from './highlight.directive';
 
-export const AppModule: Module = {
+@Module({
     exports: {
-        directives: [highlightDir]
+        directives: [HighlightDirective]
     }
-};
+})
+export class AppModule { }
 ```
 
 ## Register pipes
@@ -156,13 +167,14 @@ A pipe can be registered to any number of modules unlike components which can be
 
 Example.
 
-```tsx
-import { Module } from '@monster-js/core';
-import { uppercasePipe } from './uppercase.pipe';
+```typescript
+import { Module } from '@monster-js/core/module';
+import { UppercasePipe } from './uppercase.pipe';
 
-export const AppModule: Module = {
-    pipes: [uppercasePipe]
-};
+@Module({
+    pipes: [UppercasePipe]
+})
+export class AppModule { }
 ```
 
 ## Export pipes
@@ -170,15 +182,18 @@ export const AppModule: Module = {
 A pipe can also be exported from the module.
 Exported pipes can be used by the components inside the module that imports the module that has the exported pipes.
 
-```tsx
-import { Module } from '@monster-js/core';
-import { uppercasePipe } from './uppercase.pipe';
+Example.
 
-export const AppModule: Module = {
+```typescript
+import { Module } from '@monster-js/core/module';
+import { UppercasePipe } from './uppercase.pipe';
+
+@Module({
     exports: {
-        pipes: [uppercasePipe]
+        pipes: [UppercasePipe]
     }
-};
+})
+export class AppModule { }
 ```
 
 ## Import modules
@@ -186,11 +201,14 @@ export const AppModule: Module = {
 A module can be imported to another module.
 The purpose of this is to make the parent module to be able to use the components, services, pipes and directives that are exported from the child module.
 
-```tsx
-import { Module } from '@monster-js/core';
+Example.
+
+```typescript
+import { Module } from '@monster-js/core/module';
 import { ChildModule } from './child.module';
 
-export const AppModule: Module = {
+@Module({
     modules: [ChildModule]
-};
+})
+export class AppModule { }
 ```

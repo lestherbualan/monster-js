@@ -1,24 +1,25 @@
-import { createWatcher } from "../watcher/create-watcher";
-import { directive } from "./directive";
-import { DirectiveParam } from "./interfaces/directive-params.interface";
+import { DirectiveArgInterface } from "../interfaces/directive-arg.interface";
+import { watch } from "../utils/watch";
+import { Directive } from "./directive.decorator";
 
-export function viewDir(params: DirectiveParam) {
-    const { directives, element, context } = params;
-    const { model, ref } = directives;
+@Directive('v')
+export class ViewDirective {
 
-    if (model) {
-        const [ modelGetter, modelSetter ] = model.get();
-        (element as HTMLInputElement).value = modelGetter();
-        element.addEventListener('input', (event: any) => {
-            modelSetter(event.target.value);
-        });
-        createWatcher(params.context, params.element, () => modelGetter(), newVal => {
-            (element as HTMLInputElement).value = newVal;
-        });
-    }
+    public $ref = (param: DirectiveArgInterface) => param.directive.set!(param.element);
 
-    if (ref) {
-        ref.set(element);
+    private updateClassList = (value: {[key: string]: any}, element: HTMLElement) => Object.keys(value).forEach(key => !!value[key]
+        ? element.classList.add(key)
+        : element.classList.remove(key));
+
+    public $class(param: DirectiveArgInterface) {
+        const valueCaller = param.directive.get;
+        const value = valueCaller();
+
+        watch(() => {
+            const newVal = valueCaller();
+            return Object.keys(newVal).map(key => newVal[key]).join();
+        }, param.element, param.component, () => this.updateClassList(valueCaller(), param.element));
+
+        this.updateClassList(value, param.element);
     }
 }
-directive(viewDir, 'view');

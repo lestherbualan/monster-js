@@ -1,6 +1,5 @@
-import colors from 'colors';
+import { green } from 'chalk';
 
-export async function logCreate(message: string) {
-    const text = colors.green('CREATE');
-    console.log(`[${text}]: ${message}`);
+export function logCreate(message: string) {
+    console.log(green(`[CREATE]: ${message}`));
 }

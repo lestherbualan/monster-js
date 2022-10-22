@@ -1,44 +1,100 @@
-import { directive, DirectiveParam, dirCreateWatcher, dirOnDestroy, Subscription } from '@monster-js/core';
-import { InternalService } from './internal.service';
-import { routeMatcher } from './utils/route-matcher';
+import {
+  AllDirectives,
+  AllDirectivesArgInterface,
+  createWatcher,
+  Directive,
+  DirectiveArgInterface,
+  OnDestroy,
+} from "@monster-js/core";
+import { fromEvent, Subscription } from "rxjs";
+import { RouterService } from "./router.service";
 
-export function routerDir(params: DirectiveParam) {
-    const internalService = new InternalService();
-    const { directives, element } = params;
-    const { link, linkActive, linkActiveExact } = directives;
-    const subscriptions: Subscription[] = [];
+@Directive("router")
+export class RouterDirective implements AllDirectives, OnDestroy {
 
-    function updater() {
-        const isExact = linkActiveExact ? linkActiveExact.get() : false;
-        const routeActive = routeMatcher(link.get(), location.pathname, isExact);
-        if (routeActive) {
-            element.classList.add(linkActive.get());
-        } else {
-            element.classList.remove(linkActive.get());
+  private subscriptions: Subscription[] = [];
+  private allDirectivesParam: AllDirectivesArgInterface = null!;
+
+  constructor(private routerService: RouterService) {
+    this.checkRouterLinkActive = this.checkRouterLinkActive.bind(this);
+  }
+
+  onDestroy(): void {
+      this.subscriptions.forEach(item => item.unsubscribe());
+  }
+
+  allDirectives(param: AllDirectivesArgInterface): void {
+    this.allDirectivesParam = param;
+    this.active();
+  }
+
+  $link(param: DirectiveArgInterface) {
+    const valueCaller = param.directive.get;
+    const initialValue = valueCaller();
+
+    fromEvent(param.element, 'click').subscribe(event => {
+      event.preventDefault();
+      this.routerService.navigate(valueCaller());
+    });
+
+    if (param.element.localName === "a") {
+      param.element.setAttribute("href", initialValue);
+
+      createWatcher(
+        () => valueCaller(),
+        param.element,
+        param.component.$wrapper!,
+        (newValue) => {
+          param.element.setAttribute("href", newValue);
+          this.active();
         }
+      );
+    }
+  }
+
+  private active(): void {
+    const { directives, element } = this.allDirectivesParam;
+    if (!directives["linkActive"]) {
+      return;
     }
 
-    dirOnDestroy(params, () => subscriptions.forEach(item => item.unsubscribe()));
+    if (element.localName === "a") {
+      this.subscriptions.push(
+        this.routerService.onRouteChange.subscribe(this.checkRouterLinkActive)
+      );
 
-    if (link) {
-        element.addEventListener('click', event => {
-            event.preventDefault();
-            internalService.navigate(link.get());
-        });
-
-        if (element.localName === 'a') {
-            element.setAttribute('href', link.get());
-
-            dirCreateWatcher(params, 'link', newValue => {
-                element.setAttribute('href', newValue);
-            })
-        }
-
-        if (linkActive) {
-            updater();
-            subscriptions.push(internalService.onRouteChange.subscribe(() => updater()));
-        }
+      this.checkRouterLinkActive();
     }
+  }
+
+  private checkRouterLinkActive() {
+    const { element, directives } = this.allDirectivesParam;
+    const href = directives["link"].get();
+    const valueCaller = directives["linkActive"].get;
+    const pathname = location.pathname;
+    const linkActiveExactCaller = directives["linkActiveExact"]?.get;
+    let exact = false;
+
+    if (linkActiveExactCaller) {
+      const linkActiveExactValue = linkActiveExactCaller();
+      if (!!linkActiveExactValue || linkActiveExactValue === "") {
+        exact = true;
+      }
+    }
+
+    // TODO : logic should be improved
+    if (!exact) {
+      if (pathname.indexOf(href) === 0) {
+        element.classList.add(valueCaller());
+      } else {
+        element.classList.remove(valueCaller());
+      }
+    } else {
+      if (pathname === href) {
+        element.classList.add(valueCaller());
+      } else {
+        element.classList.remove(valueCaller());
+      }
+    }
+  }
 }
-
-directive(routerDir, 'router');

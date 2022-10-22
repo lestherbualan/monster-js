@@ -1,116 +1,134 @@
 ---
-sidebar_position: 11
+sidebar_position: 14
 ---
 
 # Services
 
 Services are injectable classes that are used to perform reusable logic.
 This helps us to have much cleaner and easy to maintain components.
-It is recommended that all http requests and business logics are implemented inside a service.
+It is recommended that all http requests and business logic are made inside a service.
 
 ## Create a service
 
-To create a service, we can use the [cli](/docs/category/cli) to automatically generate a service file with boilerplate codes or we can manually create a file and write the code from scratch.
+To create a service, we can use the [cli](/docs/cli/cli-what-is-cli) to automatically generate a service file with boilerplate codes or we can manually create a file and write the code from scratch.
 
 The following code is an example of a working service codes but without functions yet.
 
-```tsx
+```typescript
 import { Service } from '@monster-js/core';
 
 @Service()
 export class GreetingService {
+
 }
 ```
-
-## Service decorator
-
-The service decorator allow us to pass configurations to the service.
-
-### Syntax
-
-```tsx
-@Service(<config>)
-```
-
-The `config` is optional.
-
-### Service config properties
-
-| Property | Data type | Description |
-| --- | --- | --- |
-| singleton | boolean | This helps us to register our service in the dependency injection container as a singleton class. |
 
 ## Singleton service
 
 Services is transient by default.
 To create a singleton service, we need to pass an optional config to `@Service()` decorator.
-The config is an object that contains a singleton property that is set to true.
+The config is an object that contains a `singleton` property that is set to true.
 
 Example.
 
-```tsx
+```typescript
 import { Service } from '@monster-js/core';
 
 @Service({ singleton: true })
 export class GreetingService {
+
 }
 ```
 
-We can also generate a singleton service using a cli command.
+## Register service in component
 
-```tsx
-mn generate service greeting --singleton
-```
-
-## Register service
-
-Before we can use a service we need to register it inside a module so that all services and components registered in that module can also use this service.
+Before we can use a service we need to register it in our component.
 
 Example.
 
-```tsx
-import { Module } from '@monster-js/core';
+```typescript
+import { Component, Services } from '@monster-js/core';
+import { GreetingService  } from './greeting.service';
+
+@Services(GreetingService)
+@Component('app-greeting')
+export class Greeting {
+    ...
+}
+```
+
+Services can also have config that is received using the `onReceiveConfig` service hook after initialization.
+
+Example.
+
+```typescript
+import { Component, Services } from '@monster-js/core';
 import { GreetingService } from './greeting.service';
 
-export const GreetingModule: Module = {
+@Services({
+    service: GreetingService,
+    config: { defaultMessage: 'Hello World!' }
+})
+@Component('app-greeting')
+export class Greeting {
+    ...
+}
+```
+
+## Register service in module
+
+If multiple components in a module are using the service it is recommended that we register the service in our module.
+Services registered in a module will be available to all the components registered in the same module.
+
+Example.
+
+```typescript
+import { Module } from '@monster-js/core/module';
+import { GreetingService } from './greeting.service';
+
+@Module({
     services: [GreetingService]
-};
+})
+export class GreetingModule { }
 ```
 
-### Register with config
+Services can also have config that is received using the `onReceiveConfig` service hook after initialization.
 
-```tsx
-import { Module } from '@monster-js/core';
+Example.
+
+```typescript
+import { Module } from '@monster-js/core/module';
 import { GreetingService } from './greeting.service';
 
-export const GreetingModule: Module = {
-    services: [[GreetingService, { message: 'hello world' }]]
-};
+@Module({
+    services: [
+        {
+            service: GreetingService,
+            config: { defaultMessage: 'Hello World!' }
+        }
+    ]
+})
+export class GreetingModule { }
 ```
 
-## Global service
+## Register service in global
 
 If we want our service to be available to all our components inside our application, we can also register the service as a global service.
 
 Example.
 
-```tsx title="src/index.ts"
-import { globalService } from '@monster-js/core';
-import { GreetingService } './greeting.service';
+```typescript
+import { Container, GlobalDataSource, registerService } from '@monster-js/core';
+import { GreetingService, config } from './greeting.service';
 
-globalService(GreetingService);
+const container = new Container(new GlobalDataSource());
+registerService(GreetingService, container, config);
 ```
 
-### Register with config
+In the example above, we register the service using `registerService(GreetingService, container, config)` function.
 
-```tsx title="src/index.ts"
-import { globalService } from '@monster-js/core';
-import { GreetingService } from './greeting.service';
-
-globalService([ GreetingService, { message: 'hello world' } ]);
-```
-
-## Service lifecycle hooks
-
-There are lifecycle hooks that we can use in a service.
-Please check the [service available hooks](/docs/main-concept/lifecycle-hooks#service-available-hooks) documentation for more info about service lifecycle hooks.
+| Params | Description |
+| --- | --- |
+| GreetingService | The service we want to register in global container |
+| container | The global dependency injection container |
+| config | An optional parameter. Any type of data that serves as a configuration of the service after initialization. Received using the `onReceiveConfig` service hook. |
