@@ -10,16 +10,14 @@ const DEFAULT_OUTPUT = 'dist';
 export const WebpackConfig = (env: any, args: WebpackConfigArgsInterface = {}) => {
 
 
-    /**
-     * https://webpack.js.org/guides/environment-variables/
-     */
-    let environment: any = 'src/environments/environment.ts';
+    let environment: string = 'src/environments/environment.ts';
     if (env.environment) {
         environment = `src/environments/environment.${env.environment}.ts`;
     }
 
+
     return {
-        mode: environment.mode || 'development', // development | production | none | defaults to development
+        mode: env.mode, // development | production | none | defaults to development
         entry: {
             index: './src/index.ts',
             polyfill: './src/polyfill.ts'
@@ -86,7 +84,7 @@ export const WebpackConfig = (env: any, args: WebpackConfigArgsInterface = {}) =
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
             alias: {
-                [path.resolve(process.cwd(), 'src/environments/environment')]: path.resolve(environment)
+                [path.resolve('src/environments/environment')]: path.resolve(environment)
             }
         },
         devtool: 'source-map'
