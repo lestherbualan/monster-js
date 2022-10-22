@@ -1,0 +1,1 @@
+import '@monster-js/core/polyfill';

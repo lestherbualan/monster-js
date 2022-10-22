@@ -1,0 +1,18 @@
+{
+  "name": "@monster-js/test-app",
+  "version": "1.4.32",
+  "license": "MIT",
+  "sideEffects": [ "*.css", "*.scss" ],
+  "scripts": {
+    "start": "mn serve --env=prod",
+    "build": "mn build",
+    "build-prod": "mn build --mode=production --env=prod && ls -lh dist",
+    "lint": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "@monster-js/core": "^1.4.32"
+  }
+}

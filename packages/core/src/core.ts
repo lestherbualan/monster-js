@@ -118,3 +118,6 @@ export { renderChild } from './view-engine/render-child';
 export { textBinding } from './view-engine/text-binding';
 export { viewDirective } from './view-engine/view-directive';
 export { viewPipe } from './view-engine/view-pipe';
+export { viewProps } from './view-engine/view-props';
+export { addAttributes } from './view-engine/add-attributes';
+export { appendChildren } from './view-engine/append-children';

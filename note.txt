@@ -5,6 +5,9 @@ add implementation and documentation to define component using 'defineGlobalComp
     - add a way to auto define custom element too.
 document cli --mode option
 
+add a way to set elementKey in createElement function to prevent calling addAttribute function in all createElement when no real attribute is provided
+    - this maybe not necessary since it is very seldom to have element without attribute
+
 
 TEST DOTNET EXECUTION TIME
 ==============================================
