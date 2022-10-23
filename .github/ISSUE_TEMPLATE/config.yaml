@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions
+    url: https://stackoverflow.com/questions/tagged/monster-js
+    about: Questions should be posted in stackoverflow
+  - name: Support Request
+    url: https://discord.com/invite/CY28Qq5yWE
+    about: Support from the creator or the community can be found in our discord channel
