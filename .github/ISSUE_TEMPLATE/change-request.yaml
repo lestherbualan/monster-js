@@ -5,7 +5,7 @@ body:
   - type: dropdown
     id: affected-packages
     attributes:
-      label: Which @monster-js/* package(s) are relevant/related to the feature request?
+      label: Which @monster-js/* package(s) are relevant/related to the change request?
       options:
         - cli
         - core
