@@ -1,0 +1,25 @@
+name: 'Change Request'
+description: Minor change request for MonsterJS Framework
+
+body:
+  - type: dropdown
+    id: affected-packages
+    attributes:
+      label: Which @monster-js/* package(s) are relevant/related to the feature request?
+      options:
+        - cli
+        - core
+        - docs
+        - router
+        - store
+        - tester
+        - transformer
+        - Don't known / other
+      multiple: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+    validations:
+      required: true
