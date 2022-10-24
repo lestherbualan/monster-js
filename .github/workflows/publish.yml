@@ -19,6 +19,6 @@ jobs:
           node-version: 16
 
       - name: Publish packages
-        run: npm run lint && npm run publish
+        run: npm install && npm run lint && npm run publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
