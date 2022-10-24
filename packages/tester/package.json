@@ -1,6 +1,6 @@
 {
   "name": "@monster-js/tester",
-  "version": "1.4.43",
+  "version": "1.4.44",
   "main": "dist/index.js",
   "description": "Testing tools for MonsterJS framework.",
   "author": "Darius Bualan Jr.",
