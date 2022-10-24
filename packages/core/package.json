@@ -12,7 +12,8 @@
   },
   "scripts": {
     "lint": "tsc --noEmit -p .",
-    "build": "tsc -p .",
+    "build-commonjs": "tsc --module commonjs -p .",
+    "watch-build-commonjs": "tsc --watch --module commonjs -p .",
     "test": "karma start"
   },
   "keywords": [
