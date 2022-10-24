@@ -18,7 +18,8 @@
     "publish-store": "npm version patch -w @monster-js/store && npm publish -w @monster-js/store",
     "publish-tester": "npm version patch -w @monster-js/tester && npm publish -w @monster-js/tester",
     "publish-transformer": "npm version patch -w @monster-js/transformer && npm publish -w @monster-js/transformer",
-    "deploy-docs": "npm run deploy-page -w @monster-js/docs"
+    "deploy-docs": "npm run deploy-page -w @monster-js/docs",
+    "test": "npm test -w @monster-js/core"
   },
   "engines": {
     "node": "^14.15.0 || >=16.10.0"
