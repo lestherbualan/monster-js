@@ -1,6 +1,6 @@
 {
   "name": "@monster-js/cli",
-  "version": "1.4.36",
+  "version": "1.4.37",
   "main": "dist/index.js",
   "license": "MIT",
   "description": "Command line interface for MonsterJS framework.",
