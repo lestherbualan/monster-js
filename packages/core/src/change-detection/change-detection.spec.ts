@@ -7,7 +7,9 @@ describe('change-detection', function() {
     let wrapper: Partial<ComponentWrapperInstanceInterface>;
 
     beforeEach(function() {
-        wrapper = {};
+        wrapper = {
+            hooksCaller: () => {}
+        };
         instance = new ChangeDetection(wrapper as ComponentWrapperInstanceInterface);
     });
 
@@ -26,7 +28,6 @@ describe('change-detection', function() {
     });
 
     it('should run only once even called multiple times', async function() {
-        wrapper.hooksCaller = () => {};
         spyOn(wrapper, 'hooksCaller');
         instance.connected();
         const promises: Promise<any>[] = [];
@@ -52,7 +53,6 @@ describe('change-detection', function() {
     });
 
     it('should remove watchers that are not connected', async function() {
-        wrapper.hooksCaller = () => {};
         expect(instance['watchers'].length).toBe(0);
         expect(instance['conditionWatchers'].length).toBe(0);
         instance.addWatcher({ isConnected: () => true, isUpdated: () => true, update: () => {}, val: null });
