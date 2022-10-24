@@ -68,12 +68,7 @@ module.exports = function (config) {
     concurrency: Infinity,
 
     karmaTypescriptConfig: {
-      compilerOptions: {
-        module: 'CommonJS',
-        moduleResolution: 'node',
-        target: 'ESNext'
-      },
-      exclude: ['node_modules']
+      tsconfig: './tsconfig.spec.json'
     }
   })
 }
