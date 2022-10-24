@@ -12,6 +12,7 @@
   },
   "scripts": {
     "lint": "tsc --noEmit -p .",
+    "build": "tsc -p .",
     "test": "karma start"
   },
   "keywords": [
