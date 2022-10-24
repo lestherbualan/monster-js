@@ -16,7 +16,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
 
       - name: Publish packages
         run: npm install && npm run lint && npm run publish
