@@ -16,9 +16,9 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 15
+          node-version: 16
 
       - name: Publish packages
-        run: npm install && npm run lint && npm run publish
+        run: echo "//registry.npmjs.com/:_authToken=${{secrets.NPM_AUTH_TOKEN}}" > ~/.npmrc && npm install && npm run publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
