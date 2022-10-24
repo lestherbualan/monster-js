@@ -291,6 +291,19 @@ customElement.define(getSelector(Greeting), Greeting);
 
 Global components needs to be registered as global components first before we define the component using `customElements.define` to avoid issues.
 
+### Using globalComponent function
+
+We can also use the `globalComponent` function that will do the same thing from the example above.
+
+Example.
+
+```typescript
+import { globalComponent } from '@monster-js/core';
+import { Greeting } from './greeting.component';
+
+globalComponent(Greeting);
+```
+
 ## Register component to a module
 
 For the component to be available for other components in a module, we need to register the component to the module.

@@ -11,14 +11,16 @@
     "update-readme": "ncp ./packages/docs/docs/getting-started/what-is-monster-js.mdx ./README.md",
     "update-submodules": "git submodule update --recursive --remote",
     "lint": "npm run lint -w @monster-js/cli && npm run lint -w @monster-js/core && npm run lint -w @monster-js/router && npm run lint -w @monster-js/store && npm run lint -w @monster-js/tester",
-    "publish": "npm run update-submodules && npm run lint && npm run publish-cli && npm run publish-core && npm run publish-router && npm run publish-store && npm run publish-tester && npm run publish-transformer",
-    "publish-cli": "npm version patch -w @monster-js/cli && npm run build -w @monster-js/cli && npm publish -w @monster-js/cli",
-    "publish-core": "npm version patch -w @monster-js/core && npm publish -w @monster-js/core",
-    "publish-router": "npm version patch -w @monster-js/router && npm publish -w @monster-js/router",
-    "publish-store": "npm version patch -w @monster-js/store && npm publish -w @monster-js/store",
-    "publish-tester": "npm version patch -w @monster-js/tester && npm publish -w @monster-js/tester",
-    "publish-transformer": "npm version patch -w @monster-js/transformer && npm publish -w @monster-js/transformer",
-    "deploy-docs": "npm run deploy-page -w @monster-js/docs"
+    "publish": "npm run lint && npm run publish-cli && npm run publish-core && npm run publish-router && npm run publish-store && npm run publish-tester && npm run publish-transformer",
+    "version-patch": "npm version patch -w @monster-js/cli && npm version patch -w @monster-js/core && npm version patch -w @monster-js/router && npm version patch -w @monster-js/store && npm version patch -w @monster-js/tester && npm version patch -w @monster-js/transformer",
+    "publish-cli": "npm run build -w @monster-js/cli && npm publish -w @monster-js/cli",
+    "publish-core": "npm publish -w @monster-js/core",
+    "publish-router": "npm publish -w @monster-js/router",
+    "publish-store": "npm publish -w @monster-js/store",
+    "publish-tester": "npm publish -w @monster-js/tester",
+    "publish-transformer": "npm publish -w @monster-js/transformer",
+    "deploy-docs": "npm run deploy-page -w @monster-js/docs",
+    "test": "npm test -w @monster-js/core"
   },
   "engines": {
     "node": "^14.15.0 || >=16.10.0"

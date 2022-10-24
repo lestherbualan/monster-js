@@ -3,10 +3,6 @@ import { ViewDirective } from "../directives/view.directive";
 import { ComponentInterface } from "../interfaces/component-interface";
 import { checkComponentDataSource } from "./utils/check-component-data-source";
 
-const defaults = {
-    directives: [ViewDirective]
-};
-
 export function Component(selector: string) {
     return function(target: ComponentInterface) {
         target.selector = selector;
@@ -20,6 +16,6 @@ export function Component(selector: string) {
         target.isMonsterComponent = true;
 
         // Apply default directives
-        Directives(...defaults.directives)(target);
+        Directives(ViewDirective)(target);
     }
 }

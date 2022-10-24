@@ -7,10 +7,8 @@ import { ComponentInterface } from "../../interfaces/component-interface";
  * @param target the component
  */
 export function checkComponentDataSource(target: ComponentInterface) {
-    if (!target.dataSource) {
-        target.dataSource = {
-            data: new Map(),
-            name: target.name
-        };
-    }
+    if (!target.dataSource) target.dataSource = {
+        data: new Map(),
+        name: target.name
+    };
 }
