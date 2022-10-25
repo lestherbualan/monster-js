@@ -1,9 +1,1 @@
-export { createTestModule } from "./utils/create-test-module";
-export { defineTestModule } from "./utils/define-test-module";
-export { clearInjectionMocks } from "./utils/clear-injection-mocks";
-export { render } from "./utils/render";
-export { createTester } from "./utils/create-tester";
-export { parseComponent } from "./utils/parse-component";
-export { fireEvent } from "./utils/fire-event";
-export { inputText } from "./utils/input-text";
-export { mockInjection } from "./utils/mock-injection";
+export { createComponentTester } from "./create-component-tester";
