@@ -23,7 +23,7 @@ export class ChangeDetection {
             : this.watchers.push(watcher);
     }
 
-    public detectChanges(): Promise<any> {
+    public async detectChanges(): Promise<any> {
 
         if (!this.isConnected || this.debounce) return;
 
