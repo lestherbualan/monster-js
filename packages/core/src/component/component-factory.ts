@@ -89,9 +89,8 @@ export function componentFactory(component: ComponentInterface) {
         }
 
         public hooksCaller(type: HooksEnum, args: any[] = []) {
-            if (this.runningHooks[type]) {
-                return;
-            }
+            if (this.runningHooks[type]) return;
+
             this.runningHooks[type] = true;
 
             const instance: ObjectInterface = this.componentInstance;

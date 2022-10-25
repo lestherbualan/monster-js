@@ -18,40 +18,35 @@ export class ChangeDetection {
     }
 
     public addWatcher(watcher: WatcherInterface, isConditionWatcher: boolean = false) {
-        if (isConditionWatcher) {
-            this.conditionWatchers.push(watcher);
-        } else {
-            this.watchers.push(watcher);
-        }
+        isConditionWatcher
+            ? this.conditionWatchers.push(watcher)
+            : this.watchers.push(watcher);
     }
 
-    public detectChanges(): void {
-        if (!this.isConnected || this.debounce) {
-            return;
-        }
+    public async detectChanges(): Promise<any> {
 
-        this.debounce = setTimeout(() => {
+        if (!this.isConnected || this.debounce) return;
 
-            let hasViewChanges: boolean = false;
+        this.debounce = new Promise(resolve => {
+            setTimeout(() => {
+                let hasViewChanges: boolean = false;
+                [...this.conditionWatchers, ...this.watchers].forEach(watcher => {
+                    if (watcher.isConnected() && watcher.isUpdated()) {
+                        hasViewChanges = true;
+                        watcher.update(watcher.val);
+                    }
+                });
 
-            [...this.conditionWatchers, ...this.watchers].forEach(watcher => {
-                if (watcher.isConnected() && watcher.isUpdated()) {
-                    hasViewChanges = true;
-                    watcher.update(watcher.val);
-                }
+                this.wrapper.hooksCaller(HooksEnum.onChangeDetection);
+                this.watchers = this.watchers.filter(watcher => watcher.isConnected());
+                this.conditionWatchers = this.conditionWatchers.filter(watcher => watcher.isConnected());
+
+                if (hasViewChanges) this.wrapper.hooksCaller(HooksEnum.onViewChange);
+
+                this.debounce = null;
+                resolve(1);
             });
-
-            this.wrapper.hooksCaller(HooksEnum.onChangeDetection);
-
-            this.watchers = this.watchers.filter(watcher => watcher.isConnected());
-            this.conditionWatchers = this.conditionWatchers.filter(watcher => watcher.isConnected());
-
-            if (hasViewChanges) {
-                this.wrapper.hooksCaller(HooksEnum.onViewChange);
-            }
-
-            this.debounce = null;
         });
-
+        return this.debounce;
     }
 }
