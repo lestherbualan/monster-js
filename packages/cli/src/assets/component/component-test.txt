@@ -1,12 +1,12 @@
+import { createComponentTester } from '@monster-js/tester';
 import { __ComponentNameCamelCase__Component } from './__ComponentNameKebabCase__.component';
-import { createTester } from '@monster-js/tester';
 
-describe('__ComponentNameKebabCase__.component.tsx', function() {
+describe('attribute-binding.component.tsx', function() {
 
-    const tester = createTester<__ComponentNameCamelCase__>(__ComponentNameCamelCase__);
+    const { render } = createComponentTester<__ComponentNameCamelCase__Component>(__ComponentNameCamelCase__Component);
 
     it('should create the component', function() {
-        const { component } = tester.createComponent();
+        const { component } = render();
         expect(component).toBeTruthy();
     });
 
