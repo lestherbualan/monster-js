@@ -7,6 +7,9 @@ export class ModelBindingComponent {
     model: string = 'initial value';
 
     render() {
-        return <input v:model={this.model} />
+        return <div>
+            <h1>{this.model}</h1>
+            <input v:model={this.model} />
+        </div>
     }
 }
