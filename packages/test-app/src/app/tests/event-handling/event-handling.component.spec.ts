@@ -16,4 +16,8 @@ describe('attribute-binding.component.tsx', function() {
         expect(component.onClick).toHaveBeenCalledTimes(2);
     });
 
+    it('should pass the proper parameter to the method');
+
+    it('should pass $event variable as parameter');
+
 });
