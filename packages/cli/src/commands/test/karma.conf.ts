@@ -32,7 +32,7 @@ export function generateKarmaConfig(webpackEnv: any) {
     files: [
       require.resolve('@monster-js/core/polyfill'),
       'src/**/*.component.tsx',
-      { pattern: 'src/**/*.test.ts', watched: false }
+      { pattern: 'src/**/*.spec.ts', watched: false }
     ],
 
 
@@ -46,7 +46,7 @@ export function generateKarmaConfig(webpackEnv: any) {
     preprocessors: {
       [require.resolve('@monster-js/core/polyfill')]: ['webpack'],
       'src/**/*.component.tsx': ['webpack', 'iframes'],
-      'src/**/*.test.ts': ['webpack', 'iframes']
+      'src/**/*.spec.ts': ['webpack', 'iframes']
     },
 
 

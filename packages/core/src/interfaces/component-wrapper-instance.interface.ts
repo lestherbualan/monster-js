@@ -12,4 +12,7 @@ export interface ComponentWrapperInstanceInterface extends HTMLElement {
     addHookWatcher(type: HooksEnum, callback: Function): void;
     $propsData: { [key: string]: any; }
     setProps(props: { [key: string]: any; }): void;
+
+    shadowRoot: ShadowRoot;
+    element: HTMLElement;
 }

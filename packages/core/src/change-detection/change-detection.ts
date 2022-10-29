@@ -29,24 +29,28 @@ export class ChangeDetection {
 
         this.debounce = new Promise(resolve => {
             setTimeout(() => {
-                let hasViewChanges: boolean = false;
-                [...this.conditionWatchers, ...this.watchers].forEach(watcher => {
-                    if (watcher.isConnected() && watcher.isUpdated()) {
-                        hasViewChanges = true;
-                        watcher.update(watcher.val);
-                    }
-                });
-
-                this.wrapper.hooksCaller(HooksEnum.onChangeDetection);
-                this.watchers = this.watchers.filter(watcher => watcher.isConnected());
-                this.conditionWatchers = this.conditionWatchers.filter(watcher => watcher.isConnected());
-
-                if (hasViewChanges) this.wrapper.hooksCaller(HooksEnum.onViewChange);
+                this.__evaluate();
 
                 this.debounce = null;
                 resolve(1);
             });
         });
         return this.debounce;
+    }
+
+    public __evaluate() {
+        let hasViewChanges: boolean = false;
+        [...this.conditionWatchers, ...this.watchers].forEach(watcher => {
+            if (watcher.isConnected() && watcher.isUpdated()) {
+                hasViewChanges = true;
+                watcher.update(watcher.val);
+            }
+        });
+
+        this.wrapper.hooksCaller(HooksEnum.onChangeDetection);
+        this.watchers = this.watchers.filter(watcher => watcher.isConnected());
+        this.conditionWatchers = this.conditionWatchers.filter(watcher => watcher.isConnected());
+
+        if (hasViewChanges) this.wrapper.hooksCaller(HooksEnum.onViewChange);
     }
 }
