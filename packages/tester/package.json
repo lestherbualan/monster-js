@@ -1,6 +1,6 @@
 {
   "name": "@monster-js/tester",
-  "version": "1.4.44",
+  "version": "1.4.45",
   "main": "public-apis.ts",
   "description": "Testing tools for MonsterJS framework.",
   "author": "Darius Bualan Jr.",

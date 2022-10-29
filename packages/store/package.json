@@ -1,6 +1,6 @@
 {
   "name": "@monster-js/store",
-  "version": "1.4.44",
+  "version": "1.4.45",
   "main": "src/index.ts",
   "description": "State management for MonsterJS framework.",
   "author": "Darius Bualan Jr.",
