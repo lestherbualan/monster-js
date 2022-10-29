@@ -1,3 +1,4 @@
+import { Component } from "../core";
 import { ComponentInstanceInterface } from "../interfaces/component-instance.interface";
 
 export const addEvent = (
@@ -9,7 +10,7 @@ export const addEvent = (
 ) => {
     element.addEventListener(name, event => {
         if (preventDefault) event.preventDefault();
-        handler.bind(context)(event);
+        handler(event);
     });
     return element;
 }

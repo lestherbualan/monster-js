@@ -21,7 +21,9 @@
     "publish-tester": "npm publish -w @monster-js/tester",
     "publish-transformer": "npm publish -w @monster-js/transformer",
     "deploy-docs": "npm run deploy-page -w @monster-js/docs",
-    "test": "npm test -w @monster-js/core && npm test -w @monster-js/test-app"
+    "test": "npm run test-test-app",
+    "test-core": "npm test -w @monster-js/core",
+    "test-test-app": "npm test -w @monster-js/test-app"
   },
   "engines": {
     "node": "^14.15.0 || >=16.10.0"
