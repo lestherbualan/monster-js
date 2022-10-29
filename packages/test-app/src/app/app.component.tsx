@@ -7,7 +7,7 @@ declare const $event: any;
 export class AppComponent {
 
     onClick(event) {
-        console.log('hello world', event);
+        console.log('hello world', event instanceof Event);
     }
 
     public render() {
