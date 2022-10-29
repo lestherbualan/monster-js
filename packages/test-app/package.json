@@ -1,15 +1,20 @@
 {
   "name": "@monster-js/test-app",
-  "version": "1.4.32",
+  "version": "1.4.44",
   "license": "MIT",
-  "sideEffects": [ "*.css", "*.scss" ],
+  "sideEffects": [
+    "*.css",
+    "*.scss"
+  ],
   "scripts": {
     "start": "mn serve",
     "build": "mn build --mode none",
     "build-prod": "mn build --mode=production --env=prod && ls -l dist",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test": "mn test"
   },
   "devDependencies": {
+    "@monster-js/tester": "^1.4.44",
     "typescript": "^4.5.5"
   },
   "dependencies": {

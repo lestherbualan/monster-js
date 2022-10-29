@@ -18,17 +18,17 @@ export function componentFactory(component: ComponentInterface) {
         public component: ComponentInterface = component;
         public changeDetection: ChangeDetection = new ChangeDetection(this);
         public isMonsterComponent: boolean = true;
-
         public runningHooks: ObjectInterface<boolean> = {};
         public hooksWatchers: ObjectInterface<Function[]> = {};
-
         public initialObservedAttributeValue: ObjectInterface = {};
         public failedToRunAttributeChangeFunctions: Function[] = [];
-
         public $propsData: { [key: string]: any } = {};
+        public element: HTMLElement;
+        public preventReactivity: boolean = false;
 
-        constructor() {
+        constructor(preventReactivity: boolean = false) {
             super();
+            this.preventReactivity = preventReactivity;
             this.setupComponent();
         }
 
@@ -52,10 +52,10 @@ export function componentFactory(component: ComponentInterface) {
             /**
              * Apply reactivity to component properties
              */
-            applyReactivity(this.componentInstance, () => this.changeDetection.detectChanges());
+            if (!this.preventReactivity) applyReactivity(this.componentInstance, () => this.changeDetection.detectChanges());
 
 
-            this.appendElement(this.componentInstance.render());
+            this.appendElement(this.element = this.componentInstance.render());
             this.hooksCaller(HooksEnum.afterViewInit);
             this.changeDetection.connected();
         }
@@ -89,9 +89,8 @@ export function componentFactory(component: ComponentInterface) {
         }
 
         public hooksCaller(type: HooksEnum, args: any[] = []) {
-            if (this.runningHooks[type]) {
-                return;
-            }
+            if (this.runningHooks[type]) return;
+
             this.runningHooks[type] = true;
 
             const instance: ObjectInterface = this.componentInstance;

@@ -470,8 +470,11 @@ function addEvent({node}, events) {
           type: 'StringLiteral',
           value: event.name.name.name
         },
-        event.value.expression,
-        CONTEXT
+        {
+          type: 'ArrowFunctionExpression',
+          params: [{ type: 'Identifier', name: '$event' }],
+          body: event.value.expression,
+        }
       ];
       if (event.name.namespace.name === 'on-prevent') {
         node.arguments.push({
