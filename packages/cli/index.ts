@@ -7,6 +7,7 @@ import { newCommand } from './src/commands/new/new-command';
 import { serveCommand } from './src/commands/serve/serve-command';
 import { testCommand } from './src/commands/test/test-command';
 import packageJson from './package.json';
+import { updateCommand } from './src/commands/update/update-command';
 
 const program = new Command();
 
@@ -15,6 +16,7 @@ program.name('MonsterJS Cli')
     .version(packageJson.version);
 
 newCommand(program);
+updateCommand(program);
 docsCommand(program);
 generateCommand(program);
 buildCommand(program);
