@@ -16,8 +16,20 @@ describe('attribute-binding.component.tsx', function() {
         expect(component.onClick).toHaveBeenCalledTimes(2);
     });
 
-    it('should pass the proper parameter to the method');
+    it('should pass the proper parameter to the method', function() {
+        const { component, query } = render();
+        const btn = query<HTMLButtonElement>('button#with-param');
+        expect(component.param).toBeNull();
+        btn.click();
+        expect(component.param).toBe('hello world');
+    });
 
-    it('should pass $event variable as parameter');
+    it('should pass $event variable as parameter', function() {
+        const { component, query } = render();
+        const btn = query<HTMLButtonElement>('button#event-param');
+        expect(component.param).toBeNull();
+        btn.click();
+        expect(component.param).toBeInstanceOf(Event);
+    });
 
 });
