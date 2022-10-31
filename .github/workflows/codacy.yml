@@ -37,6 +37,15 @@ jobs:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout code
         uses: actions/checkout@v3
+        
+                
+      - name: Setup Java JDK
+        uses: actions/setup-java@v3.6.0
+        with:
+          # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
+          java-version: 11
+          # Java distribution. See the list of supported distributions in README file
+          distribution: jdk
 
       # Execute Codacy Analysis CLI and generate a SARIF output with the security issues identified during the analysis
       - name: Run Codacy Analysis CLI
