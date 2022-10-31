@@ -69,7 +69,15 @@ describe('attribute-binding.component.tsx', function() {
         expect(component.booleanAttr).toBe(false);
     });
 
-    it('should trigger the attributeChangedCallback hook if attribute is changed');
+    it('should trigger the attributeChangedCallback hook if attribute is changed', function() {
+        const { component, host } = render();
+        spyOn(component, 'attributeChangedCallback');
+        host.setAttribute('string-attr', 'test');
+        host.setAttribute('boolean-attr', 'false');
+        host.setAttribute('number-attr', '123');
+        expect(component.attributeChangedCallback).toHaveBeenCalledTimes(3);
+    });
+
     it('should have a proper old and new value parameters of attributeChangedCallback hook');
     it('should have a proper name and camel case name parameters of attributeChangedCallback hook');
     it('should have a name and in kebab case and camelCaseName in camel case');
