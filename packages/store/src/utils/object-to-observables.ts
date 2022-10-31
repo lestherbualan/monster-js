@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, Subscriber } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 
 /**
  * Convert object properties into observables and event emitters

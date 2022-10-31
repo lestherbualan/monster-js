@@ -80,11 +80,8 @@ export class Store<T> implements OnReceiveConfig {
 
     public action(action: RawActionInterface) {
         const key = this.actionKeys[action.type];
-        if (key === undefined) {
-            throw `The action '${action.type}' is not registered in the action array.`;
-        }
-        const value = this.get(key);
-        this.doSet(key, action.reducer(value, action.data));
+        if (key === undefined) throw new Error(`The action '${action.type}' is not registered in the action array.`);
+        this.doSet(key, action.reducer(this.get(key), action.data));
         this.devToolSet(action.type);
     }
 
