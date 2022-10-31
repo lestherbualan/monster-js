@@ -1,6 +1,6 @@
 {
   "name": "@monster-js/router",
-  "version": "1.4.45",
+  "version": "1.4.46",
   "main": "src/index.ts",
   "description": "Router for MonsterJS framework.",
   "author": "Darius Bualan Jr.",
