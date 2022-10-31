@@ -5,7 +5,7 @@ import { DirectiveArgInterface } from "../interfaces/directive-arg.interface";
 @Directive('v')
 export class ViewDirective {
 
-    public $ref = (param: DirectiveArgInterface) => param.directive.set!(param.element);
+    public $ref = (param: DirectiveArgInterface) => param.directive.set(param.element);
 
     private updateClassList = (value: {[key: string]: any}, element: HTMLElement) => Object.keys(value).forEach(key => !!value[key]
         ? element.classList.add(key)

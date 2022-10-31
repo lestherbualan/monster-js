@@ -55,7 +55,8 @@ export function componentFactory(component: ComponentInterface) {
             if (!this.preventReactivity) applyReactivity(this.componentInstance, () => this.changeDetection.detectChanges());
 
 
-            this.appendElement(this.element = this.componentInstance.render());
+            this.element = this.componentInstance.render();
+            this.appendElement(this.element);
             this.hooksCaller(HooksEnum.afterViewInit);
             this.changeDetection.connected();
         }

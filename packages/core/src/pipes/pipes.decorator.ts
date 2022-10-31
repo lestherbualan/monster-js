@@ -9,14 +9,10 @@ export function Pipes(...pipes: PipeInterface[]) {
 
         checkComponentDataSource(target);
 
-        const di = new Container(target.dataSource!);
+        const di = new Container(target.dataSource);
 
-        if (!target.pipes) {
-            target.pipes = {};
-        }
-        pipes.forEach(pipe => {
-            target.pipes![pipe.selector!] = pipe;
-        });
+        if (!target.pipes) target.pipes = {};
+        pipes.forEach(pipe => target.pipes[pipe.selector] = pipe);
 
         registerPipesToDI(target.pipes, di);
     }

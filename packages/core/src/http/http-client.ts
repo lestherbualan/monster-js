@@ -76,7 +76,7 @@ export class HttpClient implements OnReceiveConfig {
 
   private modifyConfig(config: RequestInit): RequestInit {
     return this.config?.modifyConfig
-      ? this.config!.modifyConfig(config)
+      ? this.config.modifyConfig(config)
       : config;
   }
 

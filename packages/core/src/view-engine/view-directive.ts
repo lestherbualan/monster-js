@@ -8,6 +8,58 @@ import { directiveMethodCaller } from "./utils/directive-method-caller";
 import { registerDirectiveHook } from "./utils/register-directive-hooks";
 import { __remove_in_prod__ } from "./utils/__remove_in_prod__";
 import { kebabToCamel } from "../utils/kebab-to-camel";
+import { DirectiveInterface } from "../core";
+
+function setDirectiveTracker(directiveTracker: any, directive: ViewDirectiveInterface) {
+    /**
+     * Set a tracker of directives and log warning for directives that are not called
+     */
+    __remove_in_prod__(() => {
+        Object.keys(directive.directives).forEach(key => {
+            directiveTracker[`${directive.namespace}:${key}`] = false;
+
+            let getValue = directive.directives[key].get;
+            Object.defineProperty(directive.directives[key], 'get', {
+                get: () => {
+                    directiveTracker[`${directive.namespace}:${key}`] = true;
+                    return getValue;
+                }
+            });
+
+            if (directive.directives[key].set) {
+                let setValue = directive.directives[key].set;
+                Object.defineProperty(directive.directives[key], 'set', {
+                    get: () => {
+                        directiveTracker[`${directive.namespace}:${key}`] = true;
+                        return setValue;
+                    }
+                });
+            }
+        });
+    });
+}
+
+function processDirective(dir: DirectiveInterface, di: Container, directive: ViewDirectiveInterface, context: ComponentInstanceInterface, element: HTMLElement, directiveTracker: any) {
+    const instance = di.resolve(dir);
+
+    for (const key in HooksEnum) registerDirectiveHook((HooksEnum as any)[key], context.$wrapper, instance);
+
+    allDirectiveMethodCaller(directive.directives, instance, context, element);
+
+    for (const key2 in directive.directives) {
+
+
+        __remove_in_prod__(() => {
+            const method = `$${kebabToCamel(key2)}`;
+            if (instance[method] && typeof instance[method] === 'function') {
+                directiveTracker[`${directive.namespace}:${key2}`] = true;
+            }
+        });
+
+
+        directiveMethodCaller(key2, directive.directives[key2], instance, context, element);
+    }
+}
 
 export function viewDirective(context: ComponentInstanceInterface, element: HTMLElement, directives: ViewDirectiveInterface[]) {
 
@@ -22,63 +74,13 @@ export function viewDirective(context: ComponentInstanceInterface, element: HTML
 
     directives.forEach(directive => {
 
-
-        /**
-         * Set a tracker of directives and log warning for directives that are not called
-         */
-        __remove_in_prod__(() => {
-            Object.keys(directive.directives).forEach(key => {
-                directiveTracker[`${directive.namespace}:${key}`] = false;
-
-                let getValue = directive.directives[key].get;
-                Object.defineProperty(directive.directives[key], 'get', {
-                    get: () => {
-                        directiveTracker[`${directive.namespace}:${key}`] = true;
-                        return getValue;
-                    }
-                });
-
-                if (directive.directives[key].set) {
-                    let setValue = directive.directives[key].set;
-                    Object.defineProperty(directive.directives[key], 'set', {
-                        get: () => {
-                            directiveTracker[`${directive.namespace}:${key}`] = true;
-                            return setValue;
-                        }
-                    });
-                }
-            });
-        });
-
+        setDirectiveTracker(directiveTracker, directive);
 
         const selectedDirectives = component.directives[directive.namespace];
-        if (!component.directives[directive.namespace]) {
-            console.error(`Directive '${directive.namespace}' is not registered in ${component.dataSource.name}`);
-            return;
-        }
+        if (!component.directives[directive.namespace]) return console.error(`Directive '${directive.namespace}' is not registered in ${component.dataSource.name}`);
 
-        const di = new Container(component.dataSource!);
-        selectedDirectives.forEach(dir => {
-            const instance = di.resolve(dir);
-
-            for (const key in HooksEnum) registerDirectiveHook((HooksEnum as any)[key], context.$wrapper, instance);
-
-            allDirectiveMethodCaller(directive.directives, instance, context, element);
-
-            for (const key2 in directive.directives) {
-
-
-                __remove_in_prod__(() => {
-                    const method = `$${kebabToCamel(key2)}`;
-                    if (instance[method] && typeof instance[method] === 'function') {
-                        directiveTracker[`${directive.namespace}:${key2}`] = true;
-                    }
-                });
-
-
-                directiveMethodCaller(key2, directive.directives[key2], instance, context, element);
-            }
-        });
+        const di = new Container(component.dataSource);
+        selectedDirectives.forEach(dir => processDirective(dir, di, directive, context, element, directiveTracker));
 
 
         /**

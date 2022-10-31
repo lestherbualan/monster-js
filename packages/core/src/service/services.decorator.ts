@@ -10,11 +10,9 @@ export function Services(...services: (ServiceInterface | ServiceWithConfigInter
 
         checkComponentDataSource(target);
 
-        const di = new Container(target.dataSource!);
+        const di = new Container(target.dataSource);
 
-        if (!target.services) {
-            target.services = [];
-        }
+        if (!target.services) target.services = [];
         target.services = [
             ...target.services,
             ...services

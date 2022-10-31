@@ -6,7 +6,7 @@ export function autoResolveComponent(component: ComponentInterface) {
     /**
      * Register component to di
      */
-    const di = new Container(component.dataSource!);
+    const di = new Container(component.dataSource);
     di.register(component, { target: component, singleton: false, instance: null });
 
 
