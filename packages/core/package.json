@@ -14,6 +14,7 @@
     "lint": "tsc --noEmit -p .",
     "build-commonjs": "tsc --module commonjs -p .",
     "watch-build-commonjs": "tsc --watch --module commonjs -p .",
+    "sonarqube": "sonar-scanner.bat -D\"sonar.projectKey=monster-js\" -D\"sonar.sources=.\" -D\"sonar.host.url=http://localhost:9000\" -D\"sonar.login=sqp_24f398d9f7ad52d1642d403c44306fad2b1cb79c\"",
     "test": "karma start"
   },
   "keywords": [
