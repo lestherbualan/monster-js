@@ -1,11 +1,12 @@
 {
   "name": "@monster-js/store",
-  "version": "1.4.45",
+  "version": "1.4.48",
   "main": "src/index.ts",
   "description": "State management for MonsterJS framework.",
   "author": "Darius Bualan Jr.",
   "license": "MIT",
   "scripts": {
+    "sonarqube": "sonar-scanner.bat -D\"sonar.projectKey=monster-js\" -D\"sonar.sources=.\" -D\"sonar.host.url=http://localhost:9000\" -D\"sonar.login=sqp_24f398d9f7ad52d1642d403c44306fad2b1cb79c\"",
     "lint": "tsc --noEmit -p ."
   },
   "peerDependencies": {

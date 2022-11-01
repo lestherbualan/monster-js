@@ -16,7 +16,7 @@ export class InternalService {
         /**
          * Allow new subscription to onRouteChange to trigger automatically upon subscribe
          */
-        const fn = this.onRouteChange.subscribe
+        const fn = this.onRouteChange.subscribe;
         this.onRouteChange.subscribe = function() {
             arguments[0]({ type: 'subscribe' });
             return fn.apply(this, arguments);
@@ -58,7 +58,7 @@ export class InternalService {
     }
 
     private overwriteHistoryStateFunctions(type: keyof History): () => void {
-        var originalFunction = history[type];
+        const originalFunction = history[type];
         return function () {
             originalFunction.apply(this, arguments);
             const newEvent: any = new Event(type);

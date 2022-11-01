@@ -43,7 +43,7 @@ export class RouterDirective implements AllDirectives, OnDestroy {
       createWatcher(
         () => valueCaller(),
         param.element,
-        param.component.$wrapper!,
+        param.component.$wrapper,
         (newValue) => {
           param.element.setAttribute("href", newValue);
           this.active();
@@ -82,19 +82,10 @@ export class RouterDirective implements AllDirectives, OnDestroy {
       }
     }
 
-    // TODO : logic should be improved
     if (!exact) {
-      if (pathname.indexOf(href) === 0) {
-        element.classList.add(valueCaller());
-      } else {
-        element.classList.remove(valueCaller());
-      }
+      pathname.indexOf(href) === 0 ? element.classList.add(valueCaller()) : element.classList.remove(valueCaller());
     } else {
-      if (pathname === href) {
-        element.classList.add(valueCaller());
-      } else {
-        element.classList.remove(valueCaller());
-      }
+      pathname === href ? element.classList.add(valueCaller()) : element.classList.remove(valueCaller());
     }
   }
 }

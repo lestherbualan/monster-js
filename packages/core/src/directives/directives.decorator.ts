@@ -13,13 +13,13 @@ export function Directives(...directives: DirectiveInterface[]) {
         if (!target.directives) target.directives = {};
 
         directives.forEach(directive => {
-            if (directive.namespace && !target.directives![directive.namespace]) target.directives![directive.namespace] = [];
-            target.directives![directive.namespace!].push(directive);
+            if (directive.namespace && !target.directives[directive.namespace]) target.directives[directive.namespace] = [];
+            target.directives[directive.namespace].push(directive);
         });
 
         // clean duplicate directives
         for (const key in target.directives) target.directives[key] = removeDuplicates(target.directives[key]);
 
-        registerDirectivesToDI(target.directives, new Container(target.dataSource!));
+        registerDirectivesToDI(target.directives, new Container(target.dataSource));
     }
 }

@@ -107,7 +107,7 @@ export class Greeting {
     }
 
     render() {
-        return <button on:click={this.greet}>Greet</button>
+        return <button on:click={this.greet()}>Greet</button>
     }
 }
 ```

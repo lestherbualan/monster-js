@@ -1,6 +1,6 @@
 {
   "name": "@monster-js/test-app",
-  "version": "1.4.44",
+  "version": "1.4.47",
   "license": "MIT",
   "sideEffects": [
     "*.css",
@@ -14,10 +14,11 @@
     "test": "mn test"
   },
   "devDependencies": {
-    "@monster-js/tester": "^1.4.44",
+    "@monster-js/tester": "^1.4.47",
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "@monster-js/core": "^1.4.32"
+    "@monster-js/core": "^1.4.47",
+    "@monster-js/router": "^1.4.47"
   }
 }

@@ -37,9 +37,9 @@ export class ViewModelDirective {
 
     private radioModel(param: DirectiveArgInterface) {
         const valueCaller = param.directive.get;
-        const valueSetter = param.directive.set!;
+        const valueSetter = param.directive.set;
 
-        if (!param.element.getAttribute('value')) throw `Radio buttons must have a value attribute to bind a model to it.`;
+        if (!param.element.getAttribute('value')) throw new Error(`Radio buttons must have a value attribute to bind a model to it.`);
 
         param.element.addEventListener('change', (event: any) => valueSetter(event.target.value));
 
@@ -49,7 +49,7 @@ export class ViewModelDirective {
 
     private checkboxModel(param: DirectiveArgInterface) {
         const valueCaller = param.directive.get;
-        const valueSetter = param.directive.set!;
+        const valueSetter = param.directive.set;
         param.element.addEventListener('change', (event: any) => valueSetter(event.target.checked));
 
         watchDirective(param, newValue => this.setCheckboxChecked(param.element, newValue));
@@ -59,7 +59,7 @@ export class ViewModelDirective {
 
     private processInputAndSelect(param: DirectiveArgInterface, eventType: string) {
         const valueCaller = param.directive.get;
-        const valueSetter = param.directive.set!;
+        const valueSetter = param.directive.set;
         param.element.addEventListener(eventType, (event: any) => valueSetter(event.target.value));
         watchDirective(param, newValue => (param.element as any).value = newValue);
         (param.element as any).value = valueCaller();

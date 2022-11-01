@@ -71,7 +71,7 @@ export class Route implements OnInit, OnDestroy {
         }
 
         const guards = this.propsService.get('guards') || [];
-        this.container = new Container(component.dataSource!);
+        this.container = new Container(component.dataSource);
         guards.forEach(guard => this.container.register(guard, { singleton: false, target: guard }));
         this.guardRegistered = true;
     }
@@ -100,7 +100,7 @@ export class Route implements OnInit, OnDestroy {
         }
 
         if (!props.component && !props.module && !redirectTo) {
-            throw `The route ${props.path} does not have a component or module property.`;
+            throw new Error(`The route ${props.path} does not have a component or module property.`);
         }
 
         if (!this.isActive && match) {
@@ -115,14 +115,11 @@ export class Route implements OnInit, OnDestroy {
     private async processGuard(method: string): Promise<boolean> {
         const guards = this.propsService.get('guards') || [];
         let checkResult = true;
-        for (let i = 0; i < guards.length; i++) {
-            const guard = guards[i];
+        for (const guard of guards) {
             const instance = this.container.resolve<ObjectInterface>(guard);
             if (instance[method] && typeof instance[method] === 'function') {
                 const result = await instance[method]();
-                if (!result) {
-                    checkResult = false;
-                }
+                if (!result) checkResult = false;
             }
         }
         return checkResult;
@@ -148,7 +145,7 @@ export class Route implements OnInit, OnDestroy {
 
             const defined = customElements.get(getSelector(props.component));
             if (!defined) {
-                throw `The component '${getSelector(props.component)}' is not defined.`;
+                throw new Error(`The component '${getSelector(props.component)}' is not defined.`);
             }
             fakeDefineComponent(this, props.component);
 
@@ -157,18 +154,25 @@ export class Route implements OnInit, OnDestroy {
     }
 
     private async processModule() {
-        const module = await this.propsService.get('module')!();
+        let module;
+
+        try {
+            module = await this.propsService.get('module')();
+        } catch (error) {
+            throw new Error('Module property must be a function. Ex. () => import("...").then(m => m.TestModule)');
+        }
+
         if (!module) {
-            throw `The import statement in route ${this.propsService.get('path')} when lazy loading a module must return the module after a promise is resolved.`;
+            throw new Error(`The import statement in route ${this.propsService.get('path')} when lazy loading a module must return the module after a promise is resolved.`);
         }
         if (!module.config.root) {
-            throw `The root component in '${module.name}' module is not defined. Please add a root component so that router can process the module correctly.`;
+            throw new Error(`The root component in '${module.name}' module is not defined. Please add a root component so that router can process the module correctly.`);
         }
 
-        fakeDefineComponent(this, module.config.root!)
+        fakeDefineComponent(this, module.config.root)
         bootstrapModule(module);
 
-        this.registerGuards(module.config.root!);
+        this.registerGuards(module.config.root);
 
         const canActivate = await this.canActivate();
         if (!canActivate) {

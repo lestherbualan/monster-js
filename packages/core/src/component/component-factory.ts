@@ -55,7 +55,8 @@ export function componentFactory(component: ComponentInterface) {
             if (!this.preventReactivity) applyReactivity(this.componentInstance, () => this.changeDetection.detectChanges());
 
 
-            this.appendElement(this.element = this.componentInstance.render());
+            this.element = this.componentInstance.render();
+            this.appendElement(this.element);
             this.hooksCaller(HooksEnum.afterViewInit);
             this.changeDetection.connected();
         }
@@ -129,8 +130,9 @@ export function componentFactory(component: ComponentInterface) {
                     break;
                 }
                 case AttributeTypeEnum.boolean: {
-                    convertedNewValue = Boolean(JSON.parse(newValue));
-                    convertedOldValue = Boolean(JSON.parse(oldValue));
+                    const falsy = ['null', 'undefined', '', '0', 'false'];
+                    convertedNewValue = !falsy.includes(newValue);
+                    convertedOldValue = !falsy.includes(oldValue);
                     break;
                 }
                 case AttributeTypeEnum.number: {

@@ -21,14 +21,13 @@ function ordinaryGetOwnMetadata<MetadataValue>(
 const ordinaryGetMetadata = <MetadataValue>(
   metadataKey: MetadataKey,
   target: Target
-): MetadataValue | undefined => ordinaryGetOwnMetadata<MetadataValue>(metadataKey, target)
-    ? ordinaryGetOwnMetadata<MetadataValue>(metadataKey, target)
-    : Object.getPrototypeOf(target)
-    ? ordinaryGetMetadata(
-        metadataKey,
-        Object.getPrototypeOf(target)
-      )
+): MetadataValue | undefined => {
+  const metadata = ordinaryGetOwnMetadata<MetadataValue>(metadataKey, target);
+  const ordinaryMetadata: any = Object.getPrototypeOf(target)
+    ? ordinaryGetMetadata(metadataKey, Object.getPrototypeOf(target))
     : undefined;
+  return metadata ? metadata : ordinaryMetadata;
+}
 
 function createMetadataMap<MetadataValue>(
     target: Target,
