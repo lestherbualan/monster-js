@@ -154,7 +154,14 @@ export class Route implements OnInit, OnDestroy {
     }
 
     private async processModule() {
-        const module = await this.propsService.get('module')!();
+        let module;
+
+        try {
+            module = await this.propsService.get('module')();
+        } catch (error) {
+            throw new Error('Module property must be a function. Ex. () => import("...").then(m => m.TestModule)');
+        }
+
         if (!module) {
             throw new Error(`The import statement in route ${this.propsService.get('path')} when lazy loading a module must return the module after a promise is resolved.`);
         }

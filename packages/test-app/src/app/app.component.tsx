@@ -7,10 +7,6 @@ declare const $event: any;
 @Component('app-root')
 export class AppComponent {
 
-    constructor(private greetingService: GreetingService) {
-        console.log(this.greetingService);
-    }
-
     onClick(event) {
         console.log('hello world', event instanceof Event);
     }
@@ -19,6 +15,10 @@ export class AppComponent {
         return <div>
             <h1>Hello world</h1>
             <button on:click={this.onClick($event)}>Click Me</button>
+            <app-route
+                prop:path="/login"
+                prop:module={import('./modules/login/login.module').then(m => m.LoginModule)}
+            ></app-route>
         </div>
     }
 }
