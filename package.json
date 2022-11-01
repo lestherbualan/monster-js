@@ -39,6 +39,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@monster-js/router": "^1.4.47"
+    "@monster-js/router": "^1.4.47",
+    "chalk": "^5.1.2"
   }
 }
